@@ -34,7 +34,13 @@ function isValidUrl(string) {
 }
 
 function anchorLink(anchor) {
+    cureent_anchor = window.location.hash.substring(1)
+    const _current_page = $(`#page-${cureent_anchor}`)
+    if (_current_page) {
+        addCls(_current_page, 'hidden')
+    }
     window.location.hash = anchor
+    rmCls($(`#page-${anchor}`), 'hidden')
 }
 
 function formatTime(date_time_string) {
