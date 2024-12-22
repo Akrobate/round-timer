@@ -4,10 +4,10 @@
  */
 
 function $(selector, element = document) {
-    const element_list = element.querySelectorAll(selector)
-    if (element_list.length > 1) {
-        return element_list
-    }
+    // const element_list = element.querySelectorAll(selector)
+    // if (element_list.length > 1) {
+    //     return element_list
+    // }
     return element.querySelector(selector)
 }
 
@@ -34,13 +34,7 @@ function isValidUrl(string) {
 }
 
 function anchorLink(anchor) {
-    cureent_anchor = window.location.hash.substring(1)
-    const _current_page = $(`#page-${cureent_anchor}`)
-    if (_current_page) {
-        addCls(_current_page, 'hidden')
-    }
     window.location.hash = anchor
-    rmCls($(`#page-${anchor}`), 'hidden')
 }
 
 function formatTime(date_time_string) {
@@ -61,10 +55,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     } else {
         rmCls($(`#page-${anchor}`), 'hidden')
     }
-
     window.addEventListener("hashchange", (event) => {
-        const anchor = window.location.hash.substring(1)
-        rmCls($(`#page-${anchor}`), 'hidden')
+        const oldHash = new URL(event.oldURL).hash.substring(1);
+        const newHash = new URL(event.newURL).hash.substring(1);
+        if (oldHash) {
+            addCls($(`#page-${oldHash}`), 'hidden')
+        }
+        rmCls($(`#page-${newHash}`), 'hidden')
     })
 })
 
