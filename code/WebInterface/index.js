@@ -2,12 +2,7 @@
 /**
  * Generic methods
  */
-
 function $(selector, element = document) {
-    // const element_list = element.querySelectorAll(selector)
-    // if (element_list.length > 1) {
-    //     return element_list
-    // }
     return element.querySelector(selector)
 }
 
