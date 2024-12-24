@@ -115,7 +115,8 @@ button.accent {
 }
 
 button:disabled,
-button[disabled]{
+button[disabled],
+button.disabled {
   border: 1px solid #cccccc;
   background-color: #eeeeee;
   color: #666666;

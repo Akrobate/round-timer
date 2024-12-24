@@ -11,6 +11,7 @@ class BusinessState {
         String sta_password;
         String sta_ip;
         boolean sta_is_connected;
+        boolean sta_is_configured;
 
         BusinessState();
         void init();
