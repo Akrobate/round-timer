@@ -118,7 +118,8 @@ button.accent {
 }
 
 button:disabled,
-button[disabled]{
+button[disabled],
+button.disabled {
   border: 1px solid #cccccc;
   background-color: #eeeeee;
   color: #666666;
@@ -338,6 +339,21 @@ input.error {
 #available-networks-list::-webkit-scrollbar-thumb {
     background: var(--neutral-color-2);
     border-radius: 10px;
+}
+
+
+
+
+/***********************************/
+
+.lamp-preview {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    height: 100px;
+    background-color: var(--neutral-color-2);
+    border-radius: 10px;
+    align-items: center;
 }
 )rawliteral";
 

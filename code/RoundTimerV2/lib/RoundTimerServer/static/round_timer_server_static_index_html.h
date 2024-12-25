@@ -37,7 +37,7 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
                     <div class="card height-100 elevation block-info-secondary">
                         <h2>RoundTimer</h2>
                         <p>Stream</p>
-                        <button class="primary mt-md" onclick="refreshInfo(this)">
+                        <button class="primary mt-md" onclick="anchorLink('round-timer')">
                             RoundTimer
                         </button>
                     </div>
@@ -68,34 +68,28 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
             <div class="row">
 
                 <div class="col col-6 col-sm-12">
-                    <div class="card height-100 elevation block-info-secondary">
+                    <div class="card height-100 elevation block-configuraion-info">
                         <h2>Informations système</h2>
-                        <p>Réseau WiFi: <strong>non connecté</strong></p>
-                        <p>Adresse IP: <strong>non connecté</strong></p>
-                        <p>Domaine local: <strong>non connecté</strong></p>
-                        <p>Version firmware: <strong>2.0</strong></p>
+                        <p>Réseau WiFi: <strong class="value_sta_ssid">non connecté</strong></p>
+                        <p>Adresse IP: <strong class="value_sta_ip">non connecté</strong></p>
+                        <p>Domaine local: <strong class="">non connecté</strong> (alpha)</p>
+                        <p>Version firmware: <strong class="value_firmware_version">2.0</strong></p>
                     </div>
                 </div>
 
                 <div class="col col-6 col-sm-12 mb-lg-mobile">
-                    <div class="card height-100 elevation block-info-primary">
+                    <div class="card height-100 elevation bloc-wifi-credentials">
                         <h2>Connection WiFi</h2>
-                        <div class="">
-                            <h4 class="mb-md">
-                                Entrez le nom du réseau et le mot de passe
-                            </h4>
-                            <input type="text" id="input-ssid-name" placeholder="SSID">
-                            <input class="mt-md" id="input-ssid-password" type="text" placeholder="Password">
-    
-                            <button class="secondary mt-lg" onclick="resetCreatingSavedWifi()">
-                                Cancel
-                            </button>
-    
-                            <button class="primary mt-lg" onclick="saveNetwork(this)">
-                                Save
-                            </button>
-                        </div>
+                        <h4 class="mb-md">
+                            Entrez le nom du réseau et le mot de passe
+                        </h4>
+                        <input class="input-wifi-ssid" type="text" placeholder="Nom du réseau">
 
+                        <input class="mt-md input-wifi-password" type="text" placeholder="Mot de passe">
+
+                        <button class="primary mt-lg" onclick="saveWifiCredentials(this)">
+                            Enregistrer
+                        </button>
                     </div>
                 </div>
 
@@ -129,6 +123,75 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
 
         </div>
 
+        <!-- RoundTimer -->
+        <div class="container hidden page" id="page-round-timer">
+
+            <div class="mb-lg display-flex align-items-center">
+                <h1>
+                    RoundTimer
+                </h1>
+            </div>
+        
+            <div class="row">
+                <div class="col col-6 col-sm-12">
+                    <div class="card height-100 elevation block-round-timer-lamp-preview">
+                        <h2>Etat des lampes</h2>
+                        <div class="row mt-lg">
+                            <div class="col col-4">
+                                <div class="lamp-preview lamp-1"></div>
+                            </div>
+                            <div class="col col-4">
+                                <div class="lamp-preview lamp-2"></div>
+                            </div>
+                            <div class="col col-4">
+                                <div class="lamp-preview lamp-3"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col col-6 col-sm-12 mb-lg-mobile">
+                    <div class="card height-100 elevation block-round-timer-controls">
+                        <h2>Contrôles</h2>
+
+                        <div>
+                            <button class="primary mt-md">
+                                Timer allumé
+                            </button>
+                            <button class="disabled mt-md">
+                                Timer éteint
+                            </button>
+                        </div>
+
+                        <div>
+                            <button class="primary mt-md">
+                                Round de 2min
+                            </button>
+                            <button class="disabled mt-md">
+                                Round de 3min
+                            </button>
+                        </div>
+                        <div>
+                            <button class="disabled mt-md">
+                                Repos 30s
+                            </button>
+                            <button class="primary mt-md">
+                                Repos 1min
+                            </button>
+                        </div>                        
+                        <button class="primary mt-lg block" onclick="saveWifiCredentials(this)">
+                            Configuration timer
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="primary mt-lg" onclick="anchorLink('main-menu')">
+                Menu principal
+            </button>
+
+        </div>
 
     </body>
 </html>
