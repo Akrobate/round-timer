@@ -48,6 +48,10 @@ let business_state = {
     sta_is_connected: false,
     sta_is_configured: false,
     firmware_version: '2.0.0-data',
+
+    lamp_1_color: '#ff0000',
+    lamp_2_color: '#00ff00',
+    lamp_3_color: '',
 }
 
 /**
@@ -75,10 +79,28 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 function updateRender() {
     // configuration
-    const _el = $('.block-configuraion-info')
-    $('.value_sta_ssid', _el).textContent = business_state.sta_ssid
-    $('.value_sta_ip', _el).textContent = business_state.sta_ip
-    $('.value_firmware_version', _el).textContent = business_state.firmware_version
+    const _el_configuraion_info = $('.block-configuraion-info')
+    $('.value_sta_ssid', _el_configuraion_info).textContent = business_state.sta_ssid
+    $('.value_sta_ip', _el_configuraion_info).textContent = business_state.sta_ip
+    $('.value_firmware_version', _el_configuraion_info).textContent = business_state.firmware_version
+
+    const _el_round_timer_lamp_preview = $('.block-round-timer-lamp-preview')
+
+    if (business_state.lamp_1_color === '') {
+        $('.lamp-1', _el_round_timer_lamp_preview).style.backgroundColor = '#dce1e2'
+    } else {
+        $('.lamp-1', _el_round_timer_lamp_preview).style.backgroundColor = business_state.lamp_1_color
+    }
+    if (business_state.lamp_2_color === '') {
+        $('.lamp-2', _el_round_timer_lamp_preview).style.backgroundColor = '#dce1e2'
+    } else {
+        $('.lamp-2', _el_round_timer_lamp_preview).style.backgroundColor = business_state.lamp_2_color
+    }
+    if (business_state.lamp_3_color === '') {
+        $('.lamp-3', _el_round_timer_lamp_preview).style.backgroundColor = '#dce1e2'
+    } else {
+        $('.lamp-3', _el_round_timer_lamp_preview).style.backgroundColor = business_state.lamp_3_color
+    }
 
 }
 
