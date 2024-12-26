@@ -8,7 +8,8 @@ class TimerSequencer {
     public:
         TimerSequencer();
 
-        using Callback = void (*)(int);
+        //using Callback = void (*)(int);
+        using Callback = std::function<void(int)>;
 
         unsigned long round_duration = 1800;
         unsigned long rest_duration = 1200;

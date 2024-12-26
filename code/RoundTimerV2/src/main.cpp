@@ -6,6 +6,7 @@
 #include <TimerSequencer.h>
 #include <RoundTimerServer.h>
 #include <BusinessState.h>
+#include <RoundTimer.h>
 
 #define PIN_D1  5
 #define PIN_D2  4
@@ -21,6 +22,7 @@ Lamps * lamps = new Lamps();
 TimerSequencer * timer_sequencer = new TimerSequencer();
 RoundTimerServer * server = new RoundTimerServer(SERVER_PORT);
 BusinessState * business_state = new BusinessState();
+RoundTimer * round_timer = new RoundTimer();
 
 void setup() {
 
@@ -34,26 +36,12 @@ void setup() {
 
     server->injectBusinessState(business_state);
 
-    timer_sequencer->setCallback([](int step) {
-        business_state->timer_sequencer_step = step;
-        switch(step) {
-            case TimerSequencer::STEP_ROUND:
-                lamps->setRest(false);
-                lamps->setRound(true);
-                break;
-            case TimerSequencer::STEP_PREREST:
-                lamps->setRound(false);
-                lamps->setPreRest(true);
-                break;
-            case TimerSequencer::STEP_REST:
-                lamps->setPreRest(false);
-                lamps->setRest(true);
-                break;
-        }
-    });
-
-    timer_sequencer->start();
-
+    round_timer->injectBusinessState(business_state);
+    round_timer->injectTimerSequencer(timer_sequencer);
+    round_timer->injectLamps(lamps);
+    
+    round_timer->init();
+  
     delay(1000);
     WiFi.softAP("RoundTimerAccessPoint");
 
