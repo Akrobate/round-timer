@@ -19,6 +19,8 @@ class TimerSequencer {
         bool in_rest = false;
         bool in_prerest = false;
 
+        bool is_running = false;
+
         static constexpr int STEP_ROUND = 1;
         static constexpr int STEP_REST = 2;
         static constexpr int STEP_PREREST = 3;
@@ -27,7 +29,6 @@ class TimerSequencer {
 
         void start();
         void stop();
-        void reset();
 
         void setCallback(Callback callback);
 

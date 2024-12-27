@@ -6,9 +6,17 @@ TimerSequencer::TimerSequencer() {
 
 void TimerSequencer::start() {
     time = millis();
+    this->is_running = true;
+}
+
+void TimerSequencer::stop() {
+    this->is_running = false;
 }
 
 void TimerSequencer::update() {
+    if (!is_running) {
+        return;
+    }
     unsigned long current_time = millis();
     if (
         current_time - time > 0
@@ -55,11 +63,5 @@ void TimerSequencer::setCallback(Callback callback) {
     this->callback = callback;
 }
 
-/*
-void TimerSequencer::update() {
-    if(callback != nullptr) {
-        callback(0);
-    }
-}
-*/
+
 

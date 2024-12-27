@@ -13,79 +13,107 @@ void RoundTimerServer::injectBusinessState(BusinessState * business_state) {
     this->business_state = business_state;
 }
 
+void RoundTimerServer::injectRoundTimer(RoundTimer * round_timer){
+    this->round_timer = round_timer;
+}
 
 void RoundTimerServer::init() {
 
-  this->server->onNotFound(
-    [](AsyncWebServerRequest *request){
-      request->send(404, "text/html", "Not found");
-    }
-  );
+    this->server->onNotFound(
+        [](AsyncWebServerRequest *request){
+            request->send(404, "text/html", "Not found");
+        }
+    );
 
 
-  this->server->on(
-    "/",
-    HTTP_GET,
-    [](AsyncWebServerRequest *request){
-      request->send_P(200, "text/html; charset=UTF-8", round_timer_server_static_index_html);
-    }
-  );
+    this->server->on(
+        "/",
+        HTTP_GET,
+        [](AsyncWebServerRequest *request){
+            request->send_P(200, "text/html; charset=UTF-8", round_timer_server_static_index_html);
+        }
+    );
 
 
-  this->server->on(
-    "/style.css",
-    HTTP_GET,
-    [](AsyncWebServerRequest *request){
-      request->send_P(200, "text/css; charset=UTF-8", round_timer_server_static_style_css);
-    }
-  );
+    this->server->on(
+        "/style.css",
+        HTTP_GET,
+        [](AsyncWebServerRequest *request){
+            request->send_P(200, "text/css; charset=UTF-8", round_timer_server_static_style_css);
+        }
+    );
 
 
-  this->server->on(
-    "/index.js",
-    HTTP_GET,
-    [](AsyncWebServerRequest *request){
-      request->send_P(200, "application/javascript; charset=UTF-8", round_timer_server_static_index_js);
-    }
-  );
+    this->server->on(
+        "/index.js",
+        HTTP_GET,
+        [](AsyncWebServerRequest *request){
+            request->send_P(200, "application/javascript; charset=UTF-8", round_timer_server_static_index_js);
+        }
+    );
 
 
-  this->server->on(
-    "/api/business-state",
-    HTTP_GET,
-    [&](AsyncWebServerRequest * request) {
-      String response;
-      DynamicJsonDocument doc(512);
-      JsonObject object = doc.to<JsonObject>();
-      object["ap_ssid"] = this->business_state->ap_ssid;
-      object["sta_ssid"] = this->business_state->sta_ssid;
-      object["sta_password"] = "";
-      object["sta_ip"] = this->business_state->sta_ip;
-      object["sta_is_connected"] = this->business_state->sta_is_connected;
-      object["sta_is_configured"] = this->business_state->sta_is_configured;
-      
-      object["timer_sequencer_step"] = this->business_state->timer_sequencer_step;
+    this->server->on(
+        "/api/business-state",
+        HTTP_GET,
+        [&](AsyncWebServerRequest * request) {
+            String response;
+            DynamicJsonDocument doc(512);
+            JsonObject object = doc.to<JsonObject>();
+
+            // Device
+            object["device_mode"] = this->business_state->device_mode;
+
+            // Network
+            object["ap_ssid"] = this->business_state->ap_ssid;
+            object["sta_ssid"] = this->business_state->sta_ssid;
+            object["sta_password"] = "";
+            object["sta_ip"] = this->business_state->sta_ip;
+            object["sta_is_connected"] = this->business_state->sta_is_connected;
+            object["sta_is_configured"] = this->business_state->sta_is_configured;
+
+            // Round Timer
+            object["round_timer_step"] = this->business_state->round_timer_step;
+            object["round_timer_mode"] = this->business_state->round_timer_mode;
+
+            object["round_timer_round_color"] = this->business_state->round_timer_round_color;
+            object["round_timer_rest_color"] = this->business_state->round_timer_rest_color;
+            object["round_timer_prerest_color"] = this->business_state->round_timer_prerest_color;
+
+            object["round_timer_round_long_duration"] = this->business_state->round_timer_round_long_duration;
+            object["round_timer_round_short_duration"] = this->business_state->round_timer_round_short_duration;
+            object["round_timer_rest_long_duration"] = this->business_state->round_timer_rest_long_duration;
+            object["round_timer_rest_short_duration"] = this->business_state->round_timer_rest_short_duration;
+            object["round_timer_prerest_duration"] = this->business_state->round_timer_prerest_duration;
+
+            object["round_timer_state_is_running"] = this->business_state->round_timer_state_is_running;
+            object["round_timer_state_is_round_long_duration"] = this->business_state->round_timer_state_is_round_long_duration;
+            object["round_timer_state_is_rest_long_duration"] = this->business_state->round_timer_state_is_rest_long_duration;
+
+            // Lamp
+            object["lamp_0_color"] = this->business_state->lamp_0_color;
+            object["lamp_1_color"] = this->business_state->lamp_1_color;
+            object["lamp_2_color"] = this->business_state->lamp_2_color;
+
+            serializeJson(doc, response);
+            request->send(200, "application/json", response);
+        }
+    );
 
 
-      serializeJson(doc, response);
-      request->send(200, "application/json", response);
-    }
-  );
-
-
-  this->server->on(
-    "/api/sta-credentials",
-    HTTP_GET,
-    [&](AsyncWebServerRequest * request) {
-      String response;
-      DynamicJsonDocument doc(256);
-      JsonObject object = doc.to<JsonObject>();
-      object["sta_ssid"] = this->business_state->sta_ssid;
-      object["sta_password"] = this->business_state->sta_password;
-      serializeJson(doc, response);
-      request->send(200, "application/json", response);
-    }
-  );
+    this->server->on(
+        "/api/sta-credentials",
+        HTTP_GET,
+        [&](AsyncWebServerRequest * request) {
+            String response;
+            DynamicJsonDocument doc(256);
+            JsonObject object = doc.to<JsonObject>();
+            object["sta_ssid"] = this->business_state->sta_ssid;
+            object["sta_password"] = this->business_state->sta_password;
+            serializeJson(doc, response);
+            request->send(200, "application/json", response);
+        }
+    );
 
 
   this->server->on(
@@ -113,6 +141,47 @@ void RoundTimerServer::init() {
       this->business_state->sta_ssid = sta_ssid;
       this->business_state->sta_password = sta_password;
       this->business_state->staSaveCredentials();
+      request->send(200, "application/json", "{\"status\": \"ok\"}");
+    }
+  );
+
+
+  this->server->on(
+    "/api/lamps",
+    HTTP_POST,
+    [&](AsyncWebServerRequest * request) {
+
+      if (request->hasParam("lamp_0_color", true)) {
+        this->business_state->lamp_0_color = request->getParam("lamp_0_color", true)->value();
+      }
+
+      if (request->hasParam("lamp_1_color", true)) {
+        this->business_state->lamp_1_color = request->getParam("lamp_1_color", true)->value();
+      }
+
+      if (request->hasParam("lamp_2_color", true)) {
+        this->business_state->lamp_2_color = request->getParam("lamp_2_color", true)->value();
+      }
+      this->round_timer->lampModeSet();
+      request->send(200, "application/json", "{\"status\": \"ok\"}");
+    }
+  );
+
+
+  this->server->on(
+    "/api/controls",
+    HTTP_POST,
+    [&](AsyncWebServerRequest * request) {
+
+      if (request->hasParam("round_timer_state_is_running", true)) {
+        this->business_state->round_timer_state_is_running = request->getParam("round_timer_state_is_running", true)->value() == "true";
+        if (this->business_state->round_timer_state_is_running) {
+          this->round_timer->start();
+        } else {
+          this->round_timer->stop();
+        }
+      }
+
       request->send(200, "application/json", "{\"status\": \"ok\"}");
     }
   );

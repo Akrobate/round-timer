@@ -15,12 +15,21 @@ class RoundTimer {
 
     public:
         RoundTimer();
+
         void injectBusinessState(BusinessState * business_state);
         void injectTimerSequencer(TimerSequencer * timer_sequencer);
         void injectLamps(Lamps * lamps);
 
         void init();
         void update();
+        void start();
+        void stop();
+
+        void roundStep();
+        void prerestStep();
+        void restStep();
+
+        void lampModeSet();
 };
 
 #endif

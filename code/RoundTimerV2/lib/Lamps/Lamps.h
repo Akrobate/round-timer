@@ -16,9 +16,16 @@ class Lamps {
         void setRest(bool state);
         void setPreRest(bool state);
 
+        void setLamp0(unsigned long int color);
         void setLamp1(unsigned long int color);
         void setLamp2(unsigned long int color);
-        void setLamp3(unsigned long int color);
+        void setAllLamps(unsigned long int color);
+
+        void setLamp0Hex(String color_string);
+        void setLamp1Hex(String color_string);
+        void setLamp2Hex(String color_string);
+        void setAllLampsHex(String color_string);
+
 
         unsigned long int hexColorFromString(String color_string);
 

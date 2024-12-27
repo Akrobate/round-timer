@@ -10,6 +10,7 @@
 #include "static/round_timer_server_static_index_js.h"
 
 #include <BusinessState.h>
+#include <RoundTimer.h>
 
 class RoundTimerServer {
 
@@ -18,9 +19,11 @@ class RoundTimerServer {
         int channel;
 
         void injectBusinessState(BusinessState * business_state);
+        void injectRoundTimer(RoundTimer * round_timer);
 
         AsyncWebServer * server;
         BusinessState * business_state;
+        RoundTimer * round_timer;
 
         RoundTimerServer(int port);
 
