@@ -44,6 +44,33 @@ void Lamps::setRest(bool state) {
     show();
 }
 
+
+void Lamps::setLamp0(unsigned long int color) {
+    leds[0] = color;
+    this->show();
+}
+
+
+void Lamps::setLamp1(unsigned long int color) {
+    leds[1] = color;
+    this->show();
+}
+
+
+void Lamps::setLamp2(unsigned long int color) {
+    leds[2] = color;
+    this->show();
+}
+
+unsigned long int Lamps::hexColorFromString(String color_string) {
+    if (color_string.startsWith("#") && color_string.length() == 7) {
+        return strtol(color_string.substring(1).c_str(), nullptr, 16);
+    }
+    return 0;
+}
+
+
+
 void Lamps::show() {
     FastLED.show();
 }
