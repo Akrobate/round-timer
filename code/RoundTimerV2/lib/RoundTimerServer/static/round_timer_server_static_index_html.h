@@ -6,7 +6,7 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="index.js"></script>
-        <script src="mock-server.js"></script>
+        <script src="repository.js"></script>
         <link rel="stylesheet" href="style.css">
         <title>RoundTimer</title>
     </head>

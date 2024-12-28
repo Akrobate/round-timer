@@ -17,14 +17,14 @@ void RoundTimerServer::injectRoundTimer(RoundTimer * round_timer){
     this->round_timer = round_timer;
 }
 
-void RoundTimerServer::init() {
+
+void RoundTimerServer::initStaticRoutes() {
 
     this->server->onNotFound(
         [](AsyncWebServerRequest *request){
             request->send(404, "text/html", "Not found");
         }
     );
-
 
     this->server->on(
         "/",
@@ -34,7 +34,6 @@ void RoundTimerServer::init() {
         }
     );
 
-
     this->server->on(
         "/style.css",
         HTTP_GET,
@@ -42,7 +41,6 @@ void RoundTimerServer::init() {
             request->send_P(200, "text/css; charset=UTF-8", round_timer_server_static_style_css);
         }
     );
-
 
     this->server->on(
         "/index.js",
@@ -52,6 +50,19 @@ void RoundTimerServer::init() {
         }
     );
 
+    this->server->on(
+        "/repository.js",
+        HTTP_GET,
+        [](AsyncWebServerRequest *request){
+            request->send_P(200, "application/javascript; charset=UTF-8", round_timer_server_static_repository_js);
+        }
+    );
+
+}
+
+void RoundTimerServer::init() {
+
+    this->initStaticRoutes();
 
     this->server->on(
         "/api/business-state",

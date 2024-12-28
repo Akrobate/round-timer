@@ -81,7 +81,6 @@ void RoundTimer::start() {
     }
 
     this->timer_sequencer->prerest_duration = this->business_state->round_timer_prerest_duration * 1000;
-
     this->timer_sequencer->start();
 }
 

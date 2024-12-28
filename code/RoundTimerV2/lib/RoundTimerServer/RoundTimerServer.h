@@ -8,11 +8,14 @@
 #include "static/round_timer_server_static_index_html.h"
 #include "static/round_timer_server_static_style_css.h"
 #include "static/round_timer_server_static_index_js.h"
+#include "static/round_timer_server_static_repository_js.h"
 
 #include <BusinessState.h>
 #include <RoundTimer.h>
 
 class RoundTimerServer {
+    private:
+        void initStaticRoutes();
 
     public:
 
