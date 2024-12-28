@@ -40,6 +40,10 @@ function formatTime(date_time_string) {
 }
 
 
+/**
+ * business_state
+ */
+
 let business_state = {
     ap_ssid: '',
     sta_ssid: 'Livebox-data',
@@ -49,10 +53,17 @@ let business_state = {
     sta_is_configured: false,
     firmware_version: '2.0.0-data',
 
-    lamp_1_color: '#ff0000',
-    lamp_2_color: '#00ff00',
-    lamp_3_color: '',
+    round_timer_state_is_running: false,
+    round_timer_state_is_round_long_duration: false,
+    round_timer_state_is_rest_long_duration: false,
+    
+    lamp_0_color: '#ff0000',
+    lamp_1_color: '#00ff00',
+    lamp_2_color: '',
 }
+
+
+let business_state_interval_handler = null
 
 /**
  * INIT
@@ -72,8 +83,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
         rmCls($(`#page-${newHash}`), 'hidden')
     })
+    business_state = await getBusinessState()
     updateRender();
     initWifiCredentialsBlock();
+
+    // init update business state timer
+    business_state_interval_handler = setInterval(async () => {
+        business_state = await getBusinessState()
+        updateRender()
+    }, 1000)
 })
 
 
@@ -85,21 +103,20 @@ function updateRender() {
     $('.value_firmware_version', _el_configuraion_info).textContent = business_state.firmware_version
 
     const _el_round_timer_lamp_preview = $('.block-round-timer-lamp-preview')
-
+    if (business_state.lamp_0_color === '') {
+        $('.lamp-0', _el_round_timer_lamp_preview).style.backgroundColor = '#dce1e2'
+    } else {
+        $('.lamp-0', _el_round_timer_lamp_preview).style.backgroundColor = business_state.lamp_1_color
+    }
     if (business_state.lamp_1_color === '') {
         $('.lamp-1', _el_round_timer_lamp_preview).style.backgroundColor = '#dce1e2'
     } else {
-        $('.lamp-1', _el_round_timer_lamp_preview).style.backgroundColor = business_state.lamp_1_color
+        $('.lamp-1', _el_round_timer_lamp_preview).style.backgroundColor = business_state.lamp_2_color
     }
     if (business_state.lamp_2_color === '') {
         $('.lamp-2', _el_round_timer_lamp_preview).style.backgroundColor = '#dce1e2'
     } else {
-        $('.lamp-2', _el_round_timer_lamp_preview).style.backgroundColor = business_state.lamp_2_color
-    }
-    if (business_state.lamp_3_color === '') {
-        $('.lamp-3', _el_round_timer_lamp_preview).style.backgroundColor = '#dce1e2'
-    } else {
-        $('.lamp-3', _el_round_timer_lamp_preview).style.backgroundColor = business_state.lamp_3_color
+        $('.lamp-2', _el_round_timer_lamp_preview).style.backgroundColor = business_state.lamp_3_color
     }
 
 }
@@ -137,4 +154,9 @@ function saveWifiCredentials() {
     console.log('Saving wifi credentials...')
     console.log('SSID:', name)
     console.log('Password', password)
+}
+
+
+async function setControls(data) {
+    await setControls(data);
 }

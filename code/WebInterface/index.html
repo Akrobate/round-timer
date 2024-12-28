@@ -135,13 +135,13 @@
                         <h2>Etat des lampes</h2>
                         <div class="row mt-lg">
                             <div class="col col-4">
+                                <div class="lamp-preview lamp-0"></div>
+                            </div>
+                            <div class="col col-4">
                                 <div class="lamp-preview lamp-1"></div>
                             </div>
                             <div class="col col-4">
                                 <div class="lamp-preview lamp-2"></div>
-                            </div>
-                            <div class="col col-4">
-                                <div class="lamp-preview lamp-3"></div>
                             </div>
                         </div>
                     </div>
@@ -152,31 +152,49 @@
                         <h2>Contrôles</h2>
 
                         <div>
-                            <button class="primary mt-md">
+                            <button
+                                class="primary mt-md round_timer_state_is_running_true"
+                                onclick="setControls({round_timer_state_is_running:true})"
+                            >
                                 Timer allumé
                             </button>
-                            <button class="disabled mt-md">
+                            <button
+                                class="disabled mt-md round_timer_state_is_running_false"
+                                onclick="setControls({round_timer_state_is_running:false})"
+                            >
                                 Timer éteint
                             </button>
                         </div>
 
                         <div>
-                            <button class="primary mt-md">
+                            <button
+                                class="primary mt-md round_timer_state_is_round_long_duration_false"
+                                onclick="setControls({round_timer_state_is_round_long_duration:false})"
+                            >
                                 Round de 2min
                             </button>
-                            <button class="disabled mt-md">
+                            <button
+                                class="disabled mt-md round_timer_state_is_round_long_duration_true" 
+                                onclick="setControls({round_timer_state_is_round_long_duration:true})"
+                            >
                                 Round de 3min
                             </button>
                         </div>
                         <div>
-                            <button class="disabled mt-md">
+                            <button
+                                class="disabled mt-md round_timer_state_is_rest_long_duration_false"
+                                onclick="setControls({round_timer_state_is_rest_long_duration:false})"
+                            >
                                 Repos 30s
                             </button>
-                            <button class="primary mt-md">
+                            <button
+                                class="primary mt-md round_timer_state_is_rest_long_duration_true"
+                                onclick="setControls({round_timer_state_is_rest_long_duration:true})"
+                            >
                                 Repos 1min
                             </button>
                         </div>                        
-                        <button class="primary mt-lg block" onclick="saveWifiCredentials(this)">
+                        <button class="primary mt-lg block" >
                             Configuration timer
                         </button>
                     </div>

@@ -3,9 +3,9 @@
  * test method
  * @returns {Promise<Array>}
  */
-async function serverGet() {
+async function getBusinessState() {
     try {
-        const result = await fetch('/api/get',
+        const result = await fetch('/api/business-state',
             {
                 method: 'GET',
             }
