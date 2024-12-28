@@ -24,6 +24,7 @@ class RoundTimer {
         void update();
         void start();
         void stop();
+        void restart();
 
         void roundStep();
         void prerestStep();

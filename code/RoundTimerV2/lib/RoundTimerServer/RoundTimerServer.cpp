@@ -116,75 +116,85 @@ void RoundTimerServer::init() {
     );
 
 
-  this->server->on(
-    "/api/sta-credentials",
-    HTTP_POST,
-    [&](AsyncWebServerRequest * request) {
+    this->server->on(
+        "/api/sta-credentials",
+        HTTP_POST,
+        [&](AsyncWebServerRequest * request) {
 
-      String sta_ssid = "";
-      String sta_password = "";
+            String sta_ssid = "";
+            String sta_password = "";
 
-      if (request->hasParam("sta_ssid", true)) {
-        sta_ssid = request->getParam("sta_ssid", true)->value();
-      } else {
-        request->send(400, "text/html", "Missing sta_ssid");
-        return;
-      }
+            if (request->hasParam("sta_ssid", true)) {
+                sta_ssid = request->getParam("sta_ssid", true)->value();
+            } else {
+                request->send(400, "text/html", "Missing sta_ssid");
+            return;
+            }
 
-      if (request->hasParam("sta_password", true)) {
-        sta_password = request->getParam("sta_password", true)->value();
-      } else {
-        request->send(400, "text/html", "Missing sta_password");
-        return;
-      }
+            if (request->hasParam("sta_password", true)) {
+                sta_password = request->getParam("sta_password", true)->value();
+            } else {
+                request->send(400, "text/html", "Missing sta_password");
+            return;
+            }
 
-      this->business_state->sta_ssid = sta_ssid;
-      this->business_state->sta_password = sta_password;
-      this->business_state->staSaveCredentials();
-      request->send(200, "application/json", "{\"status\": \"ok\"}");
-    }
-  );
-
-
-  this->server->on(
-    "/api/lamps",
-    HTTP_POST,
-    [&](AsyncWebServerRequest * request) {
-
-      if (request->hasParam("lamp_0_color", true)) {
-        this->business_state->lamp_0_color = request->getParam("lamp_0_color", true)->value();
-      }
-
-      if (request->hasParam("lamp_1_color", true)) {
-        this->business_state->lamp_1_color = request->getParam("lamp_1_color", true)->value();
-      }
-
-      if (request->hasParam("lamp_2_color", true)) {
-        this->business_state->lamp_2_color = request->getParam("lamp_2_color", true)->value();
-      }
-      this->round_timer->lampModeSet();
-      request->send(200, "application/json", "{\"status\": \"ok\"}");
-    }
-  );
-
-
-  this->server->on(
-    "/api/controls",
-    HTTP_POST,
-    [&](AsyncWebServerRequest * request) {
-
-      if (request->hasParam("round_timer_state_is_running", true)) {
-        this->business_state->round_timer_state_is_running = request->getParam("round_timer_state_is_running", true)->value() == "true";
-        if (this->business_state->round_timer_state_is_running) {
-          this->round_timer->start();
-        } else {
-          this->round_timer->stop();
+            this->business_state->sta_ssid = sta_ssid;
+            this->business_state->sta_password = sta_password;
+            this->business_state->staSaveCredentials();
+            request->send(200, "application/json", "{\"status\": \"ok\"}");
         }
-      }
+    );
 
-      request->send(200, "application/json", "{\"status\": \"ok\"}");
-    }
-  );
+
+    this->server->on(
+        "/api/lamps",
+        HTTP_POST,
+        [&](AsyncWebServerRequest * request) {
+            Serial.println("POST /api/lamps");
+            if (request->hasParam("lamp_0_color", true)) {
+                this->business_state->lamp_0_color = request->getParam("lamp_0_color", true)->value();
+            }
+
+            if (request->hasParam("lamp_1_color", true)) {
+                this->business_state->lamp_1_color = request->getParam("lamp_1_color", true)->value();
+            }
+
+            if (request->hasParam("lamp_2_color", true)) {
+                this->business_state->lamp_2_color = request->getParam("lamp_2_color", true)->value();
+            }
+            this->round_timer->lampModeSet();
+            request->send(200, "application/json", "{\"status\": \"ok\"}");
+        }
+    );
+
+
+    this->server->on(
+        "/api/controls",
+        HTTP_POST,
+        [&](AsyncWebServerRequest * request) {
+
+            if (request->hasParam("round_timer_state_is_running", true)) {
+                this->business_state->round_timer_state_is_running = request->getParam("round_timer_state_is_running", true)->value() == "true";
+                if (this->business_state->round_timer_state_is_running) {
+                    this->round_timer->start();
+                } else {
+                    this->round_timer->stop();
+                }
+            }
+
+            if (request->hasParam("round_timer_state_is_round_long_duration", true)) {
+                this->business_state->round_timer_state_is_round_long_duration = request->getParam("round_timer_state_is_round_long_duration", true)->value() == "true";
+                this->round_timer->restart();
+            }
+
+            if (request->hasParam("round_timer_state_is_rest_long_duration", true)) {
+                this->business_state->round_timer_state_is_rest_long_duration = request->getParam("round_timer_state_is_rest_long_duration", true)->value() == "true";
+                this->round_timer->restart();
+            }
+
+            request->send(200, "application/json", "{\"status\": \"ok\"}");
+        }
+    );
 
 
 }

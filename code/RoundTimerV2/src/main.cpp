@@ -28,11 +28,9 @@ WifiService * wifi_service = new WifiService();
 
 
 void setup() {
-
-    lamps->init();
     Serial.begin(74880); // 115200
+    lamps->init();
     delay(1000);
-    Serial.println("Started");
 
     business_state->init();
     business_state->staLoadCredentials();
@@ -43,9 +41,9 @@ void setup() {
     round_timer->injectBusinessState(business_state);
     round_timer->injectTimerSequencer(timer_sequencer);
     round_timer->injectLamps(lamps);    
+    
     round_timer->init();
-  
-    delay(1000);
+
     wifi_service->injectBusinessState(business_state);
     wifi_service->init();
 

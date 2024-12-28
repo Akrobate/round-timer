@@ -7,10 +7,16 @@ TimerSequencer::TimerSequencer() {
 void TimerSequencer::start() {
     time = millis();
     this->is_running = true;
+    in_round = false;
+    in_prerest = false;
+    in_rest = false;
 }
 
 void TimerSequencer::stop() {
     this->is_running = false;
+    in_round = false;
+    in_prerest = false;
+    in_rest = false;
 }
 
 void TimerSequencer::update() {

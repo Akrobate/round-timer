@@ -20,6 +20,7 @@ void RoundTimer::update() {
     this->timer_sequencer->update();
 }
 
+
 void RoundTimer::init() {
     this->timer_sequencer->setCallback([this](int step) {
         this->business_state->round_timer_step = step;
@@ -87,6 +88,12 @@ void RoundTimer::start() {
 
 void RoundTimer::stop() {
     this->timer_sequencer->stop();
+    this->lamps->setAllLampsHex("#000000");
+}
+
+void RoundTimer::restart() {
+    this->timer_sequencer->stop();
+    this->timer_sequencer->start();
 }
 
 

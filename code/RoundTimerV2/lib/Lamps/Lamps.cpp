@@ -1,7 +1,6 @@
 #include "Lamps.h"
 
 Lamps::Lamps() {
-    
 }
 
 void Lamps::init() {
@@ -12,38 +11,9 @@ void Lamps::init() {
         leds[i] = CRGB::Black;
     }
     for(int i = 0; i < 3; i++) {
-        show();
+        this->show();
     }
 }
-
-void Lamps::setRound(bool state) {
-    if(state) {
-        leds[0] = CRGB::Green;
-    } else {
-        leds[0] = CRGB::Black;
-    }
-    show();
-}
-
-
-void Lamps::setPreRest(bool state) {
-    if(state) {
-        leds[1] = CRGB::OrangeRed;
-    } else {
-        leds[1] = CRGB::Black;
-    }
-    show();
-}
-
-void Lamps::setRest(bool state) {
-    if(state) {
-        leds[2] = CRGB::Red;
-    } else {
-        leds[2] = CRGB::Black;
-    }
-    show();
-}
-
 
 void Lamps::setLamp0(unsigned long int color) {
     leds[0] = color;
@@ -62,6 +32,17 @@ void Lamps::setLamp2(unsigned long int color) {
     this->show();
 }
 
+void Lamps::setAllLamps(unsigned long int color) {
+    for(int i = 0; i < 3; i++) {
+        leds[i] = color;
+    }
+    this->show();
+}
+
+void Lamps::show() {
+    FastLED.show();
+}
+
 void Lamps::setLamp0Hex(String color_string) {
     this->setLamp0(this->hexColorFromString(color_string));
 }
@@ -75,18 +56,10 @@ void Lamps::setLamp2Hex(String color_string) {
 }
 
 void Lamps::setAllLampsHex(String color_string) {
-    for(int i = 0; i < 3; i++) {
-        leds[i] = this->hexColorFromString(color_string);
-    }
-    this->show();
+    this->setAllLamps(this->hexColorFromString(color_string));
 }
 
-void Lamps::setAllLamps(unsigned long int color) {
-    for(int i = 0; i < 3; i++) {
-        leds[i] = color;
-    }
-    this->show();
-}
+
 
 
 unsigned long int Lamps::hexColorFromString(String color_string) {
@@ -96,7 +69,3 @@ unsigned long int Lamps::hexColorFromString(String color_string) {
     return 0;
 }
 
-
-void Lamps::show() {
-    FastLED.show();
-}

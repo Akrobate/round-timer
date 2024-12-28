@@ -22,8 +22,8 @@ class TimerSequencer {
         bool is_running = false;
 
         static constexpr int STEP_ROUND = 1;
-        static constexpr int STEP_REST = 2;
-        static constexpr int STEP_PREREST = 3;
+        static constexpr int STEP_PREREST = 2;
+        static constexpr int STEP_REST = 3;
 
         void update();
 
