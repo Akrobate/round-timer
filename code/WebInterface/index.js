@@ -57,8 +57,8 @@ let business_state = {
     round_timer_state_is_round_long_duration: false,
     round_timer_state_is_rest_long_duration: false,
     
-    lamp_0_color: '#ff0000',
-    lamp_1_color: '#00ff00',
+    lamp_0_color: '',
+    lamp_1_color: '',
     lamp_2_color: '',
 }
 
@@ -83,13 +83,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
         rmCls($(`#page-${newHash}`), 'hidden')
     })
-    business_state = await getBusinessState()
+    business_state = await getBusinessStateRepository()
     updateRender();
     initWifiCredentialsBlock();
 
     // init update business state timer
     business_state_interval_handler = setInterval(async () => {
-        business_state = await getBusinessState()
+        business_state = await getBusinessStateRepository()
         updateRender()
     }, 1000)
 })
@@ -104,20 +104,20 @@ function updateRender() {
 
     // round timer lamps
     const _el_round_timer_lamp_preview = $('.block-round-timer-lamp-preview')
-    if (business_state.lamp_0_color === '') {
+    if (['', '#000000'].includes(business_state.lamp_0_color)) {
         $('.lamp-0', _el_round_timer_lamp_preview).style.backgroundColor = '#dce1e2'
     } else {
-        $('.lamp-0', _el_round_timer_lamp_preview).style.backgroundColor = business_state.lamp_1_color
+        $('.lamp-0', _el_round_timer_lamp_preview).style.backgroundColor = business_state.lamp_0_color
     }
-    if (business_state.lamp_1_color === '') {
+    if (['', '#000000'].includes(business_state.lamp_1_color)) {
         $('.lamp-1', _el_round_timer_lamp_preview).style.backgroundColor = '#dce1e2'
     } else {
-        $('.lamp-1', _el_round_timer_lamp_preview).style.backgroundColor = business_state.lamp_2_color
+        $('.lamp-1', _el_round_timer_lamp_preview).style.backgroundColor = business_state.lamp_1_color
     }
-    if (business_state.lamp_2_color === '') {
+    if (['', '#000000'].includes(business_state.lamp_2_color)) {
         $('.lamp-2', _el_round_timer_lamp_preview).style.backgroundColor = '#dce1e2'
     } else {
-        $('.lamp-2', _el_round_timer_lamp_preview).style.backgroundColor = business_state.lamp_3_color
+        $('.lamp-2', _el_round_timer_lamp_preview).style.backgroundColor = business_state.lamp_2_color
     }
 
     // round timer controls
@@ -182,14 +182,14 @@ function saveWifiCredentials() {
 // Controls
 async function setControls(data) {
     await setControlsRepository(data)
-    business_state = await getBusinessState()
+    business_state = await getBusinessStateRepository()
     updateRender()
 }
 
 
 // Lamps
 
-async function setLampColor(element) {
-    console.log(element.value)
+async function setLampColor(data) {
+    setLampColorRepository(data)
 }
 

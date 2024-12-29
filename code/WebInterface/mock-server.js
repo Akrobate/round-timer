@@ -35,8 +35,8 @@ async function wait(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function getBusinessState() {
-    console.log('getBusinessState')
+async function getBusinessStateRepository() {
+    console.log('getBusinessStateRepository')
     await wait(SERVER_LAG_SHORT);
     return repository_business_state
 }

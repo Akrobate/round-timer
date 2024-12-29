@@ -43,6 +43,10 @@ function formatTime(date_time_string) {
 }
 
 
+/**
+ * business_state
+ */
+
 let business_state = {
     ap_ssid: '',
     sta_ssid: 'Livebox-data',
@@ -52,10 +56,17 @@ let business_state = {
     sta_is_configured: false,
     firmware_version: '2.0.0-data',
 
-    lamp_1_color: '#ff0000',
-    lamp_2_color: '#00ff00',
-    lamp_3_color: '',
+    round_timer_state_is_running: false,
+    round_timer_state_is_round_long_duration: false,
+    round_timer_state_is_rest_long_duration: false,
+    
+    lamp_0_color: '',
+    lamp_1_color: '',
+    lamp_2_color: '',
 }
+
+
+let business_state_interval_handler = null
 
 /**
  * INIT
@@ -75,8 +86,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
         rmCls($(`#page-${newHash}`), 'hidden')
     })
+    business_state = await getBusinessStateRepository()
     updateRender();
     initWifiCredentialsBlock();
+
+    // init update business state timer
+    business_state_interval_handler = setInterval(async () => {
+        business_state = await getBusinessStateRepository()
+        updateRender()
+    }, 1000)
 })
 
 
@@ -87,24 +105,46 @@ function updateRender() {
     $('.value_sta_ip', _el_configuraion_info).textContent = business_state.sta_ip
     $('.value_firmware_version', _el_configuraion_info).textContent = business_state.firmware_version
 
+    // round timer lamps
     const _el_round_timer_lamp_preview = $('.block-round-timer-lamp-preview')
-
-    if (business_state.lamp_1_color === '') {
+    if (['', '#000000'].includes(business_state.lamp_0_color)) {
+        $('.lamp-0', _el_round_timer_lamp_preview).style.backgroundColor = '#dce1e2'
+    } else {
+        $('.lamp-0', _el_round_timer_lamp_preview).style.backgroundColor = business_state.lamp_0_color
+    }
+    if (['', '#000000'].includes(business_state.lamp_1_color)) {
         $('.lamp-1', _el_round_timer_lamp_preview).style.backgroundColor = '#dce1e2'
     } else {
         $('.lamp-1', _el_round_timer_lamp_preview).style.backgroundColor = business_state.lamp_1_color
     }
-    if (business_state.lamp_2_color === '') {
+    if (['', '#000000'].includes(business_state.lamp_2_color)) {
         $('.lamp-2', _el_round_timer_lamp_preview).style.backgroundColor = '#dce1e2'
     } else {
         $('.lamp-2', _el_round_timer_lamp_preview).style.backgroundColor = business_state.lamp_2_color
     }
-    if (business_state.lamp_3_color === '') {
-        $('.lamp-3', _el_round_timer_lamp_preview).style.backgroundColor = '#dce1e2'
-    } else {
-        $('.lamp-3', _el_round_timer_lamp_preview).style.backgroundColor = business_state.lamp_3_color
-    }
 
+    // round timer controls
+    const _el_round_timer_controls = $('.block-round-timer-controls')
+    updateToggleButtonsControls(business_state.round_timer_state_is_running, 'round_timer_state_is_running', _el_round_timer_controls)
+    updateToggleButtonsControls(business_state.round_timer_state_is_round_long_duration, 'round_timer_state_is_round_long_duration', _el_round_timer_controls)
+    updateToggleButtonsControls(business_state.round_timer_state_is_rest_long_duration, 'round_timer_state_is_rest_long_duration', _el_round_timer_controls)
+}
+
+// Toggle button controls update
+function updateToggleButtonsControls(value, class_prefix, parent_element) {
+    const _el_true = $(`.${class_prefix}_true`, parent_element)
+    const _el_false = $(`.${class_prefix}_false`, parent_element)
+    if (value) {
+        addCls(_el_true, 'primary')
+        rmCls(_el_true, 'disabled')
+        addCls(_el_false, 'disabled')
+        rmCls(_el_false, 'primary')
+    } else {
+        addCls(_el_true, 'disabled')
+        rmCls(_el_true, 'primary')
+        addCls(_el_false, 'primary')
+        rmCls(_el_false, 'disabled')
+    }
 }
 
 
@@ -140,6 +180,20 @@ function saveWifiCredentials() {
     console.log('Saving wifi credentials...')
     console.log('SSID:', name)
     console.log('Password', password)
+}
+
+// Controls
+async function setControls(data) {
+    await setControlsRepository(data)
+    business_state = await getBusinessStateRepository()
+    updateRender()
+}
+
+
+// Lamps
+
+async function setLampColor(data) {
+    setLampColorRepository(data)
 }
 )rawliteral";
 

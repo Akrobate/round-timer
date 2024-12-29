@@ -6,10 +6,11 @@ Lamps::Lamps() {
 void Lamps::init() {
     pinMode(PIN_NEOPIXEL_LED, OUTPUT);
     digitalWrite(PIN_NEOPIXEL_LED, LOW);
-    FastLED.addLeds<NEOPIXEL, PIN_NEOPIXEL_LED>(leds, 3);
     for(int i = 0; i < 3; i++) {
         leds[i] = CRGB::Black;
     }
+    FastLED.addLeds<NEOPIXEL, PIN_NEOPIXEL_LED>(leds, 3);
+    FastLED.clear();
     for(int i = 0; i < 3; i++) {
         this->show();
     }
@@ -41,6 +42,7 @@ void Lamps::setAllLamps(unsigned long int color) {
 
 void Lamps::show() {
     FastLED.show();
+    FastLED.show();
 }
 
 void Lamps::setLamp0Hex(String color_string) {
@@ -56,6 +58,8 @@ void Lamps::setLamp2Hex(String color_string) {
 }
 
 void Lamps::setAllLampsHex(String color_string) {
+    Serial.println("setAllLampsHex");
+    Serial.println(color_string);
     this->setAllLamps(this->hexColorFromString(color_string));
 }
 

@@ -192,6 +192,10 @@ button.icon svg {
     display: flex;
 }
 
+.display-block {
+    display: block;
+}
+
 .align-items-center {
     align-items: center;
 }
@@ -269,6 +273,10 @@ input[type="text"] {
     box-sizing: border-box;
 }
 
+input[type="color"] {
+    border: 1px solid var(--neutral-color-2);
+}
+
 select {
     padding: 10px;
     border: 1px solid var(--neutral-color-2);
@@ -314,6 +322,7 @@ input.error {
 .hidden {
     display: none;
 }
+
 
 .logo {
     width: 60px;

@@ -3,7 +3,7 @@
  * test method
  * @returns {Promise<Array>}
  */
-async function getBusinessState() {
+async function getBusinessStateRepository() {
     try {
         const result = await fetch('/api/business-state',
             {

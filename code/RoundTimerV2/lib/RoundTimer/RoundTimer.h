@@ -11,9 +11,9 @@ class RoundTimer {
     private:
         BusinessState * business_state;
         TimerSequencer * timer_sequencer;
-        Lamps * lamps;
 
     public:
+        Lamps * lamps;
         RoundTimer();
 
         void injectBusinessState(BusinessState * business_state);
@@ -29,7 +29,9 @@ class RoundTimer {
         void roundStep();
         void prerestStep();
         void restStep();
+        bool isRunning();
 
+        void lampsOffWithBusinessStateUpdate();
         void lampModeSet();
 };
 

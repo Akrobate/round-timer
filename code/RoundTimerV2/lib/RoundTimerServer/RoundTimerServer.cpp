@@ -180,13 +180,24 @@ void RoundTimerServer::init() {
 
 
     this->server->on(
+        "/api/lamps-off",
+        HTTP_POST,
+        [&](AsyncWebServerRequest * request) {
+            Serial.println("POST /api/lamps-off");
+            this->round_timer->lamps->setAllLampsHex("#000000");
+            request->send(200, "application/json", "{\"status\": \"ok\"}");
+        }
+    );
+
+
+
+    this->server->on(
         "/api/controls",
         HTTP_POST,
         [&](AsyncWebServerRequest * request) {
 
             if (request->hasParam("round_timer_state_is_running", true)) {
-                this->business_state->round_timer_state_is_running = request->getParam("round_timer_state_is_running", true)->value() == "true";
-                if (this->business_state->round_timer_state_is_running) {
+                if (request->getParam("round_timer_state_is_running", true)->value() == "true") {
                     this->round_timer->start();
                 } else {
                     this->round_timer->stop();
@@ -195,18 +206,32 @@ void RoundTimerServer::init() {
 
             if (request->hasParam("round_timer_state_is_round_long_duration", true)) {
                 this->business_state->round_timer_state_is_round_long_duration = request->getParam("round_timer_state_is_round_long_duration", true)->value() == "true";
-                this->round_timer->restart();
+                if (this->business_state->round_timer_state_is_running) {
+                    this->round_timer->restart();
+                }
             }
 
             if (request->hasParam("round_timer_state_is_rest_long_duration", true)) {
                 this->business_state->round_timer_state_is_rest_long_duration = request->getParam("round_timer_state_is_rest_long_duration", true)->value() == "true";
-                this->round_timer->restart();
+                if (this->business_state->round_timer_state_is_running) {
+                    this->round_timer->restart();
+                }
             }
 
             request->send(200, "application/json", "{\"status\": \"ok\"}");
         }
     );
 
+
+
+    this->server->on(
+        "/api/round-timer-configurations",
+        HTTP_POST,
+        [&](AsyncWebServerRequest * request) {
+
+            request->send(200, "application/json", "{\"status\": \"ok\"}");
+        }
+    );
 
 }
 

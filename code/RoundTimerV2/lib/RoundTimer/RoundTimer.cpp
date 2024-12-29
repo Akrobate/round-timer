@@ -40,34 +40,29 @@ void RoundTimer::init() {
 
 
 void RoundTimer::roundStep() {
-    this->lamps->setAllLamps(this->lamps->hexColorFromString("#000000"));
+    this->lampsOffWithBusinessStateUpdate();
     this->lamps->setLamp0Hex(this->business_state->round_timer_round_color);
     this->business_state->lamp_0_color = this->business_state->round_timer_round_color;
-    this->business_state->lamp_1_color = "#000000";
-    this->business_state->lamp_2_color = "#000000";
 }
 
 
 void RoundTimer::prerestStep() {
-    this->lamps->setAllLampsHex("#000000");
+    this->lampsOffWithBusinessStateUpdate();
     this->lamps->setLamp1Hex(this->business_state->round_timer_prerest_color);
     this->business_state->lamp_1_color = this->business_state->round_timer_prerest_color;
-    this->business_state->lamp_0_color = "#000000";
-    this->business_state->lamp_2_color = "#000000";
 }
 
 
 void RoundTimer::restStep() {
-    this->lamps->setAllLampsHex("#000000");
+    this->lampsOffWithBusinessStateUpdate();
     this->lamps->setLamp2Hex(this->business_state->round_timer_rest_color);
     this->business_state->lamp_2_color = this->business_state->round_timer_rest_color;
-    this->business_state->lamp_0_color = "#000000";
-    this->business_state->lamp_1_color = "#000000";
 }
 
 
 void RoundTimer::start() {
-    
+    this->lampsOffWithBusinessStateUpdate();
+
     if (this->business_state->round_timer_state_is_round_long_duration) {
         this->timer_sequencer->round_duration = (this->business_state->round_timer_round_long_duration - this->business_state->round_timer_prerest_duration) * 1000;
     } else {
@@ -81,14 +76,19 @@ void RoundTimer::start() {
     }
 
     this->timer_sequencer->prerest_duration = this->business_state->round_timer_prerest_duration * 1000;
+    this->business_state->round_timer_state_is_running = true;
     this->timer_sequencer->start();
 }
 
 
 void RoundTimer::stop() {
-    this->timer_sequencer->stop();
-    this->lamps->setAllLampsHex("#000000");
+    if (this->isRunning()) {
+        this->business_state->round_timer_state_is_running = false;
+        this->timer_sequencer->stop();
+        this->lampsOffWithBusinessStateUpdate();
+    }
 }
+
 
 void RoundTimer::restart() {
     this->timer_sequencer->stop();
@@ -101,4 +101,17 @@ void RoundTimer::lampModeSet() {
     this->lamps->setLamp0Hex(this->business_state->lamp_0_color);
     this->lamps->setLamp1Hex(this->business_state->lamp_1_color);
     this->lamps->setLamp2Hex(this->business_state->lamp_2_color);
+}
+
+
+void RoundTimer::lampsOffWithBusinessStateUpdate() {
+    this->lamps->setAllLampsHex("#000000");
+    this->business_state->lamp_0_color = "#000000";
+    this->business_state->lamp_1_color = "#000000";
+    this->business_state->lamp_2_color = "#000000";
+}
+
+
+bool RoundTimer::isRunning() {
+    return this->business_state->round_timer_state_is_running;
 }

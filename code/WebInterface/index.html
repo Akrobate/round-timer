@@ -153,28 +153,28 @@
 
                         <div>
                             <button
-                                class="primary mt-md round_timer_state_is_running_true"
-                                onclick="setControls({round_timer_state_is_running:true})"
-                            >
-                                Timer allumé
-                            </button>
-                            <button
-                                class="disabled mt-md round_timer_state_is_running_false"
+                                class="primary mt-md round_timer_state_is_running_false"
                                 onclick="setControls({round_timer_state_is_running:false})"
                             >
                                 Timer éteint
+                            </button>
+                            <button
+                                class="disabled mt-md round_timer_state_is_running_true"
+                                onclick="setControls({round_timer_state_is_running:true})"
+                            >
+                                Timer allumé
                             </button>
                         </div>
 
                         <div>
                             <button
-                                class="primary mt-md round_timer_state_is_round_long_duration_false"
+                                class="mt-md round_timer_state_is_round_long_duration_false"
                                 onclick="setControls({round_timer_state_is_round_long_duration:false})"
                             >
                                 Round de 2min
                             </button>
                             <button
-                                class="disabled mt-md round_timer_state_is_round_long_duration_true" 
+                                class="mt-md round_timer_state_is_round_long_duration_true" 
                                 onclick="setControls({round_timer_state_is_round_long_duration:true})"
                             >
                                 Round de 3min
@@ -182,13 +182,13 @@
                         </div>
                         <div>
                             <button
-                                class="disabled mt-md round_timer_state_is_rest_long_duration_false"
+                                class="mt-md round_timer_state_is_rest_long_duration_false"
                                 onclick="setControls({round_timer_state_is_rest_long_duration:false})"
                             >
                                 Repos 30s
                             </button>
                             <button
-                                class="primary mt-md round_timer_state_is_rest_long_duration_true"
+                                class="mt-md round_timer_state_is_rest_long_duration_true"
                                 onclick="setControls({round_timer_state_is_rest_long_duration:true})"
                             >
                                 Repos 1min
@@ -224,14 +224,32 @@
                         <h2>Etat des lampes</h2>
                         <div class="row mt-lg">
                             <div class="col col-4">
-                                <input class="lamp-preview lamp-0 display-block" type="color" onchange="setLampColor(this)" />
+                                <input
+                                    class="lamp-preview lamp-0 display-block"
+                                    type="color"
+                                    onchange="setLampColor({lamp_0_color:this.value})"
+                                />
                             </div>
                             <div class="col col-4">
-                                <input class="lamp-preview lamp-1 display-block" type="color" onchange="setLampColor(this)" />
+                                <input 
+                                    class="lamp-preview lamp-1 display-block"
+                                    type="color"
+                                    onchange="setLampColor({lamp_1_color:this.value})"
+                                />
                             </div>
                             <div class="col col-4">
-                                <input class="lamp-preview lamp-2 display-block" type="color" onchange="setLampColor(this)" />
+                                <input
+                                    class="lamp-preview lamp-2 display-block"
+                                    type="color"
+                                    onchange="setLampColor({lamp_2_color:this.value})"
+                                />
                             </div>
+                            <button
+                                class="primary mt-md display-block center"
+                                onclick="setLampColor({lamp_0_color:'#000000',lamp_1_color:'#000000',lamp_2_color:'#000000'})"
+                            >
+                                Eteindre tous
+                            </button>
                         </div>
                     </div>
                 </div>

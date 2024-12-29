@@ -47,7 +47,7 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
                     <div class="card height-100 elevation block-info-secondary">
                         <h2>Lamp</h2>
                         <p>Stream</p>
-                        <button class="primary mt-md" onclick="refreshInfo(this)">
+                        <button class="primary mt-md" onclick="anchorLink('lamp')">
                             Lamp
                         </button>
                     </div>
@@ -138,13 +138,13 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
                         <h2>Etat des lampes</h2>
                         <div class="row mt-lg">
                             <div class="col col-4">
+                                <div class="lamp-preview lamp-0"></div>
+                            </div>
+                            <div class="col col-4">
                                 <div class="lamp-preview lamp-1"></div>
                             </div>
                             <div class="col col-4">
                                 <div class="lamp-preview lamp-2"></div>
-                            </div>
-                            <div class="col col-4">
-                                <div class="lamp-preview lamp-3"></div>
                             </div>
                         </div>
                     </div>
@@ -155,33 +155,112 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
                         <h2>Contrôles</h2>
 
                         <div>
-                            <button class="primary mt-md">
-                                Timer allumé
-                            </button>
-                            <button class="disabled mt-md">
+                            <button
+                                class="primary mt-md round_timer_state_is_running_false"
+                                onclick="setControls({round_timer_state_is_running:false})"
+                            >
                                 Timer éteint
+                            </button>
+                            <button
+                                class="disabled mt-md round_timer_state_is_running_true"
+                                onclick="setControls({round_timer_state_is_running:true})"
+                            >
+                                Timer allumé
                             </button>
                         </div>
 
                         <div>
-                            <button class="primary mt-md">
+                            <button
+                                class="mt-md round_timer_state_is_round_long_duration_false"
+                                onclick="setControls({round_timer_state_is_round_long_duration:false})"
+                            >
                                 Round de 2min
                             </button>
-                            <button class="disabled mt-md">
+                            <button
+                                class="mt-md round_timer_state_is_round_long_duration_true" 
+                                onclick="setControls({round_timer_state_is_round_long_duration:true})"
+                            >
                                 Round de 3min
                             </button>
                         </div>
                         <div>
-                            <button class="disabled mt-md">
+                            <button
+                                class="mt-md round_timer_state_is_rest_long_duration_false"
+                                onclick="setControls({round_timer_state_is_rest_long_duration:false})"
+                            >
                                 Repos 30s
                             </button>
-                            <button class="primary mt-md">
+                            <button
+                                class="mt-md round_timer_state_is_rest_long_duration_true"
+                                onclick="setControls({round_timer_state_is_rest_long_duration:true})"
+                            >
                                 Repos 1min
                             </button>
                         </div>                        
-                        <button class="primary mt-lg block" onclick="saveWifiCredentials(this)">
+                        <button class="primary mt-lg block" >
                             Configuration timer
                         </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="primary mt-lg" onclick="anchorLink('main-menu')">
+                Menu principal
+            </button>
+
+        </div>
+
+
+        <!-- Lamp -->
+        <div class="container hidden page" id="page-lamp">
+
+            <div class="mb-lg display-flex align-items-center">
+                <h1>
+                    Lamp
+                </h1>
+            </div>
+        
+            <div class="row">
+                <div class="col col-6 col-sm-12">
+                    <div class="card height-100 elevation block-lamp-controls">
+                        <h2>Etat des lampes</h2>
+                        <div class="row mt-lg">
+                            <div class="col col-4">
+                                <input
+                                    class="lamp-preview lamp-0 display-block"
+                                    type="color"
+                                    onchange="setLampColor({lamp_0_color:this.value})"
+                                />
+                            </div>
+                            <div class="col col-4">
+                                <input 
+                                    class="lamp-preview lamp-1 display-block"
+                                    type="color"
+                                    onchange="setLampColor({lamp_1_color:this.value})"
+                                />
+                            </div>
+                            <div class="col col-4">
+                                <input
+                                    class="lamp-preview lamp-2 display-block"
+                                    type="color"
+                                    onchange="setLampColor({lamp_2_color:this.value})"
+                                />
+                            </div>
+                            <button
+                                class="primary mt-md display-block center"
+                                onclick="setLampColor({lamp_0_color:'#000000',lamp_1_color:'#000000',lamp_2_color:'#000000'})"
+                            >
+                                Eteindre tous
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col col-6 col-sm-12 mb-lg-mobile">
+                    <div class="card height-100 elevation block-lamp-presets">
+                        <h2>Raccourcis couleurs</h2>
+
                     </div>
                 </div>
 
