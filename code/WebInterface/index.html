@@ -44,7 +44,7 @@
                     <div class="card height-100 elevation block-info-secondary">
                         <h2>Lamp</h2>
                         <p>Stream</p>
-                        <button class="primary mt-md" onclick="refreshInfo(this)">
+                        <button class="primary mt-md" onclick="anchorLink('lamp')">
                             Lamp
                         </button>
                     </div>
@@ -197,6 +197,49 @@
                         <button class="primary mt-lg block" >
                             Configuration timer
                         </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="primary mt-lg" onclick="anchorLink('main-menu')">
+                Menu principal
+            </button>
+
+        </div>
+
+
+        <!-- Lamp -->
+        <div class="container hidden page" id="page-lamp">
+
+            <div class="mb-lg display-flex align-items-center">
+                <h1>
+                    Lamp
+                </h1>
+            </div>
+        
+            <div class="row">
+                <div class="col col-6 col-sm-12">
+                    <div class="card height-100 elevation block-lamp-controls">
+                        <h2>Etat des lampes</h2>
+                        <div class="row mt-lg">
+                            <div class="col col-4">
+                                <input class="lamp-preview lamp-0 display-block" type="color" onchange="setLampColor(this)" />
+                            </div>
+                            <div class="col col-4">
+                                <input class="lamp-preview lamp-1 display-block" type="color" onchange="setLampColor(this)" />
+                            </div>
+                            <div class="col col-4">
+                                <input class="lamp-preview lamp-2 display-block" type="color" onchange="setLampColor(this)" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col col-6 col-sm-12 mb-lg-mobile">
+                    <div class="card height-100 elevation block-lamp-presets">
+                        <h2>Raccourcis couleurs</h2>
+
                     </div>
                 </div>
 

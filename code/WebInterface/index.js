@@ -102,6 +102,7 @@ function updateRender() {
     $('.value_sta_ip', _el_configuraion_info).textContent = business_state.sta_ip
     $('.value_firmware_version', _el_configuraion_info).textContent = business_state.firmware_version
 
+    // round timer lamps
     const _el_round_timer_lamp_preview = $('.block-round-timer-lamp-preview')
     if (business_state.lamp_0_color === '') {
         $('.lamp-0', _el_round_timer_lamp_preview).style.backgroundColor = '#dce1e2'
@@ -119,6 +120,28 @@ function updateRender() {
         $('.lamp-2', _el_round_timer_lamp_preview).style.backgroundColor = business_state.lamp_3_color
     }
 
+    // round timer controls
+    const _el_round_timer_controls = $('.block-round-timer-controls')
+    updateToggleButtonsControls(business_state.round_timer_state_is_running, 'round_timer_state_is_running', _el_round_timer_controls)
+    updateToggleButtonsControls(business_state.round_timer_state_is_round_long_duration, 'round_timer_state_is_round_long_duration', _el_round_timer_controls)
+    updateToggleButtonsControls(business_state.round_timer_state_is_rest_long_duration, 'round_timer_state_is_rest_long_duration', _el_round_timer_controls)
+}
+
+// Toggle button controls update
+function updateToggleButtonsControls(value, class_prefix, parent_element) {
+    const _el_true = $(`.${class_prefix}_true`, parent_element)
+    const _el_false = $(`.${class_prefix}_false`, parent_element)
+    if (value) {
+        addCls(_el_true, 'primary')
+        rmCls(_el_true, 'disabled')
+        addCls(_el_false, 'disabled')
+        rmCls(_el_false, 'primary')
+    } else {
+        addCls(_el_true, 'disabled')
+        rmCls(_el_true, 'primary')
+        addCls(_el_false, 'primary')
+        rmCls(_el_false, 'disabled')
+    }
 }
 
 
@@ -156,7 +179,17 @@ function saveWifiCredentials() {
     console.log('Password', password)
 }
 
-
+// Controls
 async function setControls(data) {
-    await setControls(data);
+    await setControlsRepository(data)
+    business_state = await getBusinessState()
+    updateRender()
 }
+
+
+// Lamps
+
+async function setLampColor(element) {
+    console.log(element.value)
+}
+
