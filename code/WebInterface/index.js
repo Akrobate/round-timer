@@ -56,6 +56,8 @@ let business_state = {
     round_timer_state_is_running: false,
     round_timer_state_is_round_long_duration: false,
     round_timer_state_is_rest_long_duration: false,
+
+    
     
     lamp_0_color: '',
     lamp_1_color: '',
@@ -188,7 +190,6 @@ async function setControls(data) {
 
 
 // Lamps
-
 async function setLampColor(data) {
     setLampColorRepository(data)
 }

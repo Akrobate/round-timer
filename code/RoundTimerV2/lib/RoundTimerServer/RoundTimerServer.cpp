@@ -106,6 +106,8 @@ void RoundTimerServer::init() {
             object["lamp_1_color"] = this->business_state->lamp_1_color;
             object["lamp_2_color"] = this->business_state->lamp_2_color;
 
+            object["firmware_version"] = this->business_state->firmware_version;
+
             serializeJson(doc, response);
             request->send(200, "application/json", response);
         }
@@ -190,7 +192,6 @@ void RoundTimerServer::init() {
     );
 
 
-
     this->server->on(
         "/api/controls",
         HTTP_POST,
@@ -206,14 +207,14 @@ void RoundTimerServer::init() {
 
             if (request->hasParam("round_timer_state_is_round_long_duration", true)) {
                 this->business_state->round_timer_state_is_round_long_duration = request->getParam("round_timer_state_is_round_long_duration", true)->value() == "true";
-                if (this->business_state->round_timer_state_is_running) {
+                if (this->round_timer->isRunning()) {
                     this->round_timer->restart();
                 }
             }
 
             if (request->hasParam("round_timer_state_is_rest_long_duration", true)) {
                 this->business_state->round_timer_state_is_rest_long_duration = request->getParam("round_timer_state_is_rest_long_duration", true)->value() == "true";
-                if (this->business_state->round_timer_state_is_running) {
+                if (this->round_timer->isRunning()) {
                     this->round_timer->restart();
                 }
             }
@@ -229,6 +230,15 @@ void RoundTimerServer::init() {
         HTTP_POST,
         [&](AsyncWebServerRequest * request) {
 
+// round_timer_round_color
+// round_timer_rest_color
+// round_timer_prerest_color
+
+// round_timer_round_long_duration
+// round_timer_round_short_duration
+// round_timer_rest_long_duration
+// round_timer_rest_short_duration
+// round_timer_prerest_duration
             request->send(200, "application/json", "{\"status\": \"ok\"}");
         }
     );

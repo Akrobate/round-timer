@@ -261,7 +261,7 @@ ul.list button {
     border: 1px solid red;
 }
 
-input[type="text"] {
+input[type="text"],input[type="number"] {
     padding: 10px;
     border: 1px solid var(--neutral-color-2);
     border-radius: 4px;

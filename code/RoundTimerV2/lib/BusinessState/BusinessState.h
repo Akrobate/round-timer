@@ -53,6 +53,8 @@ class BusinessState {
 
         String lamp_presets_array[5][3];
 
+        String firmware_version = "2.0.0";
+
         BusinessState();
         void init();
 
