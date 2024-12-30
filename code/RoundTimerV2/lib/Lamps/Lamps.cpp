@@ -4,6 +4,8 @@ Lamps::Lamps() {
 }
 
 void Lamps::init() {
+
+
     pinMode(PIN_NEOPIXEL_LED, OUTPUT);
     digitalWrite(PIN_NEOPIXEL_LED, LOW);
     for(int i = 0; i < 3; i++) {
@@ -11,9 +13,10 @@ void Lamps::init() {
     }
     FastLED.addLeds<NEOPIXEL, PIN_NEOPIXEL_LED>(leds, 3);
     FastLED.clear();
-    for(int i = 0; i < 3; i++) {
+    // for(int i = 0; i < 3; i++) {
         this->show();
-    }
+    //}
+    FastLED.setBrightness(255);
 }
 
 void Lamps::setLamp0(unsigned long int color) {
@@ -41,7 +44,7 @@ void Lamps::setAllLamps(unsigned long int color) {
 }
 
 void Lamps::show() {
-    FastLED.show();
+    FastLED.delay(1); // Precious fix for flickering
     FastLED.show();
 }
 
