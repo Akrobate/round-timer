@@ -52,3 +52,21 @@ async function setLampColorRepository(input) {
         console.log('setLampColorRepository - Error:', error)
     }
 }
+
+
+async function saveRoundTimerConfigurationRepository(input) {
+    try {
+        const form_data = new FormData()
+        Object.keys(input).forEach((key) => {
+            form_data.append(key, input[key])
+        })
+        await fetch('/api/round-timer-configurations',
+            {
+                body: form_data,
+                method: 'POST',
+            }
+        )
+    } catch (error) {
+        console.log('setLampColorRepository - Error:', error)
+    }
+}
