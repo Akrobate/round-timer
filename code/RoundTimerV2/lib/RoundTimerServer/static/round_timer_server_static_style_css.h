@@ -2,7 +2,6 @@
 
 const char round_timer_server_static_style_css[] PROGMEM = R"rawliteral(
 :root {
-
     --primary-color: #3498db;
     --secondary-color-1: #2ecc71;
     --secondary-color-2: #e67e22;
@@ -20,6 +19,7 @@ const char round_timer_server_static_style_css[] PROGMEM = R"rawliteral(
     --margin-lg: 32px;
     --margin-xl: 64px;
 }
+
 * {
     margin: 0;
     padding: 0;
@@ -40,9 +40,6 @@ const char round_timer_server_static_style_css[] PROGMEM = R"rawliteral(
 .ml-sm { margin-left: var(--margin-sm); }
 .ml-md { margin-left: var(--margin-md); }
 .ml-lg { margin-left: var(--margin-lg); }
-
-
-
 
 body {
     background-color: var(--neutral-color-4);
@@ -107,7 +104,6 @@ button, input[type="submit"] {
     height: 100%;
     cursor: pointer;
 }
-
 
 button.secondary {
     background-color: var(--secondary-color-1);
@@ -224,6 +220,9 @@ button.icon svg {
     .mb-lg-mobile {
         margin-bottom: var(--margin-lg);
     }
+    .mb-md-mobile {
+        margin-bottom: var(--margin-md);
+    }
 }
 
 .height-100 {
@@ -264,7 +263,7 @@ ul.list button {
     border: 1px solid red;
 }
 
-input[type="text"] {
+input[type="text"],input[type="number"] {
     padding: 10px;
     border: 1px solid var(--neutral-color-2);
     border-radius: 4px;
@@ -322,36 +321,6 @@ input.error {
 .hidden {
     display: none;
 }
-
-
-.logo {
-    width: 60px;
-    height: 40px;
-    fill: var(--primary-color);
-}
-
-#available-networks-list {
-    overflow-y: scroll;
-    max-height: 200px;
-    padding-right: 10px;
-}
-
-#available-networks-list::-webkit-scrollbar {
-    width: 7px;
-}
-
-#available-networks-list::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px var(--neutral-color-4);
-    border-radius: 10px;
-}
-
-#available-networks-list::-webkit-scrollbar-thumb {
-    background: var(--neutral-color-2);
-    border-radius: 10px;
-}
-
-
-
 
 /***********************************/
 

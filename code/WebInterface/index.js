@@ -6,6 +6,10 @@ function $(selector, element = document) {
     return element.querySelector(selector)
 }
 
+function $all(selector, element = document) {
+    return element.querySelectorAll(selector)
+}
+
 function buttonSetLoadingState(btn, state) {
     btn.disabled = state
     if (state) {
@@ -72,8 +76,6 @@ let business_state = {
     round_timer_state_is_round_long_duration: false,
     round_timer_state_is_rest_long_duration: false,
 
-    
-    
     lamp_0_color: '',
     lamp_1_color: '',
     lamp_2_color: '',
@@ -91,14 +93,36 @@ document.addEventListener('DOMContentLoaded', async () => {
         anchorLink('main-menu')
     } else {
         rmCls($(`#page-${anchor}`), 'hidden')
+        const init_function = snakeToCamel(`page-${anchor}-mounted`)
+        if (typeof window[init_function] === 'function') {
+            console.log('Init function:', init_function)
+            window[init_function]();
+        } else {
+            console.log('-----Init function:', init_function)
+        }
     }
     window.addEventListener("hashchange", (event) => {
         const oldHash = new URL(event.oldURL).hash.substring(1)
         const newHash = new URL(event.newURL).hash.substring(1)
         if (oldHash) {
             addCls($(`#page-${oldHash}`), 'hidden')
+            const unmounted_function = snakeToCamel(`page-${oldHash}-unmounted`)
+            if (typeof window[unmounted_function] === 'function') {
+                console.log('unmounted_function:', unmounted_function)
+                window[unmounted_function]();
+            } else {
+                console.log('unmounted_function:', unmounted_function)
+            }
         }
         rmCls($(`#page-${newHash}`), 'hidden')
+
+        const init_function = snakeToCamel(`page-${newHash}-mounted`)
+        if (typeof window[init_function] === 'function') {
+            console.log('init_function:', init_function)
+            window[init_function]();
+        } else {
+            console.log('init_function:', init_function)
+        }
     })
     business_state = await getBusinessStateRepository()
     updateRender();
@@ -110,6 +134,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         updateRender()
     }, 1000)
 })
+
+
+function snakeToCamel(snake_string) {
+    return snake_string
+        .split('-')
+        .map((word, index) =>
+            index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1)
+        )
+        .join('')
+}
 
 
 function updateRender() {
@@ -208,4 +242,58 @@ async function setControls(data) {
 async function setLampColor(data) {
     setLampColorRepository(data)
 }
+
+async function pageRoundTimerConfigurationsMounted() {
+    business_state = await getBusinessStateRepository()
+    const _el = $('#page-round-timer-configurations')
+
+    $('input[name=round_timer_round_color]', _el).value = business_state.round_timer_round_color
+    $('input[name=round_timer_rest_color]', _el).value = business_state.round_timer_rest_color
+    $('input[name=round_timer_prerest_color]', _el).value = business_state.round_timer_prerest_color
+
+    $('input[name=round_timer_round_long_duration]', _el).value = business_state.round_timer_round_long_duration
+    $('input[name=round_timer_round_short_duration]', _el).value = business_state.round_timer_round_short_duration
+    $('input[name=round_timer_rest_long_duration]', _el).value = business_state.round_timer_rest_long_duration
+    $('input[name=round_timer_rest_short_duration]', _el).value = business_state.round_timer_rest_short_duration
+    $('input[name=round_timer_prerest_duration]', _el).value = business_state.round_timer_prerest_duration
+}
+
+
+
+// RoundTimer Configuration
+async function setRoundTimerConfiguration() {
+    const _el = $('#page-round-timer-configurations')
+    const data = {
+
+        round_timer_mode: $('input[name=round_timer_mode]:checked', _el)?.value,
+
+        round_timer_round_color: $('input[name=round_timer_round_color]', _el).value,
+        round_timer_rest_color: $('input[name=round_timer_rest_color]', _el).value,
+        round_timer_prerest_color: $('input[name=round_timer_prerest_color]', _el).value,
+
+        round_timer_round_long_duration: $('input[name=round_timer_round_long_duration]', _el).value,
+        round_timer_round_short_duration: $('input[name=round_timer_round_short_duration]', _el).value,
+        round_timer_rest_long_duration: $('input[name=round_timer_rest_long_duration]', _el).value,
+        round_timer_rest_short_duration: $('input[name=round_timer_rest_short_duration]', _el).value,
+        round_timer_prerest_duration: $('input[name=round_timer_prerest_duration]', _el).value,
+    }
+
+    console.log('Setting round timer configuration...')
+    console.log(data)
+
+}
+
+
+/*
+document.getElementById('setValueBtn').addEventListener('click', function () {
+    const valueToSet = "Option 2"; // La valeur que vous voulez sélectionner
+    const radioButtons = document.querySelectorAll('input[name="option"]');
+    
+    radioButtons.forEach(radio => {
+        if (radio.value === valueToSet) {
+            radio.checked = true; // Définit cet élément comme sélectionné
+        }
+    });
+});
+*/
 

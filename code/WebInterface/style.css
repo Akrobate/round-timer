@@ -1,5 +1,4 @@
 :root {
-
     --primary-color: #3498db;
     --secondary-color-1: #2ecc71;
     --secondary-color-2: #e67e22;
@@ -17,6 +16,7 @@
     --margin-lg: 32px;
     --margin-xl: 64px;
 }
+
 * {
     margin: 0;
     padding: 0;
@@ -37,9 +37,6 @@
 .ml-sm { margin-left: var(--margin-sm); }
 .ml-md { margin-left: var(--margin-md); }
 .ml-lg { margin-left: var(--margin-lg); }
-
-
-
 
 body {
     background-color: var(--neutral-color-4);
@@ -104,7 +101,6 @@ button, input[type="submit"] {
     height: 100%;
     cursor: pointer;
 }
-
 
 button.secondary {
     background-color: var(--secondary-color-1);
@@ -322,36 +318,6 @@ input.error {
 .hidden {
     display: none;
 }
-
-
-.logo {
-    width: 60px;
-    height: 40px;
-    fill: var(--primary-color);
-}
-
-#available-networks-list {
-    overflow-y: scroll;
-    max-height: 200px;
-    padding-right: 10px;
-}
-
-#available-networks-list::-webkit-scrollbar {
-    width: 7px;
-}
-
-#available-networks-list::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px var(--neutral-color-4);
-    border-radius: 10px;
-}
-
-#available-networks-list::-webkit-scrollbar-thumb {
-    background: var(--neutral-color-2);
-    border-radius: 10px;
-}
-
-
-
 
 /***********************************/
 

@@ -56,6 +56,7 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
 
         </div>
 
+        
         <!-- configuration -->
         <div class="container hidden page" id="page-configuration">
 
@@ -122,6 +123,7 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
             </button>
 
         </div>
+
 
         <!-- RoundTimer -->
         <div class="container hidden page" id="page-round-timer">
@@ -197,7 +199,7 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
                                 Repos 1min
                             </button>
                         </div>                        
-                        <button class="primary mt-lg block" >
+                        <button class="primary mt-lg block" onclick="anchorLink('round-timer-configurations')">
                             Configuration timer
                         </button>
                     </div>
@@ -208,6 +210,119 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
             <button class="primary mt-lg" onclick="anchorLink('main-menu')">
                 Menu principal
             </button>
+
+        </div>
+
+
+        <!-- RoundTimerConfiguration -->
+        <div class="container hidden page" id="page-round-timer-configurations">
+
+            <div class="mb-lg display-flex align-items-center">
+                <h1>
+                    RoundTimer Configuration
+                </h1>
+            </div>
+        
+            <div class="row">
+                <div class="col col-6 col-sm-12 mb-md-mobile">
+                    <div class="card height-100 elevation block-round-timer-controls">
+                        <h2>Mode des lampes</h2>
+                        <div>
+                            <div>
+                                <input type="radio" id="round-timer-configuration-sequential-mode" name="round_timer_mode" value="1" />
+                                <label for="round-timer-configuration-sequential-mode">Lampes en mode séquentiel</label>
+                            </div>
+                            
+                            <div class="mt-sm">
+                                <input type="radio" id="round-timer-configuration-all-mode" name="round_timer_mode" value="2" />
+                                <label for="round-timer-configuration-all-mode">Toutes les lampes indiquent l'état</label>
+                            </div>
+                        </div>
+
+                        <h2 class="mt-lg">Sens de la séquence</h2>
+                        <div>
+                            <div>
+                                <input type="radio" id="round-timer-configuration-orientation-left" name="drone" />
+                                <label for="round-timer-configuration-orientation-left">Début a gauche</label>
+                            </div>
+                            
+                            <div class="mt-sm">
+                                <input type="radio" id="round-timer-configuration-orientation-right" name="drone" value="dewey" />
+                                <label for="round-timer-configuration-orientation-right">Début a droite</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-6 col-sm-12 ">
+                    <div class="card height-100 elevation block-round-timer-controls">
+
+                        <h2>Configuration des couleurs</h2>
+                        <div class="mb-sm">
+                            <p>Couleur du round</p>
+                            <input type="color" class="display-block" name="round_timer_round_color" />
+                        </div>
+                        <div class="mb-sm">
+                            <p>Couleur du fin de round (prérepos)</p>
+                            <input type="color" class="display-block" name="round_timer_prerest_color" />
+                        </div>
+                        <div>
+                            <p>Couleur du repos</p>
+                            <input type="color" class="display-block" name="round_timer_rest_color" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-12 col-sm-12 mt-md">
+                    <div class="card height-100 elevation block-round-timer-controls">
+                        <h2>Configuration des temps</h2>
+
+                        <div class="row">
+                            <div class="col col-6 col-sm-12 mb-md-mobile">
+                                <h4 class="mb-md">
+                                    Durée du round courte (120 secondes par défaut)
+                                </h4>
+                                <input type="number" min="1" name="round_timer_round_short_duration" />
+                            </div>
+                            <div class="col col-6 col-sm-12">
+                                <h4 class="mb-md">
+                                    Durée du round longue (180 secondes par défaut)
+                                </h4>
+                                <input type="number" min="1" name="round_timer_round_long_duration" />
+                            </div>
+                        </div>
+
+                        <div class="row mt-md">
+                            <div class="col col-6 col-sm-12 mb-md-mobile">
+                                <h4 class="mb-md">
+                                    Durée du repos courte (30 secondes par défaut)
+                                </h4>
+                                <input type="number" min="1" name="round_timer_rest_short_duration" />
+                            </div>
+                            <div class="col col-6 col-sm-12">
+                                <h4 class="mb-md">
+                                    Durée du repos longue (60 secondes par défaut)
+                                </h4>
+                                <input type="number" min="1" name="round_timer_rest_long_duration" />
+                            </div>
+                        </div>
+
+                        <h4 class="mb-md mt-md">
+                            Durée du prérepos (30 secondes par défaut)
+                        </h4>
+                        <input type="number" min="0" name="round_timer_prerest_duration" />
+                    </div>
+                </div>
+            </div>
+
+            <button class="primary mt-lg" onclick="anchorLink('main-menu')">
+                Menu principal
+            </button>
+
+            <button class="primary mt-lg" onclick="setRoundTimerConfiguration()">
+                Sauvegarder
+            </button>
+            
 
         </div>
 
