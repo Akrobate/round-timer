@@ -4,8 +4,6 @@ Lamps::Lamps() {
 }
 
 void Lamps::init() {
-
-
     pinMode(PIN_NEOPIXEL_LED, OUTPUT);
     digitalWrite(PIN_NEOPIXEL_LED, LOW);
     for(int i = 0; i < 3; i++) {
@@ -15,6 +13,7 @@ void Lamps::init() {
     FastLED.clear();
     this->show();
 }
+
 
 void Lamps::setLamp0(unsigned long int color) {
     leds[0] = color;
@@ -60,8 +59,6 @@ void Lamps::setLamp2Hex(String color_string) {
 void Lamps::setAllLampsHex(String color_string) {
     this->setAllLamps(this->hexColorFromString(color_string));
 }
-
-
 
 
 unsigned long int Lamps::hexColorFromString(String color_string) {

@@ -221,6 +221,9 @@ button.icon svg {
     .mb-lg-mobile {
         margin-bottom: var(--margin-lg);
     }
+    .mb-md-mobile {
+        margin-bottom: var(--margin-md);
+    }
 }
 
 .height-100 {

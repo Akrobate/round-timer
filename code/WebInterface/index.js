@@ -53,6 +53,21 @@ let business_state = {
     sta_is_configured: false,
     firmware_version: '2.0.0-data',
 
+    // ROUND_TIMER_SEQUENTIAL_MODE = 1
+    // ROUND_TIMER_ALL_MODE = 2
+    round_timer_mode: 1, 
+
+    round_timer_round_color: '#00FF00',
+    round_timer_rest_color: '#FF0000',
+    round_timer_prerest_color: '#FF4500',
+
+    round_timer_round_long_duration: 0,
+    round_timer_round_short_duration: 0,
+    round_timer_rest_long_duration: 0,
+    round_timer_rest_short_duration: 0,
+    round_timer_prerest_duration: 0,
+
+
     round_timer_state_is_running: false,
     round_timer_state_is_round_long_duration: false,
     round_timer_state_is_rest_long_duration: false,
