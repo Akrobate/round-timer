@@ -60,9 +60,14 @@ let business_state = {
     sta_is_configured: false,
     firmware_version: '2.0.0-data',
 
+    round_timer_mute: false,
+
     // ROUND_TIMER_SEQUENTIAL_MODE = 1
     // ROUND_TIMER_ALL_MODE = 2
     round_timer_mode: 1, 
+
+    // ASC 0, DESC 1
+    round_timer_sequential_mode_order: 0,
 
     round_timer_round_color: '#00FF00',
     round_timer_rest_color: '#FF0000',
@@ -73,7 +78,7 @@ let business_state = {
     round_timer_rest_long_duration: 0,
     round_timer_rest_short_duration: 0,
     round_timer_prerest_duration: 0,
-
+    round_timer_prestart_duration: 0,
 
     round_timer_state_is_running: false,
     round_timer_state_is_round_long_duration: false,
@@ -264,6 +269,18 @@ async function pageRoundTimerConfigurationsMounted() {
     business_state = await getBusinessStateRepository()
     const _el = $('#page-round-timer-configurations')
 
+    $all('input[name=round_timer_mode]', _el).forEach((radio) => {
+        if (radio.value == business_state.round_timer_mode) {
+            radio.checked = true;
+        }
+    });
+
+    $all('input[name=round_timer_sequential_mode_order]', _el).forEach((radio) => {
+        if (radio.value == business_state.round_timer_sequential_mode_order) {
+            radio.checked = true;
+        }
+    });
+
     $('input[name=round_timer_round_color]', _el).value = business_state.round_timer_round_color
     $('input[name=round_timer_rest_color]', _el).value = business_state.round_timer_rest_color
     $('input[name=round_timer_prerest_color]', _el).value = business_state.round_timer_prerest_color
@@ -273,8 +290,8 @@ async function pageRoundTimerConfigurationsMounted() {
     $('input[name=round_timer_rest_long_duration]', _el).value = business_state.round_timer_rest_long_duration
     $('input[name=round_timer_rest_short_duration]', _el).value = business_state.round_timer_rest_short_duration
     $('input[name=round_timer_prerest_duration]', _el).value = business_state.round_timer_prerest_duration
+    $('input[name=round_timer_prestart_duration]', _el).value = business_state.round_timer_prestart_duration
 }
-
 
 
 // RoundTimer Configuration
@@ -283,6 +300,7 @@ async function setRoundTimerConfiguration() {
     const data = {
 
         round_timer_mode: $('input[name=round_timer_mode]:checked', _el)?.value,
+        round_timer_sequential_mode_order: $('input[name=round_timer_sequential_mode_order]:checked', _el)?.value,
 
         round_timer_round_color: $('input[name=round_timer_round_color]', _el).value,
         round_timer_rest_color: $('input[name=round_timer_rest_color]', _el).value,
@@ -293,25 +311,12 @@ async function setRoundTimerConfiguration() {
         round_timer_rest_long_duration: $('input[name=round_timer_rest_long_duration]', _el).value,
         round_timer_rest_short_duration: $('input[name=round_timer_rest_short_duration]', _el).value,
         round_timer_prerest_duration: $('input[name=round_timer_prerest_duration]', _el).value,
+        round_timer_prestart_duration: $('input[name=round_timer_prestart_duration]', _el).value,
     }
-
+    await saveRoundTimerConfigurationRepository(data)
     console.log('Setting round timer configuration...')
     console.log(data)
 
 }
-
-
-/*
-document.getElementById('setValueBtn').addEventListener('click', function () {
-    const valueToSet = "Option 2"; // La valeur que vous voulez sélectionner
-    const radioButtons = document.querySelectorAll('input[name="option"]');
-    
-    radioButtons.forEach(radio => {
-        if (radio.value === valueToSet) {
-            radio.checked = true; // Définit cet élément comme sélectionné
-        }
-    });
-});
-*/
 )rawliteral";
 

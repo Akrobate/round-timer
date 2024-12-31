@@ -83,6 +83,9 @@ void RoundTimerServer::init() {
             object["sta_is_connected"] = this->business_state->sta_is_connected;
             object["sta_is_configured"] = this->business_state->sta_is_configured;
 
+            // Beeper
+            object["round_timer_mute"] = this->business_state->round_timer_mute;
+
             // Round Timer
             object["round_timer_step"] = this->business_state->round_timer_step;
             object["round_timer_mode"] = this->business_state->round_timer_mode;
@@ -231,21 +234,74 @@ void RoundTimerServer::init() {
     );
 
 
+    // round_timer_mute
+    // round_timer_mode
+    // round_timer_sequential_mode_order
+
+    // round_timer_round_color
+    // round_timer_rest_color
+    // round_timer_prerest_color
+
+    // round_timer_round_long_duration
+    // round_timer_round_short_duration
+    // round_timer_rest_long_duration
+    // round_timer_rest_short_duration
+    // round_timer_prerest_duration
+    // round_timer_prestart_duration
 
     this->server->on(
         "/api/round-timer-configurations",
         HTTP_POST,
         [&](AsyncWebServerRequest * request) {
+            
+            if (request->hasParam("round_timer_mode", true)) {
+                this->business_state->round_timer_mute = request->getParam("round_timer_mute", true)->value() == "true";
+            }
 
-// round_timer_round_color
-// round_timer_rest_color
-// round_timer_prerest_color
+            if (request->hasParam("round_timer_mode", true)) {
+                this->business_state->round_timer_mode = request->getParam("round_timer_mode", true)->value().toInt();
+            }
 
-// round_timer_round_long_duration
-// round_timer_round_short_duration
-// round_timer_rest_long_duration
-// round_timer_rest_short_duration
-// round_timer_prerest_duration
+            if (request->hasParam("round_timer_sequential_mode_order", true)) {
+                this->business_state->round_timer_sequential_mode_order = request->getParam("round_timer_sequential_mode_order", true)->value().toInt();
+            }
+
+            if (request->hasParam("round_timer_round_color", true)) {
+                this->business_state->round_timer_round_color = request->getParam("round_timer_round_color", true)->value();
+            }
+
+            if (request->hasParam("round_timer_rest_color", true)) {
+                this->business_state->round_timer_rest_color = request->getParam("round_timer_rest_color", true)->value();
+            }
+
+            if (request->hasParam("round_timer_prerest_color", true)) {
+                this->business_state->round_timer_prerest_color = request->getParam("round_timer_prerest_color", true)->value();
+            }
+
+            if (request->hasParam("round_timer_round_long_duration", true)) {
+                this->business_state->round_timer_round_long_duration = request->getParam("round_timer_round_long_duration", true)->value().toInt();
+            }
+
+            if (request->hasParam("round_timer_round_short_duration", true)) {
+                this->business_state->round_timer_round_short_duration = request->getParam("round_timer_round_short_duration", true)->value().toInt();
+            }
+
+            if (request->hasParam("round_timer_rest_long_duration", true)) {
+                this->business_state->round_timer_rest_long_duration = request->getParam("round_timer_rest_long_duration", true)->value().toInt();
+            }
+
+            if (request->hasParam("round_timer_rest_short_duration", true)) {
+                this->business_state->round_timer_rest_short_duration = request->getParam("round_timer_rest_short_duration", true)->value().toInt();
+            }
+
+            if (request->hasParam("round_timer_prerest_duration", true)) {
+                this->business_state->round_timer_prerest_duration = request->getParam("round_timer_prerest_duration", true)->value().toInt();
+            }
+
+            if (request->hasParam("round_timer_prestart_duration", true)) {
+                this->business_state->round_timer_prestart_duration = request->getParam("round_timer_prestart_duration", true)->value().toInt();
+            }
+
             request->send(200, "application/json", "{\"status\": \"ok\"}");
         }
     );

@@ -229,12 +229,12 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
                         <h2>Mode des lampes</h2>
                         <div>
                             <div>
-                                <input type="radio" id="round-timer-configuration-sequential-mode" name="round_timer_mode" value="1" />
+                                <input type="radio" id="round-timer-configuration-sequential-mode" name="round_timer_mode" value="1">
                                 <label for="round-timer-configuration-sequential-mode">Lampes en mode séquentiel</label>
                             </div>
                             
                             <div class="mt-sm">
-                                <input type="radio" id="round-timer-configuration-all-mode" name="round_timer_mode" value="2" />
+                                <input type="radio" id="round-timer-configuration-all-mode" name="round_timer_mode" value="2">
                                 <label for="round-timer-configuration-all-mode">Toutes les lampes indiquent l'état</label>
                             </div>
                         </div>
@@ -242,12 +242,12 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
                         <h2 class="mt-lg">Sens de la séquence</h2>
                         <div>
                             <div>
-                                <input type="radio" id="round-timer-configuration-orientation-left" name="drone" />
+                                <input type="radio" id="round-timer-configuration-orientation-left" name="round_timer_sequential_mode_order" value="0">
                                 <label for="round-timer-configuration-orientation-left">Début a gauche</label>
                             </div>
                             
                             <div class="mt-sm">
-                                <input type="radio" id="round-timer-configuration-orientation-right" name="drone" value="dewey" />
+                                <input type="radio" id="round-timer-configuration-orientation-right" name="round_timer_sequential_mode_order" value="1">
                                 <label for="round-timer-configuration-orientation-right">Début a droite</label>
                             </div>
                         </div>
@@ -259,15 +259,15 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
                         <h2>Configuration des couleurs</h2>
                         <div class="mb-sm">
                             <p>Couleur du round</p>
-                            <input type="color" class="display-block" name="round_timer_round_color" />
+                            <input type="color" class="display-block" name="round_timer_round_color">
                         </div>
                         <div class="mb-sm">
                             <p>Couleur du fin de round (prérepos)</p>
-                            <input type="color" class="display-block" name="round_timer_prerest_color" />
+                            <input type="color" class="display-block" name="round_timer_prerest_color">
                         </div>
                         <div>
                             <p>Couleur du repos</p>
-                            <input type="color" class="display-block" name="round_timer_rest_color" />
+                            <input type="color" class="display-block" name="round_timer_rest_color">
                         </div>
                     </div>
                 </div>
@@ -282,13 +282,13 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
                                 <h4 class="mb-md">
                                     Durée du round courte (120 secondes par défaut)
                                 </h4>
-                                <input type="number" min="1" name="round_timer_round_short_duration" />
+                                <input type="number" min="1" name="round_timer_round_short_duration">
                             </div>
                             <div class="col col-6 col-sm-12">
                                 <h4 class="mb-md">
                                     Durée du round longue (180 secondes par défaut)
                                 </h4>
-                                <input type="number" min="1" name="round_timer_round_long_duration" />
+                                <input type="number" min="1" name="round_timer_round_long_duration">
                             </div>
                         </div>
 
@@ -297,20 +297,26 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
                                 <h4 class="mb-md">
                                     Durée du repos courte (30 secondes par défaut)
                                 </h4>
-                                <input type="number" min="1" name="round_timer_rest_short_duration" />
+                                <input type="number" min="1" name="round_timer_rest_short_duration">
                             </div>
                             <div class="col col-6 col-sm-12">
                                 <h4 class="mb-md">
                                     Durée du repos longue (60 secondes par défaut)
                                 </h4>
-                                <input type="number" min="1" name="round_timer_rest_long_duration" />
+                                <input type="number" min="1" name="round_timer_rest_long_duration">
                             </div>
                         </div>
-
+                        
                         <h4 class="mb-md mt-md">
                             Durée du prérepos (30 secondes par défaut)
                         </h4>
-                        <input type="number" min="0" name="round_timer_prerest_duration" />
+                        <input type="number" min="0" name="round_timer_prerest_duration">
+
+                        <h4 class="mb-md mt-md">
+                            Durée avant le premier round (5 secondes par défaut)
+                        </h4>
+                        <input type="number" min="1" name="round_timer_prestart_duration">
+
                     </div>
                 </div>
             </div>
@@ -323,7 +329,6 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
                 Sauvegarder
             </button>
             
-
         </div>
 
 
@@ -347,7 +352,7 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
                                     type="color"
                                     name="lamp_0_color"
                                     onchange="updateLampsColors()"
-                                />
+                                >
                             </div>
                             <div class="col col-4">
                                 <input 
@@ -355,7 +360,7 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
                                     type="color"
                                     name="lamp_1_color"
                                     onchange="updateLampsColors()"
-                                />
+                                >
                             </div>
                             <div class="col col-4">
                                 <input
@@ -363,7 +368,7 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
                                     type="color"
                                     name="lamp_2_color"
                                     onchange="updateLampsColors()"
-                                />
+                                >
                             </div>
                             <button
                                 class="primary mt-md display-block center"

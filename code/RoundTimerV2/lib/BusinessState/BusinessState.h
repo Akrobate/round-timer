@@ -32,6 +32,9 @@ class BusinessState {
         boolean sta_is_connected = false;
         boolean sta_is_configured = false;
 
+        // Beeper
+        boolean round_timer_mute = false;
+
         // Round Timer
         unsigned int round_timer_step = 0;
         unsigned int round_timer_mode = ROUND_TIMER_SEQUENTIAL_MODE;
