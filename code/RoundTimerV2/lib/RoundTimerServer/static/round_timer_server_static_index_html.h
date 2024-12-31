@@ -345,21 +345,24 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
                                 <input
                                     class="lamp-preview lamp-0 display-block"
                                     type="color"
-                                    onchange="setLampColor({lamp_0_color:this.value})"
+                                    name="lamp_0_color"
+                                    onchange="updateLampsColors()"
                                 />
                             </div>
                             <div class="col col-4">
                                 <input 
                                     class="lamp-preview lamp-1 display-block"
                                     type="color"
-                                    onchange="setLampColor({lamp_1_color:this.value})"
+                                    name="lamp_1_color"
+                                    onchange="updateLampsColors()"
                                 />
                             </div>
                             <div class="col col-4">
                                 <input
                                     class="lamp-preview lamp-2 display-block"
                                     type="color"
-                                    onchange="setLampColor({lamp_2_color:this.value})"
+                                    name="lamp_2_color"
+                                    onchange="updateLampsColors()"
                                 />
                             </div>
                             <button

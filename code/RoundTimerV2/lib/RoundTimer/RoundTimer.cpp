@@ -16,8 +16,13 @@ void RoundTimer::injectLamps(Lamps * lamps) {
     this->lamps = lamps;
 }
 
+void RoundTimer::injectBeeper(Beeper * beeper) {
+    this->beeper = beeper;
+}
+
 void RoundTimer::update() {
     this->timer_sequencer->update();
+    this->beeper->update();
 }
 
 
@@ -25,6 +30,9 @@ void RoundTimer::init() {
     this->timer_sequencer->setCallback([this](int step) {
         this->business_state->round_timer_step = step;
         switch(step) {
+            case TimerSequencer::STEP_PRESTART:
+                this->prestartStep();
+                break;
             case TimerSequencer::STEP_ROUND:
                 this->roundStep();
                 break;
@@ -39,7 +47,14 @@ void RoundTimer::init() {
 }
 
 
+void RoundTimer::prestartStep() {
+    this->lampsOffWithBusinessStateUpdate();
+    this->lamps->setLamp0Hex(this->business_state->round_timer_rest_color);
+    this->business_state->lamp_0_color = this->business_state->round_timer_rest_color;
+}
+
 void RoundTimer::roundStep() {
+    this->beeper->startBeepingOnceShort();
     this->lampsOffWithBusinessStateUpdate();
     this->lamps->setLamp0Hex(this->business_state->round_timer_round_color);
     this->business_state->lamp_0_color = this->business_state->round_timer_round_color;
@@ -47,6 +62,7 @@ void RoundTimer::roundStep() {
 
 
 void RoundTimer::prerestStep() {
+    this->beeper->startBeepingSequence();
     this->lampsOffWithBusinessStateUpdate();
     this->lamps->setLamp1Hex(this->business_state->round_timer_prerest_color);
     this->business_state->lamp_1_color = this->business_state->round_timer_prerest_color;
@@ -54,6 +70,7 @@ void RoundTimer::prerestStep() {
 
 
 void RoundTimer::restStep() {
+    this->beeper->startBeepingOnceLong();
     this->lampsOffWithBusinessStateUpdate();
     this->lamps->setLamp2Hex(this->business_state->round_timer_rest_color);
     this->business_state->lamp_2_color = this->business_state->round_timer_rest_color;
@@ -76,6 +93,8 @@ void RoundTimer::start() {
     }
 
     this->timer_sequencer->prerest_duration = this->business_state->round_timer_prerest_duration * 1000;
+    this->timer_sequencer->prestart_duration = this->business_state->round_timer_prestart_duration * 1000;
+
     this->business_state->round_timer_state_is_running = true;
     this->timer_sequencer->start();
 }
@@ -85,6 +104,7 @@ void RoundTimer::stop() {
     if (this->isRunning()) {
         this->business_state->round_timer_state_is_running = false;
         this->timer_sequencer->stop();
+        this->beeper->stop();
         this->lampsOffWithBusinessStateUpdate();
     }
 }
@@ -96,8 +116,11 @@ void RoundTimer::restart() {
 }
 
 
-void RoundTimer::lampModeSet() {
+void RoundTimer::lampModeSet(String lamp_color_0, String lamp_color_1, String lamp_color_2) {
     this->stop();
+    this->business_state->lamp_0_color = lamp_color_0;
+    this->business_state->lamp_1_color = lamp_color_1;
+    this->business_state->lamp_2_color = lamp_color_2;
     this->lamps->setLamp0Hex(this->business_state->lamp_0_color);
     this->lamps->setLamp1Hex(this->business_state->lamp_1_color);
     this->lamps->setLamp2Hex(this->business_state->lamp_2_color);

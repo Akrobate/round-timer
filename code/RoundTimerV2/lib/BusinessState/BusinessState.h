@@ -17,6 +17,10 @@ class BusinessState {
         static constexpr int DEVICE_ROUND_TIMER_MODE = 1;
         static constexpr int DEVICE_LAMP_MODE = 2;
 
+        static constexpr int ROUND_TIMER_SEQUENTIAL_MODE_ORDER_ASC = 0;
+        static constexpr int ROUND_TIMER_SEQUENTIAL_MODE_ORDER_DESC = 1;
+
+
         // Device
         unsigned int device_mode = DEVICE_ROUND_TIMER_MODE;
         
@@ -31,6 +35,7 @@ class BusinessState {
         // Round Timer
         unsigned int round_timer_step = 0;
         unsigned int round_timer_mode = ROUND_TIMER_SEQUENTIAL_MODE;
+        unsigned int round_timer_sequential_mode_order = ROUND_TIMER_SEQUENTIAL_MODE_ORDER_ASC;
 
         String round_timer_round_color = "#00FF00";
         String round_timer_rest_color = "#FF0000";
@@ -41,6 +46,7 @@ class BusinessState {
         unsigned int round_timer_rest_long_duration = 6;
         unsigned int round_timer_rest_short_duration = 3;
         unsigned int round_timer_prerest_duration = 3;
+        unsigned int round_timer_prestart_duration = 3;
 
         boolean round_timer_state_is_running = false;
         boolean round_timer_state_is_round_long_duration = false;

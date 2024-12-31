@@ -86,6 +86,7 @@ void RoundTimerServer::init() {
             // Round Timer
             object["round_timer_step"] = this->business_state->round_timer_step;
             object["round_timer_mode"] = this->business_state->round_timer_mode;
+            object["round_timer_sequential_mode_order"] = this->business_state->round_timer_sequential_mode_order;
 
             object["round_timer_round_color"] = this->business_state->round_timer_round_color;
             object["round_timer_rest_color"] = this->business_state->round_timer_rest_color;
@@ -96,6 +97,7 @@ void RoundTimerServer::init() {
             object["round_timer_rest_long_duration"] = this->business_state->round_timer_rest_long_duration;
             object["round_timer_rest_short_duration"] = this->business_state->round_timer_rest_short_duration;
             object["round_timer_prerest_duration"] = this->business_state->round_timer_prerest_duration;
+            object["round_timer_prerest_duration"] = this->business_state->round_timer_prestart_duration;
 
             object["round_timer_state_is_running"] = this->business_state->round_timer_state_is_running;
             object["round_timer_state_is_round_long_duration"] = this->business_state->round_timer_state_is_round_long_duration;
@@ -164,18 +166,23 @@ void RoundTimerServer::init() {
         HTTP_POST,
         [&](AsyncWebServerRequest * request) {
             Serial.println("POST /api/lamps");
+
+            String lamp_0_color = "#000000";
+            String lamp_1_color = "#000000";
+            String lamp_2_color = "#000000";
+
             if (request->hasParam("lamp_0_color", true)) {
-                this->business_state->lamp_0_color = request->getParam("lamp_0_color", true)->value();
+                lamp_0_color = request->getParam("lamp_0_color", true)->value();
             }
 
             if (request->hasParam("lamp_1_color", true)) {
-                this->business_state->lamp_1_color = request->getParam("lamp_1_color", true)->value();
+                lamp_1_color = request->getParam("lamp_1_color", true)->value();
             }
 
             if (request->hasParam("lamp_2_color", true)) {
-                this->business_state->lamp_2_color = request->getParam("lamp_2_color", true)->value();
+                lamp_2_color = request->getParam("lamp_2_color", true)->value();
             }
-            this->round_timer->lampModeSet();
+            this->round_timer->lampModeSet(lamp_0_color, lamp_1_color, lamp_2_color);
             request->send(200, "application/json", "{\"status\": \"ok\"}");
         }
     );

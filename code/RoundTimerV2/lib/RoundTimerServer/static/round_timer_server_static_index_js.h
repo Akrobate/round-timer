@@ -243,7 +243,21 @@ async function setControls(data) {
 
 // Lamps
 async function setLampColor(data) {
-    setLampColorRepository(data)
+    await setLampColorRepository(data)
+}
+
+async function updateLampsColors() {
+    const _el = $('.block-lamp-controls')
+    const lamp_0_color = $('input[name=lamp_0_color]', _el).value
+    const lamp_1_color = $('input[name=lamp_1_color]', _el).value
+    const lamp_2_color = $('input[name=lamp_2_color]', _el).value
+
+    const data = {
+        lamp_0_color,
+        lamp_1_color,
+        lamp_2_color,
+    }
+    await setLampColor(data)
 }
 
 async function pageRoundTimerConfigurationsMounted() {
@@ -285,5 +299,19 @@ async function setRoundTimerConfiguration() {
     console.log(data)
 
 }
+
+
+/*
+document.getElementById('setValueBtn').addEventListener('click', function () {
+    const valueToSet = "Option 2"; // La valeur que vous voulez sélectionner
+    const radioButtons = document.querySelectorAll('input[name="option"]');
+    
+    radioButtons.forEach(radio => {
+        if (radio.value === valueToSet) {
+            radio.checked = true; // Définit cet élément comme sélectionné
+        }
+    });
+});
+*/
 )rawliteral";
 

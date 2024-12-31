@@ -61,6 +61,9 @@ let business_state = {
     // ROUND_TIMER_ALL_MODE = 2
     round_timer_mode: 1, 
 
+    // ASC 0, DESC 1
+    round_timer_sequential_mode_order: 0,
+
     round_timer_round_color: '#00FF00',
     round_timer_rest_color: '#FF0000',
     round_timer_prerest_color: '#FF4500',
@@ -240,12 +243,38 @@ async function setControls(data) {
 
 // Lamps
 async function setLampColor(data) {
-    setLampColorRepository(data)
+    await setLampColorRepository(data)
+}
+
+async function updateLampsColors() {
+    const _el = $('.block-lamp-controls')
+    const lamp_0_color = $('input[name=lamp_0_color]', _el).value
+    const lamp_1_color = $('input[name=lamp_1_color]', _el).value
+    const lamp_2_color = $('input[name=lamp_2_color]', _el).value
+
+    const data = {
+        lamp_0_color,
+        lamp_1_color,
+        lamp_2_color,
+    }
+    await setLampColor(data)
 }
 
 async function pageRoundTimerConfigurationsMounted() {
     business_state = await getBusinessStateRepository()
     const _el = $('#page-round-timer-configurations')
+
+    $all('input[name=round_timer_mode]', _el).forEach((radio) => {
+        if (radio.value == business_state.round_timer_mode) {
+            radio.checked = true;
+        }
+    });
+
+    $all('input[name=round_timer_sequential_mode_order]', _el).forEach((radio) => {
+        if (radio.value == business_state.round_timer_sequential_mode_order) {
+            radio.checked = true;
+        }
+    });
 
     $('input[name=round_timer_round_color]', _el).value = business_state.round_timer_round_color
     $('input[name=round_timer_rest_color]', _el).value = business_state.round_timer_rest_color

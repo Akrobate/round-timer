@@ -4,6 +4,7 @@
 #include <BusinessState.h>
 #include <TimerSequencer.h>
 #include <Lamps.h>
+#include <Beeper.h>
 
 #include <Arduino.h>
 
@@ -11,6 +12,7 @@ class RoundTimer {
     private:
         BusinessState * business_state;
         TimerSequencer * timer_sequencer;
+        Beeper * beeper;
 
     public:
         Lamps * lamps;
@@ -18,6 +20,7 @@ class RoundTimer {
 
         void injectBusinessState(BusinessState * business_state);
         void injectTimerSequencer(TimerSequencer * timer_sequencer);
+        void injectBeeper(Beeper * beeper);
         void injectLamps(Lamps * lamps);
 
         void init();
@@ -26,13 +29,14 @@ class RoundTimer {
         void stop();
         void restart();
 
+        void prestartStep();
         void roundStep();
         void prerestStep();
         void restStep();
         bool isRunning();
 
         void lampsOffWithBusinessStateUpdate();
-        void lampModeSet();
+        void lampModeSet(String lamap_color_0, String lamap_color_1, String lamap_color_2);
 };
 
 #endif

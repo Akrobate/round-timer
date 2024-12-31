@@ -7,6 +7,7 @@
 #include <RoundTimerServer.h>
 #include <BusinessState.h>
 #include <RoundTimer.h>
+#include <Beeper.h>
 #include <WifiService.h>
 
 #define PIN_D1  5
@@ -25,6 +26,7 @@ RoundTimerServer * server = new RoundTimerServer(SERVER_PORT);
 BusinessState * business_state = new BusinessState();
 RoundTimer * round_timer = new RoundTimer();
 WifiService * wifi_service = new WifiService();
+Beeper * beeper = new Beeper();
 
 
 void setup() {
@@ -38,9 +40,12 @@ void setup() {
     server->injectBusinessState(business_state);
     server->injectRoundTimer(round_timer);
 
+    beeper->init();
+
     round_timer->injectBusinessState(business_state);
     round_timer->injectTimerSequencer(timer_sequencer);
-    round_timer->injectLamps(lamps);    
+    round_timer->injectLamps(lamps);
+    round_timer->injectBeeper(beeper);
     
     round_timer->init();
 

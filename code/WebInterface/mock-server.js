@@ -15,6 +15,7 @@ const repository_business_state = {
     sta_is_configured: false,
     round_timer_step: 0,
     round_timer_mode: 1,
+    round_timer_sequential_mode_order: 0,
     round_timer_round_color: "#00FF00",
     round_timer_rest_color: "#FF0000",
     round_timer_prerest_color: "#FF4500",

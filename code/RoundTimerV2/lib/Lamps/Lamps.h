@@ -4,7 +4,7 @@
 #include <Arduino.h>
 #include <FastLED.h>
 
-#define PIN_NEOPIXEL_LED    12
+#define PIN_NEOPIXEL_LED    12 // PIN_D6
 
 class Lamps {
 
