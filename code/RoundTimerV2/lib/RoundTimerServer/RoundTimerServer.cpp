@@ -100,7 +100,7 @@ void RoundTimerServer::init() {
             object["round_timer_rest_long_duration"] = this->business_state->round_timer_rest_long_duration;
             object["round_timer_rest_short_duration"] = this->business_state->round_timer_rest_short_duration;
             object["round_timer_prerest_duration"] = this->business_state->round_timer_prerest_duration;
-            object["round_timer_prerest_duration"] = this->business_state->round_timer_prestart_duration;
+            object["round_timer_prestart_duration"] = this->business_state->round_timer_prestart_duration;
 
             object["round_timer_state_is_running"] = this->business_state->round_timer_state_is_running;
             object["round_timer_state_is_round_long_duration"] = this->business_state->round_timer_state_is_round_long_duration;
@@ -300,7 +300,9 @@ void RoundTimerServer::init() {
         HTTP_POST,
         [&](AsyncWebServerRequest * request) {
             
-            if (request->hasParam("round_timer_mode", true)) {
+            Serial.println("POST /api/round-timer-configurations");
+
+            if (request->hasParam("round_timer_mute", true)) {
                 this->business_state->round_timer_mute = request->getParam("round_timer_mute", true)->value() == "true";
             }
 

@@ -1,13 +1,11 @@
 #include <Arduino.h>
-#include <ESP8266WiFi.h>
-#include <FastLED.h>
-#include <Debounce.h>
 #include <Lamps.h>
 #include <TimerSequencer.h>
 #include <RoundTimerServer.h>
 #include <BusinessState.h>
 #include <RoundTimer.h>
 #include <Beeper.h>
+#include <FacadeButtons.h>
 #include <WifiService.h>
 
 #define PIN_D1  5
@@ -27,6 +25,7 @@ BusinessState * business_state = new BusinessState();
 RoundTimer * round_timer = new RoundTimer();
 WifiService * wifi_service = new WifiService();
 Beeper * beeper = new Beeper();
+FacadeButtons * facade_buttons = new FacadeButtons();
 
 
 void setup() {
@@ -46,8 +45,11 @@ void setup() {
     round_timer->injectTimerSequencer(timer_sequencer);
     round_timer->injectLamps(lamps);
     round_timer->injectBeeper(beeper);
-    
     round_timer->init();
+
+    facade_buttons->injectBusinessState(business_state);
+    facade_buttons->injectRoundTimer(round_timer);
+    facade_buttons->init();
 
     wifi_service->injectBusinessState(business_state);
     wifi_service->init();
@@ -60,5 +62,5 @@ void setup() {
 void loop() {
     wifi_service->update();
     round_timer->update();
+    facade_buttons->update();
 }
-

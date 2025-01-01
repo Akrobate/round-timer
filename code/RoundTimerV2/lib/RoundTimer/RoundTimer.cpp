@@ -49,31 +49,68 @@ void RoundTimer::init() {
 
 void RoundTimer::prestartStep() {
     this->lampsOffWithBusinessStateUpdate();
-    this->lamps->setLamp0Hex(this->business_state->round_timer_rest_color);
-    this->business_state->lamp_0_color = this->business_state->round_timer_rest_color;
+
+    if (this->business_state->round_timer_mode == BusinessState::ROUND_TIMER_ALL_MODE) {
+        this->setAllLampsHex(this->business_state->round_timer_rest_color);
+    } else if (this->business_state->round_timer_mode == BusinessState::ROUND_TIMER_SEQUENTIAL_MODE) {
+
+        if (this->business_state->round_timer_sequential_mode_order == BusinessState::ROUND_TIMER_SEQUENTIAL_MODE_ORDER_ASC) {
+            this->lamps->setLamp0Hex(this->business_state->round_timer_rest_color);
+            this->business_state->lamp_0_color = this->business_state->round_timer_rest_color;
+        } else if (this->business_state->round_timer_sequential_mode_order == BusinessState::ROUND_TIMER_SEQUENTIAL_MODE_ORDER_DESC) {
+            this->lamps->setLamp2Hex(this->business_state->round_timer_rest_color);
+            this->business_state->lamp_2_color = this->business_state->round_timer_rest_color;
+        }
+    }
 }
 
 void RoundTimer::roundStep() {
     this->beeper->startBeepingOnceShort();
     this->lampsOffWithBusinessStateUpdate();
-    this->lamps->setLamp0Hex(this->business_state->round_timer_round_color);
-    this->business_state->lamp_0_color = this->business_state->round_timer_round_color;
+    
+    if (this->business_state->round_timer_mode == BusinessState::ROUND_TIMER_ALL_MODE) {
+        this->setAllLampsHex(this->business_state->round_timer_round_color);
+    } else if (this->business_state->round_timer_mode == BusinessState::ROUND_TIMER_SEQUENTIAL_MODE) {
+
+        if (this->business_state->round_timer_sequential_mode_order == BusinessState::ROUND_TIMER_SEQUENTIAL_MODE_ORDER_ASC) {
+            this->lamps->setLamp2Hex(this->business_state->round_timer_round_color);
+            this->business_state->lamp_2_color = this->business_state->round_timer_round_color;
+        } else if (this->business_state->round_timer_sequential_mode_order == BusinessState::ROUND_TIMER_SEQUENTIAL_MODE_ORDER_DESC) {
+            this->lamps->setLamp0Hex(this->business_state->round_timer_round_color);
+            this->business_state->lamp_0_color = this->business_state->round_timer_round_color;
+        }
+    }
 }
 
 
 void RoundTimer::prerestStep() {
     this->beeper->startBeepingSequence();
     this->lampsOffWithBusinessStateUpdate();
-    this->lamps->setLamp1Hex(this->business_state->round_timer_prerest_color);
-    this->business_state->lamp_1_color = this->business_state->round_timer_prerest_color;
+
+    if (this->business_state->round_timer_mode == BusinessState::ROUND_TIMER_ALL_MODE) {
+        this->setAllLampsHex(this->business_state->round_timer_prerest_color);
+    } else if (this->business_state->round_timer_mode == BusinessState::ROUND_TIMER_SEQUENTIAL_MODE) {
+        this->lamps->setLamp1Hex(this->business_state->round_timer_prerest_color);
+        this->business_state->lamp_1_color = this->business_state->round_timer_prerest_color;
+    }
 }
 
 
 void RoundTimer::restStep() {
     this->beeper->startBeepingOnceLong();
     this->lampsOffWithBusinessStateUpdate();
-    this->lamps->setLamp2Hex(this->business_state->round_timer_rest_color);
-    this->business_state->lamp_2_color = this->business_state->round_timer_rest_color;
+
+    if (this->business_state->round_timer_mode == BusinessState::ROUND_TIMER_ALL_MODE) {
+        this->setAllLampsHex(this->business_state->round_timer_rest_color);
+    } else if (this->business_state->round_timer_mode == BusinessState::ROUND_TIMER_SEQUENTIAL_MODE) {
+        if (this->business_state->round_timer_sequential_mode_order == BusinessState::ROUND_TIMER_SEQUENTIAL_MODE_ORDER_ASC) {
+            this->lamps->setLamp0Hex(this->business_state->round_timer_rest_color);
+            this->business_state->lamp_0_color = this->business_state->round_timer_rest_color;
+        } else if (this->business_state->round_timer_sequential_mode_order == BusinessState::ROUND_TIMER_SEQUENTIAL_MODE_ORDER_DESC) {
+            this->lamps->setLamp2Hex(this->business_state->round_timer_rest_color);
+            this->business_state->lamp_2_color = this->business_state->round_timer_rest_color;
+        }
+    }
 }
 
 
@@ -111,8 +148,8 @@ void RoundTimer::stop() {
 
 
 void RoundTimer::restart() {
-    this->timer_sequencer->stop();
-    this->timer_sequencer->start();
+    this->stop();
+    this->start();
 }
 
 
@@ -128,12 +165,16 @@ void RoundTimer::lampModeSet(String lamp_color_0, String lamp_color_1, String la
 
 
 void RoundTimer::lampsOffWithBusinessStateUpdate() {
-    this->lamps->setAllLampsHex("#000000");
-    this->business_state->lamp_0_color = "#000000";
-    this->business_state->lamp_1_color = "#000000";
-    this->business_state->lamp_2_color = "#000000";
+    this->setAllLampsHex("#000000");
 }
 
+
+void RoundTimer::setAllLampsHex(String color_string) {
+    this->lamps->setAllLampsHex(color_string);
+    this->business_state->lamp_0_color = color_string;
+    this->business_state->lamp_1_color = color_string;
+    this->business_state->lamp_2_color = color_string;
+}
 
 bool RoundTimer::isRunning() {
     return this->business_state->round_timer_state_is_running;

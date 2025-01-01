@@ -14,6 +14,8 @@ class RoundTimer {
         TimerSequencer * timer_sequencer;
         Beeper * beeper;
 
+        void setAllLampsHex(String color_string);
+
     public:
         Lamps * lamps;
         RoundTimer();

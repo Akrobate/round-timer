@@ -1,11 +1,11 @@
 
 # Todo
 
-- [ ] Physical Buttons controller
 - [ ] Upload firmware
 - [ ] Presets Lamp
-- [ ] All lamps mode for round timer
 - [ ] Disable beeper
-- [ ] sequence mode orienatation change
+- [x] sequence mode orienatation change
+- [x] All lamps mode for round timer
+- [x] Physical Buttons controller
 - [x] prestart 5s timeout
 - [x] Beeper mecanics
