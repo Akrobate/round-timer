@@ -198,6 +198,7 @@ button.icon svg {
 
 .col-1 { flex: 0 0 8.33%; }
 .col-2 { flex: 0 0 16.66%; }
+.col-2_4 { flex: 0 0 20; }
 .col-3 { flex: 0 0 25%; }
 .col-4 { flex: 0 0 33.33%; }
 .col-5 { flex: 0 0 41.66%; }
@@ -332,6 +333,14 @@ input.error {
     background-color: var(--neutral-color-2);
     border-radius: 10px;
     align-items: center;
+}
+
+
+.preset-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    overflow: hidden;
 }
 )rawliteral";
 

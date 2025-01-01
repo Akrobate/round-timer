@@ -244,6 +244,36 @@ async function setControls(data) {
 
 
 // Lamps
+
+function pageLampMounted() {
+    updateLampPresets()
+
+    console.log("pageLampMounted in mehod")
+}
+
+
+function updateLampPresets() {
+    const preset_list = [1,2,3,4,5]
+
+    const _el = $('.block-lamp-presets')
+    const _list_el = $('.color-presets', _el)
+    _list_el.innerHTML = ''
+    const template_html = $('#template-color-preset').innerHTML
+    
+    preset_list.forEach((data, index) => {
+        let html = template_html
+        Object.keys(data).forEach((key) => {
+            html = html.replaceAll(`{{ ${key} }}`, data[key]);
+        })
+        html = html.replaceAll('{{ index }}', index);
+        const _new_el = document.createElement("div")
+        _new_el.innerHTML = html
+        _list_el.appendChild(_new_el.firstElementChild)
+    })
+
+}
+
+
 async function setLampColor(data) {
     await setLampColorRepository(data)
 }
@@ -262,6 +292,7 @@ async function updateLampsColors() {
     await setLampColor(data)
 }
 
+// RoundTimer Configuration
 async function pageRoundTimerConfigurationsMounted() {
     business_state = await getBusinessStateRepository()
     const _el = $('#page-round-timer-configurations')
@@ -291,7 +322,6 @@ async function pageRoundTimerConfigurationsMounted() {
 }
 
 
-// RoundTimer Configuration
 async function setRoundTimerConfiguration() {
     const _el = $('#page-round-timer-configurations')
     const data = {

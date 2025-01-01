@@ -69,7 +69,7 @@ void RoundTimerServer::init() {
         HTTP_GET,
         [&](AsyncWebServerRequest * request) {
             String response;
-            DynamicJsonDocument doc(512);
+            DynamicJsonDocument doc(1024);
             JsonObject object = doc.to<JsonObject>();
 
             // Device
@@ -113,6 +113,13 @@ void RoundTimerServer::init() {
 
             object["firmware_version"] = this->business_state->firmware_version;
 
+            JsonArray lampPresetList = object.createNestedArray("lamp_preset_list");
+            for (int i = 0; i < 5; i++) {
+                JsonArray row = lampPresetList.createNestedArray();
+                for (int j = 0; j < 3; j++) {
+                    row.add(this->business_state->lamp_preset_list[i][j]);
+                }
+            }
             serializeJson(doc, response);
             request->send(200, "application/json", response);
         }
@@ -186,6 +193,45 @@ void RoundTimerServer::init() {
                 lamp_2_color = request->getParam("lamp_2_color", true)->value();
             }
             this->round_timer->lampModeSet(lamp_0_color, lamp_1_color, lamp_2_color);
+            request->send(200, "application/json", "{\"status\": \"ok\"}");
+        }
+    );
+
+
+    this->server->on(
+        "/api/lamps-presets",
+        HTTP_POST,
+        [&](AsyncWebServerRequest * request) {
+            Serial.println("POST /api/lamps-presets");
+
+            String lamp_0_color = "#000000";
+            String lamp_1_color = "#000000";
+            String lamp_2_color = "#000000";
+
+            unsigned int index = 0;
+
+            if (request->hasParam("index", true)) {
+                index = request->getParam("index", true)->value().toInt();
+            } else {
+                request->send(400, "text/html", "Missing index");
+            }
+
+            if (request->hasParam("lamp_0_color", true)) {
+                lamp_0_color = request->getParam("lamp_0_color", true)->value();
+            }
+
+            if (request->hasParam("lamp_1_color", true)) {
+                lamp_1_color = request->getParam("lamp_1_color", true)->value();
+            }
+
+            if (request->hasParam("lamp_2_color", true)) {
+                lamp_2_color = request->getParam("lamp_2_color", true)->value();
+            }
+
+            this->business_state->lamp_preset_list[index][0] = lamp_0_color;
+            this->business_state->lamp_preset_list[index][1] = lamp_1_color;
+            this->business_state->lamp_preset_list[index][2] = lamp_2_color;
+
             request->send(200, "application/json", "{\"status\": \"ok\"}");
         }
     );

@@ -5,6 +5,11 @@ BusinessState::BusinessState() {
 }
 
 void BusinessState::init() {
+    for (int i = 0; i < 5; i++) {
+        this->lamp_preset_list[i][0] = "#000000";
+        this->lamp_preset_list[i][1] = "#000000";
+        this->lamp_preset_list[i][2] = "#000000";
+    }
 }
 
 

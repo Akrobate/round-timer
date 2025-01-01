@@ -60,7 +60,7 @@ class BusinessState {
         String lamp_1_color = "#000000";
         String lamp_2_color = "#000000";
 
-        String lamp_presets_array[5][3];
+        String lamp_preset_list[5][3];
 
         String firmware_version = "2.0.0";
 
