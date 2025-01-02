@@ -3,7 +3,11 @@
 
 - [ ] Upload firmware
 - [ ] Presets Lamp
-- [ ] Disable beeper
+- [ ] Configuration save in file
+- [ ] Reset saved files (factory mode)
+- [ ] Round timer Configuration webinterface set to defaults
+- [x] Webinterface Configuration Save loading button state
+- [x] Disable beeper
 - [x] sequence mode orienatation change
 - [x] All lamps mode for round timer
 - [x] Physical Buttons controller

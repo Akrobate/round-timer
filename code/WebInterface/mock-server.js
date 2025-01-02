@@ -16,6 +16,10 @@ const repository_business_state = {
 
     firmware_version: '2.0.0-data',
 
+    sta_credentials_file_exists: true,
+    configurations_file_exists: true,
+    lamps_presets_file_exists: true,
+
     round_timer_mute: false,
 
     round_timer_step: 0,
@@ -38,6 +42,14 @@ const repository_business_state = {
     lamp_0_color: '',
     lamp_1_color: '',
     lamp_2_color: '',
+
+    lamp_preset_list: [
+        ["#FF0000", "#00FF00", "#0000FF"],
+        ["#FF0000", "#00FFFF", "#FF00FF"],
+        ["#FF0000", "#00FF00", "#00FFFF"],
+        ["#FFFF00", "#00FF00", "#0000FF"],
+        ["#FF0000", "#00FF00", "#0000FF"],
+    ]
 }
 
 async function wait(ms) {
@@ -52,7 +64,7 @@ async function getBusinessStateRepository() {
 
 
 async function setControlsRepository(data) {
-    console.log('setControls', data)
+    console.log('setControlsRepository', data)
     await wait(SERVER_LAG_SHORT);
     Object.keys(data).forEach((key) => {
         repository_business_state[key] = data[key]
@@ -65,7 +77,7 @@ async function setControlsRepository(data) {
 
 
 async function setLampColorRepository(data) {
-    console.log('setLampColor', data)
+    console.log('setLampColorRepository', data)
     await wait(SERVER_LAG_SHORT);
     Object.keys(data).forEach((key) => {
         repository_business_state[key] = data[key]
@@ -77,12 +89,48 @@ async function setLampColorRepository(data) {
 
 
 async function saveRoundTimerConfigurationRepository(data) {
-    console.log('setRoundTimerConfiguration', data)
+    console.log('saveRoundTimerConfigurationRepository', data)
     await wait(SERVER_LAG_SHORT);
     Object.keys(data).forEach((key) => {
         console.log(key)
         repository_business_state[key] = data[key]
     })
+    return {
+        status: 'ok',
+    }
+}
+
+async function saveSaveLampPresetRepository(data) {
+    console.log('saveSaveLampPresetRepository', data)
+    await wait(SERVER_LAG_SHORT);
+    Object.keys(data).forEach((key) => {
+        console.log(key)
+        repository_business_state[key] = data[key]
+    })
+    return {
+        status: 'ok',
+    }
+}
+
+async function deleteStaCredentialsFileRepository() {
+    console.log('deleteStaCredentialsFileRepository')
+    await wait(SERVER_LAG_SHORT);
+    return {
+        status: 'ok',
+    }
+}
+
+async function deleteConfigurationsFileRepository() {
+    console.log('deleteConfigurationsFileRepository')
+    await wait(SERVER_LAG_SHORT);
+    return {
+        status: 'ok',
+    }
+}
+
+async function deleteLampsPresetsFileRepository() {
+    console.log('deleteLampsPresetsFileRepository')
+    await wait(SERVER_LAG_SHORT);
     return {
         status: 'ok',
     }

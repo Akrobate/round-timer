@@ -34,7 +34,6 @@ void setup() {
     delay(1000);
 
     business_state->init();
-    business_state->staLoadCredentials();
 
     server->injectBusinessState(business_state);
     server->injectRoundTimer(round_timer);

@@ -109,7 +109,7 @@ button.secondary {
     background-color: var(--secondary-color-1);
 }
 
-button.accent {
+button.accent, input.accent {
     background-color: var(--accent-color);
 }
 
@@ -341,6 +341,16 @@ input.error {
     height: 50px;
     border-radius: 10px;
     overflow: hidden;
+    cursor: pointer;
+}
+
+.preset-selected {
+    border: 4px solid var(--neutral-color-1);
+}
+
+input.lamp-set-round-color {
+    width: 100px;
+    height: 50px;
 }
 )rawliteral";
 

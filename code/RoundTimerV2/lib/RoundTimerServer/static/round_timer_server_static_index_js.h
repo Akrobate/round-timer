@@ -17,7 +17,7 @@ function buttonSetLoadingState(btn, state) {
     btn.disabled = state
     if (state) {
         btn.dataset.originalText = btn.textContent
-        btn.textContent = 'Loading...'
+        btn.textContent = 'Chargement...'
     } else {
         btn.textContent = btn.dataset.originalText
     }
@@ -62,6 +62,10 @@ let business_state = {
 
     round_timer_mute: false,
 
+    sta_credentials_file_exists: false,
+    configurations_file_exists: false,
+    lamps_presets_file_exists: false,
+
     // ROUND_TIMER_SEQUENTIAL_MODE = 1
     // ROUND_TIMER_ALL_MODE = 2
     round_timer_mode: 1, 
@@ -87,6 +91,8 @@ let business_state = {
     lamp_0_color: '',
     lamp_1_color: '',
     lamp_2_color: '',
+
+    lamp_preset_list: [],
 }
 
 
@@ -184,7 +190,70 @@ function updateRender() {
     updateToggleButtonsControls(business_state.round_timer_state_is_running, 'round_timer_state_is_running', _el_round_timer_controls)
     updateToggleButtonsControls(business_state.round_timer_state_is_round_long_duration, 'round_timer_state_is_round_long_duration', _el_round_timer_controls)
     updateToggleButtonsControls(business_state.round_timer_state_is_rest_long_duration, 'round_timer_state_is_rest_long_duration', _el_round_timer_controls)
+
+    // saved files
+    updateBlockSavedFiles()
 }
+
+
+function updateBlockSavedFiles() {
+    const _el_block_saved_files = $('.block-saved-files')
+    updateSavedFileLine(business_state.sta_credentials_file_exists, 'list-item-sta-credentials', _el_block_saved_files)
+    updateSavedFileLine(business_state.configurations_file_exists, 'list-item-configurations', _el_block_saved_files)
+    updateSavedFileLine(business_state.lamps_presets_file_exists, 'list-item-lamps-presets', _el_block_saved_files)
+
+    if (
+        !business_state.sta_credentials_file_exists
+        && !business_state.configurations_file_exists
+        && !business_state.lamps_presets_file_exists
+    ) {
+        rmCls($('h4', _el_block_saved_files), 'hidden')
+        addCls($('ul', _el_block_saved_files), 'hidden')
+    } else {
+        addCls($('h4', _el_block_saved_files), 'hidden')
+        rmCls($('ul', _el_block_saved_files), 'hidden')
+    }
+}
+
+
+
+// Saved files block file
+function updateSavedFileLine(is_visible, li_class, parent_element) {
+    const _el = $(`.${li_class}`, parent_element)
+    if (is_visible) {
+        addCls(_el, 'list-item')
+        rmCls(_el, 'hidden')
+    } else {
+        rmCls(_el, 'list-item')
+        addCls(_el, 'hidden')
+    }
+}
+
+async function deleteStaCredentialsFile(btn) {
+    buttonSetLoadingState(btn, true)
+    await deleteStaCredentialsFileRepository()
+    business_state = await getBusinessStateRepository()
+    updateBlockSavedFiles()
+    buttonSetLoadingState(btn, false)
+}
+
+async function deleteConfigurationsFile(btn) {
+    buttonSetLoadingState(btn, true)
+    await deleteConfigurationsFileRepository()
+    business_state = await getBusinessStateRepository()
+    updateBlockSavedFiles()
+    buttonSetLoadingState(btn, false)
+
+}
+
+async function deleteLampsPresetsFile(btn) {
+    buttonSetLoadingState(btn, true)
+    await deleteLampsPresetsFileRepository()
+    business_state = await getBusinessStateRepository()
+    updateBlockSavedFiles()
+    buttonSetLoadingState(btn, false)
+}
+
 
 // Toggle button controls update
 function updateToggleButtonsControls(value, class_prefix, parent_element) {
@@ -213,7 +282,7 @@ function initWifiCredentialsBlock() {
     }
 }
 
-function saveWifiCredentials() {
+function saveWifiCredentials(btn) {
     const _el = $('.bloc-wifi-credentials')
     const _name_input = $('.input-wifi-ssid', _el)
     const _password_input = $('.input-wifi-password', _el)
@@ -233,9 +302,11 @@ function saveWifiCredentials() {
     rmCls(_name_input, 'error')
     rmCls(_password_input, 'error')
 
+    buttonSetLoadingState(btn, true)
     console.log('Saving wifi credentials...')
     console.log('SSID:', name)
     console.log('Password', password)
+    buttonSetLoadingState(btn, false)
 }
 
 // Controls
@@ -248,9 +319,18 @@ async function setControls(data) {
 
 // Lamps
 
-function pageLampMounted() {
+let selected_preset_index = null
 
-    const preset_list = [1,2,3,4,5]
+async function pageLampMounted() {
+    console.log("pageLampMounted in method")
+    business_state = await getBusinessStateRepository()
+    updateLampPresets()
+    updatePresetSelection()
+}
+
+
+function updateLampPresets() {
+    const preset_list = business_state.lamp_preset_list
 
     const _el = $('.block-lamp-presets')
     const _list_el = $('.color-presets', _el)
@@ -260,40 +340,101 @@ function pageLampMounted() {
     preset_list.forEach((data, index) => {
         let html = template_html
         Object.keys(data).forEach((key) => {
-            html = html.replaceAll(`{{ ${key} }}`, data[key]);
+            html = html.replaceAll(`{{ color_${key} }}`, data[key]);
         })
         html = html.replaceAll('{{ index }}', index);
         const _new_el = document.createElement("div")
         _new_el.innerHTML = html
+        $('.color_0', _new_el).style.backgroundColor = data[0]
+        $('.color_1', _new_el).style.backgroundColor = data[1]
+        $('.color_2', _new_el).style.backgroundColor = data[2]
         _list_el.appendChild(_new_el.firstElementChild)
     })
 
-    console.log("pageLampMounted in mehod")
 }
 
+function setLampInputColors(color_0, color_1, color_2) {
+    const _el = $('.block-lamp-controls')
+    $('input[name=lamp_0_color]', _el).value = color_0
+    $('input[name=lamp_1_color]', _el).value = color_1
+    $('input[name=lamp_2_color]', _el).value = color_2
+}
 
-async function setLampColor(data) {
-    await setLampColorRepository(data)
+function getLampInputColors() {
+    const _el = $('.block-lamp-controls')
+    return {
+        lamp_0_color: $('input[name=lamp_0_color]', _el).value,
+        lamp_1_color: $('input[name=lamp_1_color]', _el).value,
+        lamp_2_color: $('input[name=lamp_2_color]', _el).value,
+    }
+}
+
+function displayPresetColors(color_0, color_1, color_2, preset_index) {
+    if (selected_preset_index === Number(preset_index)) {
+        setLampInputColors('#000000', '#000000', '#000000')
+        selected_preset_index = null
+    } else {
+        setLampInputColors(color_0, color_1, color_2)
+        selected_preset_index = Number(preset_index)
+    }
+    updatePresetSelection()
+    updateLampsColors()
+}
+
+function updatePresetSelection() {
+
+    const _el_control = $('.block-lamp-controls')
+    if (selected_preset_index !== null) {
+        rmCls($('.save-preset-button', _el_control), 'hidden')
+    } else {
+        addCls($('.save-preset-button', _el_control), 'hidden')
+    }
+
+    const selected_class = 'preset-selected'
+    const _el = $('.block-lamp-presets')
+    $all('.preset-icon', _el).forEach((el) => {
+        rmCls(el, selected_class)
+    });
+    if (selected_preset_index !== null) {
+        console.log(`.lamp-preset-index-${selected_preset_index}`)
+        addCls($(`.lamp-preset-index-${selected_preset_index}`, _el), selected_class)
+    }
+}
+
+async function saveCurrentPreset(btn) {
+    buttonSetLoadingState(btn, true)
+    await saveSaveLampPresetRepository({
+        index: selected_preset_index,
+        ...getLampInputColors(),
+    })
+    business_state = await getBusinessStateRepository()
+    updateLampPresets()
+    updatePresetSelection()
+    buttonSetLoadingState(btn, false)
 }
 
 async function updateLampsColors() {
-    const _el = $('.block-lamp-controls')
-    const lamp_0_color = $('input[name=lamp_0_color]', _el).value
-    const lamp_1_color = $('input[name=lamp_1_color]', _el).value
-    const lamp_2_color = $('input[name=lamp_2_color]', _el).value
-
-    const data = {
-        lamp_0_color,
-        lamp_1_color,
-        lamp_2_color,
-    }
-    await setLampColor(data)
+    await setLampColor(getLampInputColors())
 }
+
+async function setLampColor(data) {
+    setLampInputColors(data.lamp_0_color, data.lamp_1_color, data.lamp_2_color)
+    await setLampColorRepository(data)
+}
+
 
 // RoundTimer Configuration
 async function pageRoundTimerConfigurationsMounted() {
     business_state = await getBusinessStateRepository()
     const _el = $('#page-round-timer-configurations')
+
+    $all('input[name=round_timer_mute]', _el).forEach((radio) => {
+        if (business_state.round_timer_mute) {
+            radio.checked = true;
+        } else {
+            radio.checked = false;
+        }
+    });
 
     $all('input[name=round_timer_mode]', _el).forEach((radio) => {
         if (radio.value == business_state.round_timer_mode) {
@@ -320,9 +461,12 @@ async function pageRoundTimerConfigurationsMounted() {
 }
 
 
-async function setRoundTimerConfiguration() {
+async function setRoundTimerConfiguration(btn) {
+    buttonSetLoadingState(btn, true)
     const _el = $('#page-round-timer-configurations')
     const data = {
+
+        round_timer_mute: $('input[name=round_timer_mute]:checked', _el) ? true : false,
 
         round_timer_mode: $('input[name=round_timer_mode]:checked', _el)?.value,
         round_timer_sequential_mode_order: $('input[name=round_timer_sequential_mode_order]:checked', _el)?.value,
@@ -341,7 +485,7 @@ async function setRoundTimerConfiguration() {
     await saveRoundTimerConfigurationRepository(data)
     console.log('Setting round timer configuration...')
     console.log(data)
-
+    buttonSetLoadingState(btn, false)
 }
 )rawliteral";
 

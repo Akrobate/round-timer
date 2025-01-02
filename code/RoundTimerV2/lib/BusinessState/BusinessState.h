@@ -7,9 +7,14 @@
 
 
 #define STA_CREDENTIALS_FILE "/sta-credentials.json"
+#define CONFIGURATIONS_FILE "/configurations.json"
+#define LAMPS_PRESETS_FILE "/lamps-presets.json"
 
 class BusinessState {
+
     private:
+        boolean removeFile(String filename);
+
     public:
         static constexpr int ROUND_TIMER_SEQUENTIAL_MODE = 1;
         static constexpr int ROUND_TIMER_ALL_MODE = 2;
@@ -31,6 +36,11 @@ class BusinessState {
         String sta_ip;
         boolean sta_is_connected = false;
         boolean sta_is_configured = false;
+
+        // Files
+        boolean sta_credentials_file_exists = false;
+        boolean configurations_file_exists = false;
+        boolean lamps_presets_file_exists = false;
 
         // Beeper
         boolean round_timer_mute = false;
@@ -67,11 +77,19 @@ class BusinessState {
         BusinessState();
         void init();
 
-        void staSaveCredentials();
-        void staLoadCredentials();
+        void saveStaCredentials();
+        void loadStaCredentials();
 
-        void saveConfiguration();
-        void loadConfiguration();
+        void saveConfigurations();
+        void loadConfigurations();
+
+        void saveLampsPresets();
+        void loadLampsPresets();
+
+        void checkFilesExists();
+        boolean removeStaCredentialsFile();
+        boolean removeConfigurationsFile();
+        boolean removeLampsPresetsFile();
 };
 
 #endif

@@ -108,6 +108,50 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
                 </div>
             </div>
 
+
+            <div class="row mt-md">
+                <div class="col col-12 col-sm-12">
+                    <div class="card height-100 elevation block-saved-files">
+                        <h2>Personnalisations sauvegardées</h2>
+                        
+                        <h4>Pas de personnalisations sauvegardées. Tous les paramètres sont d'origine.</h4>
+
+                        <ul class="list mt-lg hidden">
+                            <li class="hidden list-item-sta-credentials">
+                                <div class="content">
+                                    <div class="title">Configuration des login mot de passe wifi</div>
+                                </div>
+                                <div class="actions">
+                                    <button class="accent" onclick="deleteStaCredentialsFile(this)">
+                                        Supprimer
+                                    </button>
+                                </div>
+                            </li>
+                            <li class="hidden list-item-configurations">
+                                <div class="content">
+                                    <div class="title">Configuration du round timer</div>
+                                </div>
+                                <div class="actions">
+                                    <button class="accent" onclick="deleteConfigurationsFile(this)">
+                                        Supprimer
+                                    </button>
+                                </div>
+                            </li>
+                            <li class="hidden list-item-lamps-presets">
+                                <div class="content">
+                                    <div class="title">Configuration des presets de la lampe</div>
+                                </div>
+                                <div class="actions">
+                                    <button class="accent" onclick="deleteLampsPresetsFile(this)">
+                                        Supprimer
+                                    </button>
+                                </div>
+                            </li>
+                        </ul>                        
+                    </div>
+                </div>
+            </div>
+
             <div class="row mt-md">
                 <div class="col col-12 col-sm-12">
                     <div class="card height-100 elevation block-info-secondary">
@@ -117,7 +161,7 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
                                 Chargez le fichier firmware
                                 <input type='file' name='firmware'>
                             </div>
-                            <input type='submit' value='Ecrire le firmware selectionné'>
+                            <input type='submit' class="accent" value='Ecrire le firmware selectionné'>
                           </form>
                     </div>
                 </div>
@@ -264,6 +308,14 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
                                 <label for="round-timer-configuration-orientation-right">Début a droite</label>
                             </div>
                         </div>
+
+                        <h2 class="mt-lg">Buzzer</h2>
+                        <div>
+                            <div>
+                                <input type="checkbox" id="round-timer-configuration-mute" name="round_timer_mute">
+                                <label for="round-timer-configuration-mute">Désactiver le son</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col col-6 col-sm-12 ">
@@ -272,15 +324,15 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
                         <h2>Configuration des couleurs</h2>
                         <div class="mb-sm">
                             <p>Couleur du round</p>
-                            <input type="color" class="display-block" name="round_timer_round_color">
+                            <input type="color" class="display-block lamp-set-round-color" name="round_timer_round_color">
                         </div>
                         <div class="mb-sm">
                             <p>Couleur du fin de round (prérepos)</p>
-                            <input type="color" class="display-block" name="round_timer_prerest_color">
+                            <input type="color" class="display-block lamp-set-round-color" name="round_timer_prerest_color">
                         </div>
                         <div>
                             <p>Couleur du repos</p>
-                            <input type="color" class="display-block" name="round_timer_rest_color">
+                            <input type="color" class="display-block lamp-set-round-color" name="round_timer_rest_color">
                         </div>
                     </div>
                 </div>
@@ -338,7 +390,7 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
                 Menu principal
             </button>
 
-            <button class="primary mt-lg" onclick="setRoundTimerConfiguration()">
+            <button class="primary mt-lg" onclick="setRoundTimerConfiguration(this)">
                 Sauvegarder
             </button>
             
@@ -383,12 +435,21 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
                                     onchange="updateLampsColors()"
                                 >
                             </div>
-                            <button
-                                class="primary mt-md display-block center"
-                                onclick="setLampColor({lamp_0_color:'#000000',lamp_1_color:'#000000',lamp_2_color:'#000000'})"
-                            >
-                                Eteindre tous
-                            </button>
+
+                            
+                                <button
+                                    class="primary mt-md center"
+                                    onclick="setLampColor({lamp_0_color:'#000000',lamp_1_color:'#000000',lamp_2_color:'#000000'})"
+                                >
+                                    Eteindre tous
+                                </button>
+
+                                <button
+                                    class="accent mt-md center save-preset-button hidden"
+                                    onclick="saveCurrentPreset(this)"
+                                >
+                                    Sauvegarder le preset
+                                </button>
                         </div>
                     </div>
                 </div>
@@ -410,17 +471,15 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
 
         </div>
 
-
         <template id="template-color-preset">
             <div class="col col-2_4">
-                <div class="preset-icon row center">
-                    <div class="display-flex col-4 height-100" style="background-color: #FF0000;" ></div>
-                    <div class="display-flex col-4 height-100" style="background-color: #0000FF;"></div>
-                    <div class="display-flex col-4 height-100" style="background-color: #00FF00;"></div>
+                <div class="preset-icon row center lamp-preset-index-{{ index }}" onclick="displayPresetColors('{{ color_0 }}', '{{ color_1 }}', '{{ color_2 }}', '{{ index }}')">
+                    <div class="display-flex col-4 height-100 color_0"></div>
+                    <div class="display-flex col-4 height-100 color_1"></div>
+                    <div class="display-flex col-4 height-100 color_2"></div>
                 </div>                            
             </div>
         </template>
-
 
     </body>
 </html>

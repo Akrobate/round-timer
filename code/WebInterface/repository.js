@@ -67,6 +67,63 @@ async function saveRoundTimerConfigurationRepository(input) {
             }
         )
     } catch (error) {
-        console.log('setLampColorRepository - Error:', error)
+        console.log('saveRoundTimerConfigurationRepository - Error:', error)
+    }
+}
+
+
+async function saveSaveLampPresetRepository(input) {
+    try {
+        const form_data = new FormData()
+        Object.keys(input).forEach((key) => {
+            form_data.append(key, input[key])
+        })
+        await fetch('/api/lamps-presets',
+            {
+                body: form_data,
+                method: 'POST',
+            }
+        )
+    } catch (error) {
+        console.log('saveSaveLampPresetRepository - Error:', error)
+    }
+}
+
+
+async function deleteStaCredentialsFileRepository() {
+    try {
+        await fetch('/api/remove-sta-credentials-file',
+            {
+                method: 'DELETE',
+            }
+        )
+    } catch (error) {
+        console.log('deleteStaCredentialsFileRepository - Error:', error)
+    }
+}
+
+
+async function deleteConfigurationsFileRepository() {
+    try {
+        await fetch('/api/remove-configurations-file',
+            {
+                method: 'DELETE',
+            }
+        )
+    } catch (error) {
+        console.log('deleteConfigurationsFileRepository - Error:', error)
+    }
+}
+
+
+async function deleteLampsPresetsFileRepository() {
+    try {
+        await fetch('/api/remove-lamps-presets-file',
+            {
+                method: 'DELETE',
+            }
+        )
+    } catch (error) {
+        console.log('deleteLampsPresetsFileRepository - Error:', error)
     }
 }

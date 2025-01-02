@@ -83,6 +83,11 @@ void RoundTimerServer::init() {
             object["sta_is_connected"] = this->business_state->sta_is_connected;
             object["sta_is_configured"] = this->business_state->sta_is_configured;
 
+            // Files
+            object["sta_credentials_file_exists"] = this->business_state->sta_credentials_file_exists;
+            object["configurations_file_exists"] = this->business_state->configurations_file_exists;
+            object["lamps_presets_file_exists"] = this->business_state->lamps_presets_file_exists;
+
             // Beeper
             object["round_timer_mute"] = this->business_state->round_timer_mute;
 
@@ -165,7 +170,7 @@ void RoundTimerServer::init() {
 
             this->business_state->sta_ssid = sta_ssid;
             this->business_state->sta_password = sta_password;
-            this->business_state->staSaveCredentials();
+            this->business_state->saveStaCredentials();
             request->send(200, "application/json", "{\"status\": \"ok\"}");
         }
     );
@@ -279,22 +284,6 @@ void RoundTimerServer::init() {
         }
     );
 
-
-    // round_timer_mute
-    // round_timer_mode
-    // round_timer_sequential_mode_order
-
-    // round_timer_round_color
-    // round_timer_rest_color
-    // round_timer_prerest_color
-
-    // round_timer_round_long_duration
-    // round_timer_round_short_duration
-    // round_timer_rest_long_duration
-    // round_timer_rest_short_duration
-    // round_timer_prerest_duration
-    // round_timer_prestart_duration
-
     this->server->on(
         "/api/round-timer-configurations",
         HTTP_POST,
@@ -351,6 +340,55 @@ void RoundTimerServer::init() {
             }
 
             request->send(200, "application/json", "{\"status\": \"ok\"}");
+        }
+    );
+
+
+    this->server->on(
+        "/api/remove-sta-credentials-file",
+        HTTP_DELETE,
+        [&](AsyncWebServerRequest * request) {
+            Serial.println("DELETE /api/remove-sta-credentials-file");
+            DynamicJsonDocument doc(256);
+            JsonObject object = doc.to<JsonObject>();
+            object["status"] = "ok";
+            object["result"] = this->business_state->removeStaCredentialsFile();
+            object["file_existed"] = this->business_state->sta_credentials_file_exists;
+            String response;
+            serializeJson(doc, response);
+            request->send(200, "application/json", response);
+        }
+    );
+
+    this->server->on(
+        "/api/remove-configurations-file",
+        HTTP_DELETE,
+        [&](AsyncWebServerRequest * request) {
+            Serial.println("DELETE /api/remove-configurations-file");
+            DynamicJsonDocument doc(256);
+            JsonObject object = doc.to<JsonObject>();
+            object["status"] = "ok";
+            object["result"] = this->business_state->removeConfigurationsFile();
+            object["file_existed"] = this->business_state->configurations_file_exists;
+            String response;
+            serializeJson(doc, response);
+            request->send(200, "application/json", response);
+        }
+    );
+
+    this->server->on(
+        "/api/remove-lamps-presets-file",
+        HTTP_DELETE,
+        [&](AsyncWebServerRequest * request) {
+            Serial.println("DELETE /api/remove-lamps-presets-file");
+            DynamicJsonDocument doc(256);
+            JsonObject object = doc.to<JsonObject>();
+            object["status"] = "ok";
+            object["result"] = this->business_state->removeLampsPresetsFile();
+            object["file_existed"] = this->business_state->lamps_presets_file_exists;
+            String response;
+            serializeJson(doc, response);
+            request->send(200, "application/json", response);
         }
     );
 
