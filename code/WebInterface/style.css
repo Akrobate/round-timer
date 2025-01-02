@@ -338,5 +338,11 @@ input.error {
     height: 50px;
     border-radius: 10px;
     overflow: hidden;
+    cursor: pointer;
 }
 
+
+input.lamp-set-round-color {
+    width: 100px;
+    height: 50px;
+}

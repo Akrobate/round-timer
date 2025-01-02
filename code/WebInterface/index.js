@@ -297,6 +297,14 @@ async function pageRoundTimerConfigurationsMounted() {
     business_state = await getBusinessStateRepository()
     const _el = $('#page-round-timer-configurations')
 
+    $all('input[name=round_timer_mute]', _el).forEach((radio) => {
+        if (business_state.round_timer_mute) {
+            radio.checked = true;
+        } else {
+            radio.checked = false;
+        }
+    });
+
     $all('input[name=round_timer_mode]', _el).forEach((radio) => {
         if (radio.value == business_state.round_timer_mode) {
             radio.checked = true;
@@ -325,6 +333,8 @@ async function pageRoundTimerConfigurationsMounted() {
 async function setRoundTimerConfiguration() {
     const _el = $('#page-round-timer-configurations')
     const data = {
+
+        round_timer_mute: $('input[name=round_timer_mute]:checked', _el) ? true : false,
 
         round_timer_mode: $('input[name=round_timer_mode]:checked', _el)?.value,
         round_timer_sequential_mode_order: $('input[name=round_timer_sequential_mode_order]:checked', _el)?.value,
