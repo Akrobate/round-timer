@@ -33,7 +33,7 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
                     </div>
                 </div>
 
-                <div class="col col-4 col-sm-12">
+                <div class="col col-4 col-sm-12 mb-lg-mobile">
                     <div class="card height-100 elevation block-info-secondary">
                         <h2>RoundTimer</h2>
                         <p>Stream</p>
@@ -68,7 +68,7 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
         
             <div class="row">
 
-                <div class="col col-6 col-sm-12">
+                <div class="col col-6 col-sm-12 mb-md-mobile">
                     <div class="card height-100 elevation block-configuraion-info">
                         <h2>Informations système</h2>
                         <p>Réseau WiFi: <strong class="value_sta_ssid">non connecté</strong></p>
@@ -78,7 +78,7 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
                     </div>
                 </div>
 
-                <div class="col col-6 col-sm-12 mb-lg-mobile">
+                <div class="col col-6 col-sm-12">
                     <div class="card height-100 elevation bloc-wifi-credentials">
                         <h2>Connection WiFi</h2>
                         <h4 class="mb-md">
@@ -93,7 +93,6 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
                         </button>
                     </div>
                 </div>
-
             </div>
 
             <div class="row mt-md">
@@ -108,7 +107,6 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
                 </div>
             </div>
 
-
             <div class="row mt-md">
                 <div class="col col-12 col-sm-12">
                     <div class="card height-100 elevation block-saved-files">
@@ -119,7 +117,7 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
                         <ul class="list mt-lg hidden">
                             <li class="hidden list-item-sta-credentials">
                                 <div class="content">
-                                    <div class="title">Configuration des login mot de passe wifi</div>
+                                    <div class="title">Configuration du réseau wifi</div>
                                 </div>
                                 <div class="actions">
                                     <button class="accent" onclick="deleteStaCredentialsFile(this)">
@@ -192,7 +190,7 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
             </div>
         
             <div class="row">
-                <div class="col col-6 col-sm-12">
+                <div class="col col-6 col-sm-12 mb-md-mobile">
                     <div class="card height-100 elevation block-round-timer-lamp-preview">
                         <h2>Etat des lampes</h2>
                         <div class="row mt-lg">
@@ -209,7 +207,7 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
                     </div>
                 </div>
 
-                <div class="col col-6 col-sm-12 mb-lg-mobile">
+                <div class="col col-6 col-sm-12">
                     <div class="card height-100 elevation block-round-timer-controls">
                         <h2>Contrôles</h2>
 
@@ -390,7 +388,7 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
                 Menu principal
             </button>
 
-            <button class="primary mt-lg" onclick="setRoundTimerConfiguration(this)">
+            <button class="primary mt-lg" onclick="saveRoundTimerConfiguration(this)">
                 Sauvegarder
             </button>
             
@@ -407,7 +405,7 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
             </div>
         
             <div class="row">
-                <div class="col col-6 col-sm-12">
+                <div class="col col-6 col-sm-12 mb-md-mobile">
                     <div class="card height-100 elevation block-lamp-controls">
                         <h2>Etat des lampes</h2>
                         <div class="row mt-lg">
@@ -454,7 +452,7 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
                     </div>
                 </div>
 
-                <div class="col col-6 col-sm-12 mb-lg-mobile">
+                <div class="col col-6 col-sm-12">
                     <div class="card height-100 elevation block-lamp-presets">
                         <h2>Raccourcis couleurs</h2>
                         

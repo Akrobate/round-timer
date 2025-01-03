@@ -397,5 +397,48 @@ void RoundTimerServer::init() {
         }
     );
 
+/*
+    this->server->on(
+        "/api/firmware",
+        HTTP_POST,
+        [](AsyncWebServerRequest * request) {
+            
+            Serial.println("POST /api/firmware");
+            if (Update.hasError()) {
+                request->send(500, "text/plain", "Erreur pendant la mise à jour");
+            } else {
+                request->send(200, "text/plain", "Mise à jour réussie. Redémarrage...");
+                ESP.restart();
+            }
+        },
+
+                            // String filename, size_t index, uint8_t *data, size_t len, bool final)
+        [](AsyncWebServerRequest * request, uint8_t * data, size_t len, size_t index, size_t total) {
+            if (!index) {
+                Serial.printf("Mise à jour commencée : %u bytes\n", total);
+                if (!Update.begin(total)) {
+                    Update.printError(Serial);
+                }
+            }
+
+            if (Update.write(data, len) != len) {
+                Update.printError(Serial);
+            }
+
+            if (index + len == total) {
+                if (!Update.end(true)) { // Terminer la mise à jour
+                    Update.printError(Serial);
+                } else {
+                    Serial.println("Mise à jour terminée !");
+                }
+            }
+        }
+    );
+
+
+
+*/
+
+
 }
 

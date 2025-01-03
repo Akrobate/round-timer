@@ -8,7 +8,7 @@ const SERVER_LAG_SHORT = 500;
 const repository_business_state = {
     device_mode: 1,
     ap_ssid: "RoundTimerAccessPoint",
-    sta_ssid: "LiveboxLA",
+    sta_ssid: "LiveboxLA2",
     sta_password: "",
     sta_ip: "192.168.1.25",
     sta_is_connected: true,

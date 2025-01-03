@@ -74,7 +74,7 @@ void BusinessState::saveConfigurations() {
         return;
     }
 
-    DynamicJsonDocument doc(512);
+    DynamicJsonDocument doc(1024);
     JsonObject object = doc.to<JsonObject>();
 
     object["round_timer_mute"] = this->round_timer_mute;
@@ -105,7 +105,7 @@ void BusinessState::loadConfigurations() {
         return;
     }
 
-    DynamicJsonDocument doc(512);
+    DynamicJsonDocument doc(1024);
     DeserializationError error = deserializeJson(doc, file);
     if (error) {
         Serial.println("Failed to parse CONFIGURATIONS_FILE file");

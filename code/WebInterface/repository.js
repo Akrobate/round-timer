@@ -1,8 +1,29 @@
 
-/**
- * test method
- * @returns {Promise<Array>}
- */
+function prepareFormData(input) {
+    const form_data = new FormData()
+    Object.keys(input).forEach((key) => {
+        form_data.append(key, input[key])
+    })
+    return form_data
+}
+
+
+async function saveStaCredentialsRepository(input) {
+    try {
+        const result = await fetch('/api/sta-credentials',
+            {
+                body: prepareFormData(input),
+                method: 'POST',
+            }
+        )
+        return result.json()
+    } catch (error) {
+        console.log('saveStaCredentialsRepository - Error:', error)
+        return {}
+    }
+}
+
+
 async function getBusinessStateRepository() {
     try {
         const result = await fetch('/api/business-state',
@@ -13,20 +34,16 @@ async function getBusinessStateRepository() {
         return result.json()
     } catch (error) {
         console.log('serverGet - Error:', error)
-        return []
+        return {}
     }
 }
 
 
 async function setControlsRepository(input) {
     try {
-        const form_data = new FormData()
-        Object.keys(input).forEach((key) => {
-            form_data.append(key, input[key])
-        })
         await fetch('/api/controls',
             {
-                body: form_data,
+                body: prepareFormData(input),
                 method: 'POST',
             }
         )
@@ -38,13 +55,9 @@ async function setControlsRepository(input) {
 
 async function setLampColorRepository(input) {
     try {
-        const form_data = new FormData()
-        Object.keys(input).forEach((key) => {
-            form_data.append(key, input[key])
-        })
         await fetch('/api/lamps',
             {
-                body: form_data,
+                body: prepareFormData(input),
                 method: 'POST',
             }
         )
@@ -56,13 +69,9 @@ async function setLampColorRepository(input) {
 
 async function saveRoundTimerConfigurationRepository(input) {
     try {
-        const form_data = new FormData()
-        Object.keys(input).forEach((key) => {
-            form_data.append(key, input[key])
-        })
         await fetch('/api/round-timer-configurations',
             {
-                body: form_data,
+                body: prepareFormData(input),
                 method: 'POST',
             }
         )
@@ -74,13 +83,9 @@ async function saveRoundTimerConfigurationRepository(input) {
 
 async function saveSaveLampPresetRepository(input) {
     try {
-        const form_data = new FormData()
-        Object.keys(input).forEach((key) => {
-            form_data.append(key, input[key])
-        })
         await fetch('/api/lamps-presets',
             {
-                body: form_data,
+                body: prepareFormData(input),
                 method: 'POST',
             }
         )

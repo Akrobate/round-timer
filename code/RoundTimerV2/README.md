@@ -2,9 +2,10 @@
 # Todo
 
 - [ ] Upload firmware
-- [ ] Configuration save in file
-- [ ] Reset saved files (factory mode)
 - [ ] Round timer Configuration webinterface set to defaults
+- [x] Save Wifi Configuration
+- [x] Configuration save in file
+- [x] Reset saved files (factory mode)
 - [x] Presets Lamp
 - [x] Webinterface Configuration Save loading button state
 - [x] Disable beeper
@@ -17,4 +18,5 @@
 
 # Detected bugs
 
-- [ ] When preset is selected and round timer launched preset remains selected
+- [x] When preset is selected and round timer launched preset remains selected
+- [x] Prestart time doesn't saves when restarts

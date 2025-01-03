@@ -23,15 +23,6 @@ function buttonSetLoadingState(btn, state) {
 const addCls = (_el, _cls) => _el.classList.add(_cls)
 const rmCls = (_el, _cls) => _el.classList.remove(_cls)
 
-function isValidUrl(string) {
-    try {
-      new URL(string)
-      return true
-    } catch (_) {
-      return false
-    }
-}
-
 function anchorLink(anchor) {
     window.location.hash = anchor
 }
@@ -40,35 +31,25 @@ function formatTime(date_time_string) {
     const date = new Date(date_time_string)
     const hours = date.getHours().toString().padStart(2, '0')
     const minutes = date.getMinutes().toString().padStart(2, '0')
-    return `${hours}:${minutes}`;
+    return `${hours}:${minutes}`
 }
 
-
-/**
- * business_state
- */
-
+// BusinessState
 let business_state = {
     ap_ssid: '',
-    sta_ssid: 'Livebox-data',
+    sta_ssid: '',
     sta_password: '',
-    sta_ip: '192.168.1.4-data',
+    sta_ip: '',
     sta_is_connected: false,
     sta_is_configured: false,
-    firmware_version: '2.0.0-data',
-
+    firmware_version: '',
     round_timer_mute: false,
 
     sta_credentials_file_exists: false,
     configurations_file_exists: false,
     lamps_presets_file_exists: false,
-
-    // ROUND_TIMER_SEQUENTIAL_MODE = 1
-    // ROUND_TIMER_ALL_MODE = 2
-    round_timer_mode: 1, 
-
-    // ASC 0, DESC 1
-    round_timer_sequential_mode_order: 0,
+    round_timer_mode: 1, // SEQUENTIAL_MODE = 1, ALL_MODE = 2
+    round_timer_sequential_mode_order: 0, // ASC 0, DESC 1
 
     round_timer_round_color: '#00FF00',
     round_timer_rest_color: '#FF0000',
@@ -92,12 +73,9 @@ let business_state = {
     lamp_preset_list: [],
 }
 
+let business_state_interval_updating = false
 
-let business_state_interval_handler = null
-
-/**
- * INIT
- */
+// INIT
 document.addEventListener('DOMContentLoaded', async () => {
     const anchor = window.location.hash.substring(1) 
     if (anchor == '') {
@@ -106,10 +84,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         rmCls($(`#page-${anchor}`), 'hidden')
         const init_function = snakeToCamel(`page-${anchor}-mounted`)
         if (typeof window[init_function] === 'function') {
-            console.log('Init function:', init_function)
-            window[init_function]();
-        } else {
-            console.log('-----Init function:', init_function)
+            window[init_function]()
         }
     }
     window.addEventListener("hashchange", (event) => {
@@ -119,30 +94,28 @@ document.addEventListener('DOMContentLoaded', async () => {
             addCls($(`#page-${oldHash}`), 'hidden')
             const unmounted_function = snakeToCamel(`page-${oldHash}-unmounted`)
             if (typeof window[unmounted_function] === 'function') {
-                console.log('unmounted_function:', unmounted_function)
-                window[unmounted_function]();
-            } else {
-                console.log('unmounted_function:', unmounted_function)
+                window[unmounted_function]()
             }
         }
         rmCls($(`#page-${newHash}`), 'hidden')
 
         const init_function = snakeToCamel(`page-${newHash}-mounted`)
         if (typeof window[init_function] === 'function') {
-            console.log('init_function:', init_function)
-            window[init_function]();
-        } else {
-            console.log('init_function:', init_function)
+            window[init_function]()
         }
     })
-    business_state = await getBusinessStateRepository()
-    updateRender();
-    initWifiCredentialsBlock();
+    await updateBusinesseState()
+    updateRender()
+    initWifiCredentialsBlock()
 
-    // init update business state timer
-    business_state_interval_handler = setInterval(async () => {
-        business_state = await getBusinessStateRepository()
+    setInterval(async () => {
+        if (business_state_interval_updating) {
+            return
+        }
+        business_state_interval_updating = true
+        await updateBusinesseState()
         updateRender()
+        business_state_interval_updating = false
     }, 1000)
 })
 
@@ -157,6 +130,18 @@ function snakeToCamel(snake_string) {
 }
 
 
+async function updateBusinesseState() {
+    const _business_state = await getBusinessStateRepository()
+    if (_business_state.round_timer_state_is_running != business_state.round_timer_state_is_running) {
+        selected_preset_index = null
+        setLampInputColors('#000000', '#000000', '#000000')
+    }
+    business_state = _business_state
+    updateBlockSavedFiles()
+}
+
+
+
 function updateRender() {
     // configuration
     const _el_configuraion_info = $('.block-configuraion-info')
@@ -166,27 +151,19 @@ function updateRender() {
 
     // round timer lamps
     const _el_round_timer_lamp_preview = $('.block-round-timer-lamp-preview')
-    if (['', '#000000'].includes(business_state.lamp_0_color)) {
-        $('.lamp-0', _el_round_timer_lamp_preview).style.backgroundColor = '#dce1e2'
-    } else {
-        $('.lamp-0', _el_round_timer_lamp_preview).style.backgroundColor = business_state.lamp_0_color
-    }
-    if (['', '#000000'].includes(business_state.lamp_1_color)) {
-        $('.lamp-1', _el_round_timer_lamp_preview).style.backgroundColor = '#dce1e2'
-    } else {
-        $('.lamp-1', _el_round_timer_lamp_preview).style.backgroundColor = business_state.lamp_1_color
-    }
-    if (['', '#000000'].includes(business_state.lamp_2_color)) {
-        $('.lamp-2', _el_round_timer_lamp_preview).style.backgroundColor = '#dce1e2'
-    } else {
-        $('.lamp-2', _el_round_timer_lamp_preview).style.backgroundColor = business_state.lamp_2_color
+    for (let i = 0; i < 3; i++) {
+        if (['', '#000000'].includes(business_state[`lamp_${i}_color`])) {
+            $(`.lamp-${i}`, _el_round_timer_lamp_preview).style.backgroundColor = '#dce1e2'
+        } else {
+            $(`.lamp-${i}`, _el_round_timer_lamp_preview).style.backgroundColor = business_state[`lamp_${i}_color`]
+        }
     }
 
     // round timer controls
-    const _el_round_timer_controls = $('.block-round-timer-controls')
-    updateToggleButtonsControls(business_state.round_timer_state_is_running, 'round_timer_state_is_running', _el_round_timer_controls)
-    updateToggleButtonsControls(business_state.round_timer_state_is_round_long_duration, 'round_timer_state_is_round_long_duration', _el_round_timer_controls)
-    updateToggleButtonsControls(business_state.round_timer_state_is_rest_long_duration, 'round_timer_state_is_rest_long_duration', _el_round_timer_controls)
+    const _el_round_timer_controls = $('.block-round-timer-controls');
+    ['round_timer_state_is_running', 'round_timer_state_is_round_long_duration', 'round_timer_state_is_rest_long_duration'].forEach((key) => {
+        updateToggleButtonsControls(business_state[key], key, _el_round_timer_controls)
+    })
 
     // saved files
     updateBlockSavedFiles()
@@ -194,24 +171,24 @@ function updateRender() {
 
 
 function updateBlockSavedFiles() {
-    const _el_block_saved_files = $('.block-saved-files')
-    updateSavedFileLine(business_state.sta_credentials_file_exists, 'list-item-sta-credentials', _el_block_saved_files)
-    updateSavedFileLine(business_state.configurations_file_exists, 'list-item-configurations', _el_block_saved_files)
-    updateSavedFileLine(business_state.lamps_presets_file_exists, 'list-item-lamps-presets', _el_block_saved_files)
+    const _el = $('.block-saved-files')
+    const {
+        sta_credentials_file_exists: file_cred,
+        configurations_file_exists: file_conf,
+        lamps_presets_file_exists: file_lamp,
+    } = business_state
+    updateSavedFileLine(file_cred, 'list-item-sta-credentials', _el)
+    updateSavedFileLine(file_conf, 'list-item-configurations', _el)
+    updateSavedFileLine(file_lamp, 'list-item-lamps-presets', _el)
 
-    if (
-        !business_state.sta_credentials_file_exists
-        && !business_state.configurations_file_exists
-        && !business_state.lamps_presets_file_exists
-    ) {
-        rmCls($('h4', _el_block_saved_files), 'hidden')
-        addCls($('ul', _el_block_saved_files), 'hidden')
+    if (!file_cred && !file_conf && !file_lamp) {
+        rmCls($('h4', _el), 'hidden')
+        addCls($('ul', _el), 'hidden')
     } else {
-        addCls($('h4', _el_block_saved_files), 'hidden')
-        rmCls($('ul', _el_block_saved_files), 'hidden')
+        addCls($('h4', _el), 'hidden')
+        rmCls($('ul', _el), 'hidden')
     }
 }
-
 
 
 // Saved files block file
@@ -229,7 +206,7 @@ function updateSavedFileLine(is_visible, li_class, parent_element) {
 async function deleteStaCredentialsFile(btn) {
     buttonSetLoadingState(btn, true)
     await deleteStaCredentialsFileRepository()
-    business_state = await getBusinessStateRepository()
+    await updateBusinesseState()
     updateBlockSavedFiles()
     buttonSetLoadingState(btn, false)
 }
@@ -237,7 +214,7 @@ async function deleteStaCredentialsFile(btn) {
 async function deleteConfigurationsFile(btn) {
     buttonSetLoadingState(btn, true)
     await deleteConfigurationsFileRepository()
-    business_state = await getBusinessStateRepository()
+    await updateBusinesseState()
     updateBlockSavedFiles()
     buttonSetLoadingState(btn, false)
 
@@ -246,7 +223,7 @@ async function deleteConfigurationsFile(btn) {
 async function deleteLampsPresetsFile(btn) {
     buttonSetLoadingState(btn, true)
     await deleteLampsPresetsFileRepository()
-    business_state = await getBusinessStateRepository()
+    await updateBusinesseState()
     updateBlockSavedFiles()
     buttonSetLoadingState(btn, false)
 }
@@ -270,10 +247,10 @@ function updateToggleButtonsControls(value, class_prefix, parent_element) {
 }
 
 
-// ****** Block: Wifi Credentials ******
-
+// Wifi Credentials
 function initWifiCredentialsBlock() {
     const _el_bwc = $('.bloc-wifi-credentials')
+    console.log(business_state.sta_ssid);
     if (business_state.sta_ssid) {
         $('.input-wifi-ssid', _el_bwc).value = business_state.sta_ssid
     }
@@ -283,15 +260,15 @@ function saveWifiCredentials(btn) {
     const _el = $('.bloc-wifi-credentials')
     const _name_input = $('.input-wifi-ssid', _el)
     const _password_input = $('.input-wifi-password', _el)
-    const name = _name_input.value
-    const password = _password_input.value
+    const sta_ssid = _name_input.value
+    const sta_password = _password_input.value
 
-    if (name.length == 0) {
+    if (sta_ssid.length == 0) {
         addCls(_name_input, 'error')
         return
     }
     
-    if (password.length == 0) {
+    if (sta_password.length == 0) {
         addCls(_password_input, 'error')
         return
     }
@@ -300,27 +277,23 @@ function saveWifiCredentials(btn) {
     rmCls(_password_input, 'error')
 
     buttonSetLoadingState(btn, true)
-    console.log('Saving wifi credentials...')
-    console.log('SSID:', name)
-    console.log('Password', password)
+    saveStaCredentialsRepository({ sta_ssid, sta_password })
     buttonSetLoadingState(btn, false)
 }
 
 // Controls
 async function setControls(data) {
     await setControlsRepository(data)
-    business_state = await getBusinessStateRepository()
+    await updateBusinesseState()
     updateRender()
 }
 
-
 // Lamps
-
 let selected_preset_index = null
 
 async function pageLampMounted() {
     console.log("pageLampMounted in method")
-    business_state = await getBusinessStateRepository()
+    await updateBusinesseState()
     updateLampPresets()
     updatePresetSelection()
 }
@@ -337,9 +310,9 @@ function updateLampPresets() {
     preset_list.forEach((data, index) => {
         let html = template_html
         Object.keys(data).forEach((key) => {
-            html = html.replaceAll(`{{ color_${key} }}`, data[key]);
+            html = html.replaceAll(`{{ color_${key} }}`, data[key])
         })
-        html = html.replaceAll('{{ index }}', index);
+        html = html.replaceAll('{{ index }}', index)
         const _new_el = document.createElement("div")
         _new_el.innerHTML = html
         $('.color_0', _new_el).style.backgroundColor = data[0]
@@ -347,7 +320,6 @@ function updateLampPresets() {
         $('.color_2', _new_el).style.backgroundColor = data[2]
         _list_el.appendChild(_new_el.firstElementChild)
     })
-
 }
 
 function setLampInputColors(color_0, color_1, color_2) {
@@ -379,19 +351,18 @@ function displayPresetColors(color_0, color_1, color_2, preset_index) {
 }
 
 function updatePresetSelection() {
-
-    const _el_control = $('.block-lamp-controls')
+    const _el_control_save = $('.block-lamp-controls .save-preset-button')
     if (selected_preset_index !== null) {
-        rmCls($('.save-preset-button', _el_control), 'hidden')
+        rmCls(_el_control_save, 'hidden')
     } else {
-        addCls($('.save-preset-button', _el_control), 'hidden')
+        addCls(_el_control_save, 'hidden')
     }
 
     const selected_class = 'preset-selected'
     const _el = $('.block-lamp-presets')
     $all('.preset-icon', _el).forEach((el) => {
         rmCls(el, selected_class)
-    });
+    })
     if (selected_preset_index !== null) {
         console.log(`.lamp-preset-index-${selected_preset_index}`)
         addCls($(`.lamp-preset-index-${selected_preset_index}`, _el), selected_class)
@@ -404,7 +375,7 @@ async function saveCurrentPreset(btn) {
         index: selected_preset_index,
         ...getLampInputColors(),
     })
-    business_state = await getBusinessStateRepository()
+    await updateBusinesseState()
     updateLampPresets()
     updatePresetSelection()
     buttonSetLoadingState(btn, false)
@@ -422,66 +393,67 @@ async function setLampColor(data) {
 
 // RoundTimer Configuration
 async function pageRoundTimerConfigurationsMounted() {
-    business_state = await getBusinessStateRepository()
+    await updateBusinesseState()
     const _el = $('#page-round-timer-configurations')
 
     $all('input[name=round_timer_mute]', _el).forEach((radio) => {
-        if (business_state.round_timer_mute) {
-            radio.checked = true;
-        } else {
-            radio.checked = false;
-        }
-    });
+        radio.checked = business_state.round_timer_mute
+    })
 
     $all('input[name=round_timer_mode]', _el).forEach((radio) => {
         if (radio.value == business_state.round_timer_mode) {
-            radio.checked = true;
+            radio.checked = true
         }
-    });
+    })
 
     $all('input[name=round_timer_sequential_mode_order]', _el).forEach((radio) => {
         if (radio.value == business_state.round_timer_sequential_mode_order) {
-            radio.checked = true;
+            radio.checked = true
         }
     });
 
-    $('input[name=round_timer_round_color]', _el).value = business_state.round_timer_round_color
-    $('input[name=round_timer_rest_color]', _el).value = business_state.round_timer_rest_color
-    $('input[name=round_timer_prerest_color]', _el).value = business_state.round_timer_prerest_color
-
-    $('input[name=round_timer_round_long_duration]', _el).value = business_state.round_timer_round_long_duration
-    $('input[name=round_timer_round_short_duration]', _el).value = business_state.round_timer_round_short_duration
-    $('input[name=round_timer_rest_long_duration]', _el).value = business_state.round_timer_rest_long_duration
-    $('input[name=round_timer_rest_short_duration]', _el).value = business_state.round_timer_rest_short_duration
-    $('input[name=round_timer_prerest_duration]', _el).value = business_state.round_timer_prerest_duration
-    $('input[name=round_timer_prestart_duration]', _el).value = business_state.round_timer_prestart_duration
+    [
+        'round_timer_round_color',
+        'round_timer_rest_color',
+        'round_timer_prerest_color',
+        'round_timer_round_long_duration',
+        'round_timer_round_short_duration',
+        'round_timer_rest_long_duration',
+        'round_timer_rest_short_duration',
+        'round_timer_prerest_duration',
+        'round_timer_prestart_duration'
+    ]
+        .forEach((key) => {
+            $(`input[name=${key}]`, _el).value = business_state[key]
+        })
 }
 
 
-async function setRoundTimerConfiguration(btn) {
+async function saveRoundTimerConfiguration(btn) {
     buttonSetLoadingState(btn, true)
     const _el = $('#page-round-timer-configurations')
     const data = {
-
         round_timer_mute: $('input[name=round_timer_mute]:checked', _el) ? true : false,
-
         round_timer_mode: $('input[name=round_timer_mode]:checked', _el)?.value,
         round_timer_sequential_mode_order: $('input[name=round_timer_sequential_mode_order]:checked', _el)?.value,
+    };
 
-        round_timer_round_color: $('input[name=round_timer_round_color]', _el).value,
-        round_timer_rest_color: $('input[name=round_timer_rest_color]', _el).value,
-        round_timer_prerest_color: $('input[name=round_timer_prerest_color]', _el).value,
+    [
+        'round_timer_round_color',
+        'round_timer_rest_color',
+        'round_timer_prerest_color',
+        'round_timer_round_long_duration',
+        'round_timer_round_short_duration',
+        'round_timer_rest_long_duration',
+        'round_timer_rest_short_duration',
+        'round_timer_prerest_duration',
+        'round_timer_prestart_duration'
+    ]
+        .forEach((key) => {
+            data[key] = $(`input[name=${key}]`, _el).value
+        })
 
-        round_timer_round_long_duration: $('input[name=round_timer_round_long_duration]', _el).value,
-        round_timer_round_short_duration: $('input[name=round_timer_round_short_duration]', _el).value,
-        round_timer_rest_long_duration: $('input[name=round_timer_rest_long_duration]', _el).value,
-        round_timer_rest_short_duration: $('input[name=round_timer_rest_short_duration]', _el).value,
-        round_timer_prerest_duration: $('input[name=round_timer_prerest_duration]', _el).value,
-        round_timer_prestart_duration: $('input[name=round_timer_prestart_duration]', _el).value,
-    }
     await saveRoundTimerConfigurationRepository(data)
-    console.log('Setting round timer configuration...')
-    console.log(data)
     buttonSetLoadingState(btn, false)
 }
 
