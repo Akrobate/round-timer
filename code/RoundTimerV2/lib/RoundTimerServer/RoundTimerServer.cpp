@@ -237,6 +237,8 @@ void RoundTimerServer::init() {
             this->business_state->lamp_preset_list[index][1] = lamp_1_color;
             this->business_state->lamp_preset_list[index][2] = lamp_2_color;
 
+            this->business_state->saveLampsPresets();
+
             request->send(200, "application/json", "{\"status\": \"ok\"}");
         }
     );
@@ -338,6 +340,9 @@ void RoundTimerServer::init() {
             if (request->hasParam("round_timer_prestart_duration", true)) {
                 this->business_state->round_timer_prestart_duration = request->getParam("round_timer_prestart_duration", true)->value().toInt();
             }
+            this->round_timer->stop();
+            
+            this->business_state->saveConfigurations();
 
             request->send(200, "application/json", "{\"status\": \"ok\"}");
         }
@@ -352,8 +357,8 @@ void RoundTimerServer::init() {
             DynamicJsonDocument doc(256);
             JsonObject object = doc.to<JsonObject>();
             object["status"] = "ok";
-            object["result"] = this->business_state->removeStaCredentialsFile();
             object["file_existed"] = this->business_state->sta_credentials_file_exists;
+            object["result"] = this->business_state->removeStaCredentialsFile();
             String response;
             serializeJson(doc, response);
             request->send(200, "application/json", response);
@@ -368,8 +373,8 @@ void RoundTimerServer::init() {
             DynamicJsonDocument doc(256);
             JsonObject object = doc.to<JsonObject>();
             object["status"] = "ok";
-            object["result"] = this->business_state->removeConfigurationsFile();
             object["file_existed"] = this->business_state->configurations_file_exists;
+            object["result"] = this->business_state->removeConfigurationsFile();
             String response;
             serializeJson(doc, response);
             request->send(200, "application/json", response);
@@ -384,8 +389,8 @@ void RoundTimerServer::init() {
             DynamicJsonDocument doc(256);
             JsonObject object = doc.to<JsonObject>();
             object["status"] = "ok";
-            object["result"] = this->business_state->removeLampsPresetsFile();
             object["file_existed"] = this->business_state->lamps_presets_file_exists;
+            object["result"] = this->business_state->removeLampsPresetsFile();
             String response;
             serializeJson(doc, response);
             request->send(200, "application/json", response);

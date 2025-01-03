@@ -6,16 +6,19 @@ BusinessState::BusinessState() {
 
 
 void BusinessState::init() {
+    this->initLampsPresets();
+    this->loadStaCredentials();
+    this->loadConfigurations();
+    this->loadLampsPresets();
+    this->checkFilesExists();
+}
+
+void BusinessState::initLampsPresets() {
     for (int i = 0; i < 5; i++) {
         this->lamp_preset_list[i][0] = "#000000";
         this->lamp_preset_list[i][1] = "#000000";
         this->lamp_preset_list[i][2] = "#000000";
     }
-
-    this->loadStaCredentials();
-    this->loadConfigurations();
-    this->loadLampsPresets();
-    this->checkFilesExists();
 }
 
 
@@ -34,6 +37,7 @@ void BusinessState::saveStaCredentials() {
     object["sta_password"] = this->sta_password;
     serializeJson(doc, file);
     file.close();
+    this->checkFilesExists();
 }
 
 
@@ -57,6 +61,7 @@ void BusinessState::loadStaCredentials() {
     this->sta_ssid = object["sta_ssid"].as<String>();
     this->sta_password = object["sta_password"].as<String>();
     file.close();
+    this->checkFilesExists();
 }
 
 
@@ -87,6 +92,7 @@ void BusinessState::saveConfigurations() {
 
     serializeJson(doc, file);
     file.close();
+    this->checkFilesExists();
 }
 
 
@@ -143,6 +149,7 @@ void BusinessState::saveLampsPresets() {
     }
     serializeJson(doc, file);
     file.close();
+    this->checkFilesExists();
 }
 
 
@@ -192,17 +199,24 @@ boolean BusinessState::removeFile(String filename) {
 
 
 boolean BusinessState::removeStaCredentialsFile() {
-    return this->removeFile(STA_CREDENTIALS_FILE);
+    boolean result = this->removeFile(STA_CREDENTIALS_FILE);
+    this->checkFilesExists();
+    return result;
 }
 
 
 boolean BusinessState::removeConfigurationsFile() {
-    return this->removeFile(CONFIGURATIONS_FILE);
+    boolean result = this->removeFile(CONFIGURATIONS_FILE);
+    this->checkFilesExists();
+    return result;
 }
 
 
 boolean BusinessState::removeLampsPresetsFile() {
-    return this->removeFile(LAMPS_PRESETS_FILE);
+    boolean result = this->removeFile(LAMPS_PRESETS_FILE);
+    this->checkFilesExists();
+    this->initLampsPresets();
+    return result;
 }
 
 

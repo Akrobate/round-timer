@@ -14,6 +14,7 @@ class BusinessState {
 
     private:
         boolean removeFile(String filename);
+        void initLampsPresets();
 
     public:
         static constexpr int ROUND_TIMER_SEQUENTIAL_MODE = 1;

@@ -65,7 +65,9 @@ void RoundTimer::prestartStep() {
 }
 
 void RoundTimer::roundStep() {
-    this->beeper->startBeepingOnceShort();
+    if (!this->business_state->round_timer_mute) {
+        this->beeper->startBeepingOnceShort();
+    }
     this->lampsOffWithBusinessStateUpdate();
     
     if (this->business_state->round_timer_mode == BusinessState::ROUND_TIMER_ALL_MODE) {
@@ -84,7 +86,9 @@ void RoundTimer::roundStep() {
 
 
 void RoundTimer::prerestStep() {
-    this->beeper->startBeepingSequence();
+    if (!this->business_state->round_timer_mute) {
+        this->beeper->startBeepingSequence();
+    }
     this->lampsOffWithBusinessStateUpdate();
 
     if (this->business_state->round_timer_mode == BusinessState::ROUND_TIMER_ALL_MODE) {
@@ -97,7 +101,9 @@ void RoundTimer::prerestStep() {
 
 
 void RoundTimer::restStep() {
-    this->beeper->startBeepingOnceLong();
+    if (!this->business_state->round_timer_mute) {
+        this->beeper->startBeepingOnceLong();
+    }
     this->lampsOffWithBusinessStateUpdate();
 
     if (this->business_state->round_timer_mode == BusinessState::ROUND_TIMER_ALL_MODE) {
