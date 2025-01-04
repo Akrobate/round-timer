@@ -29,7 +29,10 @@ class BusinessState {
 
         // Device
         unsigned int device_mode = DEVICE_ROUND_TIMER_MODE;
-        
+        boolean device_needs_restart = false;
+        unsigned int disconnect_access_point_delay = 60 * 15;
+
+
         // Network
         String ap_ssid = "RoundTimerAccessPoint";
         String sta_ssid = "";
@@ -73,7 +76,7 @@ class BusinessState {
 
         String lamp_preset_list[5][3];
 
-        String firmware_version = "2.0.4";
+        String firmware_version = "2.0.12";
 
         BusinessState();
         void init();

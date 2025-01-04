@@ -75,6 +75,7 @@ let business_state = {
 
 let business_state_interval_updating = false
 let disable_business_state_interval_updating = false
+
 // INIT
 document.addEventListener('DOMContentLoaded', async () => {
     const anchor = window.location.hash.substring(1) 
@@ -136,10 +137,10 @@ async function updateBusinesseState() {
         selected_preset_index = null
         setLampInputColors('#000000', '#000000', '#000000')
     }
+
     business_state = _business_state
     updateBlockSavedFiles()
 }
-
 
 
 function updateRender() {
@@ -283,19 +284,60 @@ function saveWifiCredentials(btn) {
 
 
 async function updateFirmware(btn) {
-    const _el_file_input = $('input[name=firmware]')
+    const _el = $('.block-firmware')
+    const _el_error = $('.error-message', _el)
+
+    const _el_file_input = $('input[name=firmware]', _el)
     if (!_el_file_input.files.length) {
-      alert("Veuillez sélectionner un fichier.");
-      return;
+        return;
     }
     disable_business_state_interval_updating = true
     buttonSetLoadingState(btn, true)
     const file = _el_file_input.files[0]
     await firmwareUpdateRepository(file)
     buttonSetLoadingState(btn, false)
+    disable_business_state_interval_updating = false
+    rmCls(_el_error, 'hidden')
+    _el_error.textContent = 'Mise a jour réussie. La page va être rechargée dans 5 secondes'
+    setTimeout(() => {
+        window.location.href = window.location.origin + window.location.pathname + '?reload=' + new Date().getTime();
+    }, 5000)
 }
 
 
+function selectedFirmware() {
+    const _el = $('.block-firmware')
+    const _el_file_input = $('input[name=firmware]', _el)
+    const _el_error = $('.error-message', _el)
+    const _el_write_firmware = $('.write-firmware', _el)
+
+    if (_el_file_input.files.length > 1) {
+        _el_error.textContent = 'Vous ne pouvez sélectionner qu\'un seul fichier'
+        rmCls(_el_error, 'hidden')
+        addCls(_el_write_firmware, 'hidden')
+    } else if (_el_file_input.files.length == 0) {
+        _el_error.textContent = 'Aucun fichier selectionné'
+        rmCls(_el_error, 'hidden')
+        addCls(_el_write_firmware, 'hidden')
+    } else if (_el_file_input.files.length == 1) {
+        const file = _el_file_input.files[0]
+
+        const file_name = file.name
+        const file_extension = file_name.split('.').pop().toLowerCase()
+
+        if (file_extension !== 'bin') {
+            _el_error.textContent = 'Le fichier doit être un fichier binaire (.bin)'
+            rmCls(_el_error, 'hidden')
+            addCls(_el_write_firmware, 'hidden')
+            return
+        }
+
+
+        _el_error.textContent = `Le fichier ${file_name} va être écrit sur le module`
+        rmCls(_el_error, 'hidden')
+        rmCls(_el_write_firmware, 'hidden')
+    }
+}   
 
 
 // Controls

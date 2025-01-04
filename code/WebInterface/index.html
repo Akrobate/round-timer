@@ -149,16 +149,18 @@
 
             <div class="row mt-md">
                 <div class="col col-12 col-sm-12">
-                    <div class="card height-100 elevation block-info-secondary">
+                    <div class="card height-100 elevation block-firmware">
                         <h2>Mise a jour firmware</h2>
-                            <div class="file-upload">
-                                Chargez le fichier firmware
-                                <input type='file' name='firmware'>
-                            </div>
-                            <!--input type='submit' class="accent" value='Ecrire le firmware selectionné' -->
-                            <button class="accent" onclick="updateFirmware(this)">
+                        <div class="file-upload">
+                            Chargez le fichier firmware
+                            <input type='file' name='firmware' onchange="selectedFirmware()">
+                        </div>
+                        <h4 class="error-message mt-lg hidden"></h4>
+                        <div>
+                            <button class="write-firmware accent mt-lg hidden" onclick="updateFirmware(this)">
                                 Ecrire le firmware selectionné
                             </button>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -9,6 +9,7 @@ void WifiService::injectBusinessState(BusinessState * business_state) {
 
 
 void WifiService::init() {
+    this->time = millis();
     WiFi.softAP("RoundTimerAccessPoint");
     this->connect();
 }
@@ -32,5 +33,14 @@ void WifiService::update() {
         Serial.print("Connected, IP address: ");
         Serial.println(WiFi.localIP());
     }
+
+    if (this->business_state->disconnect_access_point_delay > 0) {
+        if (millis() - this->time > this->business_state->disconnect_access_point_delay * 1000) {
+            this->disconnectAccessPoint();
+        }
+    }
 }
 
+void WifiService::disconnectAccessPoint() {
+    WiFi.softAPdisconnect(true);
+}

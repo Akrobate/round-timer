@@ -62,4 +62,9 @@ void loop() {
     wifi_service->update();
     round_timer->update();
     facade_buttons->update();
+
+    if (business_state->device_needs_restart) {
+        delay(3000);
+        ESP.restart();
+    }
 }

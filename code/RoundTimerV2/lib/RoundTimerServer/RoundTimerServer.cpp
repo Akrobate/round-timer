@@ -69,14 +69,13 @@ void RoundTimerServer::init() {
         HTTP_GET,
         [&](AsyncWebServerRequest * request) {
 
-            Serial.println("GET /api/business-state");
-
             String response;
             DynamicJsonDocument doc(1024);
             JsonObject object = doc.to<JsonObject>();
 
             // Device
             object["device_mode"] = this->business_state->device_mode;
+            object["disconnect_access_point_delay"] = this->business_state->disconnect_access_point_delay;
 
             // Network
             object["ap_ssid"] = this->business_state->ap_ssid;
@@ -343,6 +342,11 @@ void RoundTimerServer::init() {
             if (request->hasParam("round_timer_prestart_duration", true)) {
                 this->business_state->round_timer_prestart_duration = request->getParam("round_timer_prestart_duration", true)->value().toInt();
             }
+
+            if (request->hasParam("disconnect_access_point_delay", true)) {
+                this->business_state->disconnect_access_point_delay = request->getParam("disconnect_access_point_delay", true)->value().toInt();
+            }
+            
             this->round_timer->stop();
             
             this->business_state->saveConfigurations();
@@ -400,93 +404,41 @@ void RoundTimerServer::init() {
         }
     );
 
-/*
-    this->server->on(
-        "/api/firmware",
-        HTTP_POST,
-        [](AsyncWebServerRequest * request) {
-            
-            Serial.println("POST /api/firmware");
-            Serial.printf("Espace disponible pour l'OTA : %u octets\n", ESP.getFreeSketchSpace());
-
-            if (Update.hasError()) {
-                request->send(500, "text/plain", "Erreur pendant la mise à jour");
-            } else {
-                request->send(200, "text/plain", "Mise à jour réussie. Redémarrage...");
-                ESP.restart();
-            }
-        },
-        [](AsyncWebServerRequest* request, String filename, size_t index, uint8_t* data, size_t len, bool final) {
-
-            Serial.println("In upload handler");
-            if (index == 0) {
-                Serial.printf("Mise à jour commencée : %s\n", filename.c_str());
-                if (!Update.begin((ESP.getFreeSketchSpace() - 0x1000) & 0xFFFFF000)) {
-                    Update.printError(Serial);
-                }
-            }
-
-            if (Update.write(data, len) != len) {
-                Update.printError(Serial);
-            }
-
-            if (final) {
-                if (!Update.end(true)) {
-                    Update.printError(Serial);
-                } else {
-                    Serial.println("Mise à jour terminée !");
-                }
-            }
-        }
-    );
-
-    */
-
-
 
    this->server->on(
     "/api/firmware",
     HTTP_POST,
-    [](AsyncWebServerRequest * request) {
+    [&](AsyncWebServerRequest * request) {
         Serial.println("POST /api/firmware");
         if (Update.hasError()) {
-            Serial.println("--Erreur pendant la mise à jour");
-            request->send(500, "text/plain", "Erreur pendant la mise à jour");
+            Serial.println("Erreur pendant la mise à jour");
+            request->send(500, "application/json", "{\"status\": \"error\", \"message\": \"Erreur pendant la mise à jour\"}");
         } else {
-            Serial.println("--Mise à jour réussie. Redémarrage...");
-            request->send(200, "text/plain", "Mise à jour réussie. Redémarrage...");
-            ESP.restart();
+            Serial.println("Mise à jour réussie. Redémarrage...");
+            request->send(200, "application/json", "{\"status\": \"ok\", \"message\": \"Mise à jour réussie. Redémarrage\"}");
+            Serial.println("Request sent... Waiting 3 seconds before restart...");
+            // delay(3000);
+            Serial.println("Restarting...");
+            this->business_state->device_needs_restart = true;
+            // ESP.restart();
         }
-
     },
     [](AsyncWebServerRequest* request, String filename, size_t index, uint8_t* data, size_t len, bool final) {
         if (index == 0) {
-            Serial.printf("Mise à jour commencée : %s\n", filename.c_str());
-            Serial.printf("Espace disponible pour l'OTA : %u octets\n", ESP.getFreeSketchSpace());
-            
             if (!Update.begin((ESP.getFreeSketchSpace() - 0x1000) & 0xFFFFF000)) {
-                Serial.println("Échec de l'initialisation de l'OTA");
-                Update.printError(Serial);
-                request->send(500, "text/plain", "Erreur : Espace insuffisant");
+                request->send(500, "application/json", "{\"status\": \"error\", \"message\": \"Espace insuffisant\"}");
                 return;
             }
         }
 
-        // Écriture des données
         if (len > 0) {
-            Serial.printf("Écriture de %u octets...\n", len);
-            if (Update.write(data, len) != len) {
-                Serial.println("Échec de l'écriture !");
-                Update.printError(Serial);
-            }
+            Serial.print(".");
+            Update.write(data, len);
         }
 
-        // Finalisation
         if (final) {
-            Serial.println("Finalisation de la mise à jour...");
             if (!Update.end(true)) {
                 Serial.println("Échec de la finalisation !");
-                Update.printError(Serial);
             } else {
                 Serial.println("Mise à jour terminée avec succès !");
             }

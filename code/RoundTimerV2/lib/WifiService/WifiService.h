@@ -9,6 +9,8 @@
 class WifiService {
     private:
         BusinessState * business_state;
+        unsigned long time = 0;
+
     public:
 
         
@@ -18,6 +20,8 @@ class WifiService {
         void init();
         void connect();
         void update();
+
+        void disconnectAccessPoint();
 
 
 };
