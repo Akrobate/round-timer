@@ -77,7 +77,7 @@ let business_state = {
 }
 
 let business_state_interval_updating = false
-
+let disable_business_state_interval_updating = false
 // INIT
 document.addEventListener('DOMContentLoaded', async () => {
     const anchor = window.location.hash.substring(1) 
@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     initWifiCredentialsBlock()
 
     setInterval(async () => {
-        if (business_state_interval_updating) {
+        if (business_state_interval_updating || disable_business_state_interval_updating) {
             return
         }
         business_state_interval_updating = true
@@ -250,7 +250,7 @@ function updateToggleButtonsControls(value, class_prefix, parent_element) {
 }
 
 
-// Wifi Credentials
+// Configuration
 function initWifiCredentialsBlock() {
     const _el_bwc = $('.bloc-wifi-credentials')
     console.log(business_state.sta_ssid);
@@ -283,6 +283,23 @@ function saveWifiCredentials(btn) {
     saveStaCredentialsRepository({ sta_ssid, sta_password })
     buttonSetLoadingState(btn, false)
 }
+
+
+async function updateFirmware(btn) {
+    const _el_file_input = $('input[name=firmware]')
+    if (!_el_file_input.files.length) {
+      alert("Veuillez sélectionner un fichier.");
+      return;
+    }
+    disable_business_state_interval_updating = true
+    buttonSetLoadingState(btn, true)
+    const file = _el_file_input.files[0]
+    await firmwareUpdateRepository(file)
+    buttonSetLoadingState(btn, false)
+}
+
+
+
 
 // Controls
 async function setControls(data) {

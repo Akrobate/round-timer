@@ -135,5 +135,24 @@ async function deleteLampsPresetsFileRepository() {
         console.log('deleteLampsPresetsFileRepository - Error:', error)
     }
 }
+
+
+async function firmwareUpdateRepository(file) {
+
+
+    const form_data = new FormData()
+    form_data.append('file', file)
+
+    try {
+        await fetch('/api/firmware',
+            {
+                body: form_data,
+                method: 'POST',
+            }
+        )
+    } catch (error) {
+        console.log('firmwareUpdateRepository - Error:', error)
+    }
+}
 )rawliteral";
 

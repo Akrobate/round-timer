@@ -68,6 +68,9 @@ void RoundTimerServer::init() {
         "/api/business-state",
         HTTP_GET,
         [&](AsyncWebServerRequest * request) {
+
+            Serial.println("GET /api/business-state");
+
             String response;
             DynamicJsonDocument doc(1024);
             JsonObject object = doc.to<JsonObject>();
@@ -404,6 +407,8 @@ void RoundTimerServer::init() {
         [](AsyncWebServerRequest * request) {
             
             Serial.println("POST /api/firmware");
+            Serial.printf("Espace disponible pour l'OTA : %u octets\n", ESP.getFreeSketchSpace());
+
             if (Update.hasError()) {
                 request->send(500, "text/plain", "Erreur pendant la mise à jour");
             } else {
@@ -411,12 +416,12 @@ void RoundTimerServer::init() {
                 ESP.restart();
             }
         },
+        [](AsyncWebServerRequest* request, String filename, size_t index, uint8_t* data, size_t len, bool final) {
 
-                            // String filename, size_t index, uint8_t *data, size_t len, bool final)
-        [](AsyncWebServerRequest * request, uint8_t * data, size_t len, size_t index, size_t total) {
-            if (!index) {
-                Serial.printf("Mise à jour commencée : %u bytes\n", total);
-                if (!Update.begin(total)) {
+            Serial.println("In upload handler");
+            if (index == 0) {
+                Serial.printf("Mise à jour commencée : %s\n", filename.c_str());
+                if (!Update.begin((ESP.getFreeSketchSpace() - 0x1000) & 0xFFFFF000)) {
                     Update.printError(Serial);
                 }
             }
@@ -425,8 +430,8 @@ void RoundTimerServer::init() {
                 Update.printError(Serial);
             }
 
-            if (index + len == total) {
-                if (!Update.end(true)) { // Terminer la mise à jour
+            if (final) {
+                if (!Update.end(true)) {
                     Update.printError(Serial);
                 } else {
                     Serial.println("Mise à jour terminée !");
@@ -435,10 +440,58 @@ void RoundTimerServer::init() {
         }
     );
 
+    */
 
 
-*/
 
+   this->server->on(
+    "/api/firmware",
+    HTTP_POST,
+    [](AsyncWebServerRequest * request) {
+        Serial.println("POST /api/firmware");
+        if (Update.hasError()) {
+            Serial.println("--Erreur pendant la mise à jour");
+            request->send(500, "text/plain", "Erreur pendant la mise à jour");
+        } else {
+            Serial.println("--Mise à jour réussie. Redémarrage...");
+            request->send(200, "text/plain", "Mise à jour réussie. Redémarrage...");
+            ESP.restart();
+        }
 
+    },
+    [](AsyncWebServerRequest* request, String filename, size_t index, uint8_t* data, size_t len, bool final) {
+        if (index == 0) {
+            Serial.printf("Mise à jour commencée : %s\n", filename.c_str());
+            Serial.printf("Espace disponible pour l'OTA : %u octets\n", ESP.getFreeSketchSpace());
+            
+            if (!Update.begin((ESP.getFreeSketchSpace() - 0x1000) & 0xFFFFF000)) {
+                Serial.println("Échec de l'initialisation de l'OTA");
+                Update.printError(Serial);
+                request->send(500, "text/plain", "Erreur : Espace insuffisant");
+                return;
+            }
+        }
+
+        // Écriture des données
+        if (len > 0) {
+            Serial.printf("Écriture de %u octets...\n", len);
+            if (Update.write(data, len) != len) {
+                Serial.println("Échec de l'écriture !");
+                Update.printError(Serial);
+            }
+        }
+
+        // Finalisation
+        if (final) {
+            Serial.println("Finalisation de la mise à jour...");
+            if (!Update.end(true)) {
+                Serial.println("Échec de la finalisation !");
+                Update.printError(Serial);
+            } else {
+                Serial.println("Mise à jour terminée avec succès !");
+            }
+        }
+    }
+);
 }
 

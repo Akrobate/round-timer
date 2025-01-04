@@ -135,3 +135,11 @@ async function deleteLampsPresetsFileRepository() {
         status: 'ok',
     }
 }
+
+async function firmwareUpdateRepository(file) {
+    console.log('firmwareUpdateRepository')
+    await wait(SERVER_LAG_LONG);
+    return {
+        status: 'ok',
+    }
+}

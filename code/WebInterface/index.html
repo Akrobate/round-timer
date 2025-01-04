@@ -151,13 +151,14 @@
                 <div class="col col-12 col-sm-12">
                     <div class="card height-100 elevation block-info-secondary">
                         <h2>Mise a jour firmware</h2>
-                        <form method='POST' action='/update' enctype='multipart/form-data'>
                             <div class="file-upload">
                                 Chargez le fichier firmware
                                 <input type='file' name='firmware'>
                             </div>
-                            <input type='submit' class="accent" value='Ecrire le firmware selectionné'>
-                          </form>
+                            <!--input type='submit' class="accent" value='Ecrire le firmware selectionné' -->
+                            <button class="accent" onclick="updateFirmware(this)">
+                                Ecrire le firmware selectionné
+                            </button>
                     </div>
                 </div>
             </div>
