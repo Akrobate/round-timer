@@ -170,8 +170,12 @@ const char round_timer_server_static_index_html[] PROGMEM = R"rawliteral(
 
             <div class="row mt-md">
                 <div class="col col-12 col-sm-12">
-                    <div class="card height-100 elevation block-info-secondary">
+                    <div class="card height-100 elevation block-security">
                         <h2>Sécurité</h2>
+                        <div>
+                            <input type="checkbox" id="block-security-desactivate-access-point" name="security_desactivate_access_point" onchange="updateAccessPointAutoDisable(this)">
+                            <label for="block-security-desactivate-access-point">Désactiver le point d'accès apres 15 minutes</label>
+                        </div>
                     </div>
                 </div>
             </div>

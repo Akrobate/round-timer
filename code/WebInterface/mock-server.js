@@ -59,7 +59,9 @@ async function wait(ms) {
 async function getBusinessStateRepository() {
     console.log('getBusinessStateRepository')
     await wait(SERVER_LAG_SHORT);
-    return repository_business_state
+    return {
+        ...repository_business_state,
+    }
 }
 
 

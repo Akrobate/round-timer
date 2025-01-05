@@ -27,6 +27,18 @@ function anchorLink(anchor) {
     window.location.hash = anchor
 }
 
+function secondsToTimeString(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    if (remainingSeconds === 0) {
+        return `${minutes}min`;
+    }
+    if (minutes === 0) {
+        return `${remainingSeconds}s`;
+    }
+    return `${minutes}min ${remainingSeconds}s`;
+}
+
 function formatTime(date_time_string) {
     const date = new Date(date_time_string)
     const hours = date.getHours().toString().padStart(2, '0')
@@ -137,6 +149,34 @@ async function updateBusinesseState() {
         selected_preset_index = null
         setLampInputColors('#000000', '#000000', '#000000')
     }
+
+    const buttons_controls_label_mappings = {
+        round_timer_round_long_duration: {
+            label: 'Round',
+            class: 'round_timer_state_is_round_long_duration_true',
+        },
+        round_timer_round_short_duration: {
+            label: 'Round',
+            class: 'round_timer_state_is_round_long_duration_false',
+        },
+        round_timer_rest_long_duration: {
+            label: 'Rest',
+            class: 'round_timer_state_is_rest_long_duration_true',
+        },
+        round_timer_rest_short_duration: {
+            label: 'Rest',
+            class: 'round_timer_state_is_rest_long_duration_false',
+        },
+    }
+
+    Object.keys(buttons_controls_label_mappings).forEach((key) => {
+        if (business_state[key] != _business_state[key]) {
+            console.log('changed detected')
+            const { label, class: _class } = buttons_controls_label_mappings[key]
+            const _el = $(`.block-round-timer-controls .${_class}`)
+            _el.textContent = `${label} ${secondsToTimeString(_business_state[key])}`
+        }
+    })
 
     business_state = _business_state
     updateBlockSavedFiles()
@@ -331,13 +371,23 @@ function selectedFirmware() {
             addCls(_el_write_firmware, 'hidden')
             return
         }
-
-
         _el_error.textContent = `Le fichier ${file_name} va être écrit sur le module`
         rmCls(_el_error, 'hidden')
         rmCls(_el_write_firmware, 'hidden')
     }
-}   
+}
+
+function updateAccessPointAutoDisable(checkbox) {
+
+    if (checkbox.checked) {
+        console.log('checked')
+    } else {
+        console.log('unchecked')
+    }
+
+    // const _el = $('.block-security')
+    // security_desactivate_access_point
+}
 
 
 // Controls
