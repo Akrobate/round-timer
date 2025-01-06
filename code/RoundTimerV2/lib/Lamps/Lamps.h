@@ -6,6 +6,10 @@
 
 #define PIN_NEOPIXEL_LED    12 // PIN_D6
 
+#define SMALL_LED_STRIP
+
+
+
 class Lamps {
 
     public:
@@ -30,8 +34,13 @@ class Lamps {
         unsigned long int hexColorFromString(String color_string);
 
     private:
-        
+
+#ifdef SMALL_LED_STRIP        
         CRGB leds[3];
+#else
+        CRGB leds[12];
+#endif
+
         void show();
 };
 

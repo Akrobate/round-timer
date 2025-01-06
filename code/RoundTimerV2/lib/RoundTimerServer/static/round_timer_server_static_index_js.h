@@ -57,6 +57,11 @@ let business_state = {
     sta_ip: '',
     sta_is_connected: false,
     sta_is_configured: false,
+    mdns_host: '',
+    mdns_is_configured: false,
+
+    disconnect_access_point_delay: 60*15,
+
     firmware_version: '',
     round_timer_mute: false,
 
@@ -123,6 +128,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     await updateBusinesseState()
     updateRender()
     initWifiCredentialsBlock()
+
+    if (business_state.disconnect_access_point_delay == 0) {
+        $('input[name=security_desactivate_access_point]', $('.block-security')).checked = false
+    } else {
+        $('input[name=security_desactivate_access_point]', $('.block-security')).checked = true
+    }
 
     setInterval(async () => {
         if (business_state_interval_updating || disable_business_state_interval_updating) {
@@ -192,6 +203,8 @@ function updateRender() {
     $('.value_sta_ssid', _el_configuraion_info).textContent = business_state.sta_ssid
     $('.value_sta_ip', _el_configuraion_info).textContent = business_state.sta_ip
     $('.value_firmware_version', _el_configuraion_info).textContent = business_state.firmware_version
+    $('.value_mdns_host', _el_configuraion_info).textContent = `${business_state.mdns_host}.local`
+
 
     // round timer lamps
     const _el_round_timer_lamp_preview = $('.block-round-timer-lamp-preview')
@@ -380,16 +393,17 @@ function selectedFirmware() {
     }
 }
 
-function updateAccessPointAutoDisable(checkbox) {
 
-    if (checkbox.checked) {
-        console.log('checked')
+async function updateAccessPointAutoDisable(btn) {
+    buttonSetLoadingState(btn, true)
+    const _el = $('.block-security')
+    const is_checked = $('input[name=security_desactivate_access_point]:checked', _el)
+    if (!is_checked) {
+        await saveRoundTimerConfigurationRepository({ disconnect_access_point_delay: 0 })
     } else {
-        console.log('unchecked')
+        await saveRoundTimerConfigurationRepository({ disconnect_access_point_delay: 60*15 })
     }
-
-    // const _el = $('.block-security')
-    // security_desactivate_access_point
+    buttonSetLoadingState(btn, false)
 }
 
 

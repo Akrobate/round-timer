@@ -115,6 +115,7 @@ void BusinessState::loadConfigurations() {
 
     this->round_timer_mute = object["round_timer_mute"].as<int>();
     this->round_timer_mode = object["round_timer_mode"].as<int>();
+    this->disconnect_access_point_delay = object["disconnect_access_point_delay"].as<int>();
     this->round_timer_sequential_mode_order = object["round_timer_sequential_mode_order"].as<int>();
     this->round_timer_round_color = object["round_timer_round_color"].as<String>();
     this->round_timer_rest_color = object["round_timer_rest_color"].as<String>();

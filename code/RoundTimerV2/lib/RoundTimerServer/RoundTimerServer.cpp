@@ -84,6 +84,8 @@ void RoundTimerServer::init() {
             object["sta_ip"] = this->business_state->sta_ip;
             object["sta_is_connected"] = this->business_state->sta_is_connected;
             object["sta_is_configured"] = this->business_state->sta_is_configured;
+            object["mdns_host"] = this->business_state->mdns_host;
+            object["mdns_is_configured"] = this->business_state->mdns_is_configured;
 
             // Files
             object["sta_credentials_file_exists"] = this->business_state->sta_credentials_file_exists;

@@ -41,6 +41,9 @@ class BusinessState {
         boolean sta_is_connected = false;
         boolean sta_is_configured = false;
 
+        String mdns_host = "round-timer"; // "round-timer.local"
+        boolean mdns_is_configured = false;
+
         // Files
         boolean sta_credentials_file_exists = false;
         boolean configurations_file_exists = false;
@@ -76,7 +79,7 @@ class BusinessState {
 
         String lamp_preset_list[5][3];
 
-        String firmware_version = "2.0.12";
+        String firmware_version = "2.0.16";
 
         BusinessState();
         void init();

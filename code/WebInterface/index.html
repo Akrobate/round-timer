@@ -70,7 +70,7 @@
                         <h2>Informations système</h2>
                         <p>Réseau WiFi: <strong class="value_sta_ssid">non connecté</strong></p>
                         <p>Adresse IP: <strong class="value_sta_ip">non connecté</strong></p>
-                        <p>Domaine local: <strong class="">non connecté</strong> (alpha)</p>
+                        <p>Domaine local: <strong class="value_mdns_host">non connecté</strong></p>
                         <p>Version firmware: <strong class="value_firmware_version">2.0</strong></p>
                     </div>
                 </div>
@@ -170,8 +170,13 @@
                     <div class="card height-100 elevation block-security">
                         <h2>Sécurité</h2>
                         <div>
-                            <input type="checkbox" id="block-security-desactivate-access-point" name="security_desactivate_access_point" onchange="updateAccessPointAutoDisable(this)">
+                            <input type="checkbox" id="block-security-desactivate-access-point" name="security_desactivate_access_point">
                             <label for="block-security-desactivate-access-point">Désactiver le point d'accès apres 15 minutes</label>
+                        </div>
+                        <div>
+                            <button class="write-firmware accent mt-lg" onclick="updateAccessPointAutoDisable(this)">
+                                Mettre à jour
+                            </button>
                         </div>
                     </div>
                 </div>

@@ -13,6 +13,9 @@ const repository_business_state = {
     sta_ip: "192.168.1.25",
     sta_is_connected: true,
     sta_is_configured: false,
+    mdns_host: 'modbus-tcp-server',
+    mdns_is_configured: false,
+    disconnect_access_point_delay: 60*15,
 
     firmware_version: '2.0.0-data',
 

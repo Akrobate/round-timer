@@ -6,36 +6,67 @@ Lamps::Lamps() {
 void Lamps::init() {
     pinMode(PIN_NEOPIXEL_LED, OUTPUT);
     digitalWrite(PIN_NEOPIXEL_LED, LOW);
+#ifdef SMALL_LED_STRIP
     for(int i = 0; i < 3; i++) {
         leds[i] = CRGB::Black;
     }
     FastLED.addLeds<NEOPIXEL, PIN_NEOPIXEL_LED>(leds, 3);
+#else
+    for(int i = 0; i < 12; i++) {
+        leds[i] = CRGB::Black;
+    }
+    FastLED.addLeds<NEOPIXEL, PIN_NEOPIXEL_LED>(leds, 12);
+#endif
     FastLED.clear();
     this->show();
 }
 
 
 void Lamps::setLamp0(unsigned long int color) {
+#ifdef SMALL_LED_STRIP
     leds[0] = color;
+#else
+    for(int i = 0; i < 4; i++) {
+        leds[i] = color;
+    }
+#endif
     this->show();
 }
 
 
 void Lamps::setLamp1(unsigned long int color) {
+#ifdef SMALL_LED_STRIP
     leds[1] = color;
+#else
+    for(int i = 0; i < 4; i++) {
+        leds[4 + i] = color;
+    }
+#endif
     this->show();
 }
 
 
 void Lamps::setLamp2(unsigned long int color) {
+#ifdef SMALL_LED_STRIP
     leds[2] = color;
+#else
+    for(int i = 0; i < 4; i++) {
+        leds[8 + i] = color;
+    }
+#endif
     this->show();
 }
 
 void Lamps::setAllLamps(unsigned long int color) {
+#ifdef SMALL_LED_STRIP
     for(int i = 0; i < 3; i++) {
         leds[i] = color;
     }
+#else
+    for(int i = 0; i < 12; i++) {
+        leds[i] = color;
+    }
+#endif
     this->show();
 }
 
