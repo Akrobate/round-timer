@@ -135,19 +135,22 @@ void RoundTimerServer::init() {
     );
 
 
-    this->server->on(
-        "/api/sta-credentials",
-        HTTP_GET,
-        [&](AsyncWebServerRequest * request) {
-            String response;
-            DynamicJsonDocument doc(256);
-            JsonObject object = doc.to<JsonObject>();
-            object["sta_ssid"] = this->business_state->sta_ssid;
-            object["sta_password"] = this->business_state->sta_password;
-            serializeJson(doc, response);
-            request->send(200, "application/json", response);
-        }
-    );
+    /**
+     * Debug method
+     */
+    // this->server->on(
+    //     "/api/sta-credentials",
+    //     HTTP_GET,
+    //     [&](AsyncWebServerRequest * request) {
+    //         String response;
+    //         DynamicJsonDocument doc(256);
+    //         JsonObject object = doc.to<JsonObject>();
+    //         object["sta_ssid"] = this->business_state->sta_ssid;
+    //         object["sta_password"] = this->business_state->sta_password;
+    //         serializeJson(doc, response);
+    //         request->send(200, "application/json", response);
+    //     }
+    // );
 
 
     this->server->on(
@@ -162,14 +165,14 @@ void RoundTimerServer::init() {
                 sta_ssid = request->getParam("sta_ssid", true)->value();
             } else {
                 request->send(400, "text/html", "Missing sta_ssid");
-            return;
+                return;
             }
 
             if (request->hasParam("sta_password", true)) {
                 sta_password = request->getParam("sta_password", true)->value();
             } else {
                 request->send(400, "text/html", "Missing sta_password");
-            return;
+                return;
             }
 
             this->business_state->sta_ssid = sta_ssid;

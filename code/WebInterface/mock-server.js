@@ -8,12 +8,12 @@ const SERVER_LAG_SHORT = 500;
 const repository_business_state = {
     device_mode: 1,
     ap_ssid: "RoundTimerAccessPoint",
-    sta_ssid: "LiveboxLA2",
+    sta_ssid: "NetworkName",
     sta_password: "",
     sta_ip: "192.168.1.25",
     sta_is_connected: true,
     sta_is_configured: false,
-    mdns_host: 'modbus-tcp-server',
+    mdns_host: 'server.local',
     mdns_is_configured: false,
     disconnect_access_point_delay: 60*15,
 

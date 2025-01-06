@@ -89,6 +89,7 @@ void BusinessState::saveConfigurations() {
     object["round_timer_rest_short_duration"] = this->round_timer_rest_short_duration;
     object["round_timer_prerest_duration"] = this->round_timer_prerest_duration;
     object["round_timer_prestart_duration"] = this->round_timer_prestart_duration;
+    object["disconnect_access_point_delay"] = this->disconnect_access_point_delay;
 
     serializeJson(doc, file);
     file.close();
