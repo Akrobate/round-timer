@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="265mm"
+   height="60mm"
+   viewBox="0 0 265 60"
+   version="1.1"
+   id="svg189"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09, custom)"
+   sodipodi:docname="facade 1.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview191"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="true"
+     inkscape:zoom="0.84096521"
+     inkscape:cx="414.40478"
+     inkscape:cy="45.780729"
+     inkscape:window-width="1606"
+     inkscape:window-height="986"
+     inkscape:window-x="74"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer3">
+    <inkscape:grid
+       type="xygrid"
+       id="grid310"
+       units="mm"
+       dotted="false"
+       empspacing="10"
+       spacingy="0.99999999"
+       spacingx="0.99999999" />
+  </sodipodi:namedview>
+  <defs
+     id="defs186">
+    <linearGradient
+       id="linearGradient4208"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop4206" />
+    </linearGradient>
+  </defs>
+  <g
+     inkscape:groupmode="layer"
+     id="layer5"
+     inkscape:label="Countour"
+     style="display:inline">
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect5690"
+       width="265"
+       height="60"
+       x="0"
+       y="0"
+       rx="0"
+       ry="0" />
+  </g>
+  <g
+     inkscape:label="Power texts"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:inline">
+    <text
+       xml:space="preserve"
+       style="font-size:22.5778px;font-family:'Varsity Regular';-inkscape-font-specification:'Varsity Regular, Normal';fill:#000000;stroke-width:0.264583"
+       x="39.723202"
+       y="10"
+       id="text1928"
+       inkscape:label="Power"><tspan
+         sodipodi:role="line"
+         id="tspan1926"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:'Varsity Regular';-inkscape-font-specification:'Varsity Regular, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;stroke-width:0.264583"
+         x="39.723202"
+         y="10">POWER</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.7px;font-family:'Varsity Regular';-inkscape-font-specification:'Varsity Regular, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;stroke-width:0.264583"
+       x="28.039444"
+       y="32"
+       id="text2084"
+       inkscape:label="On"><tspan
+         sodipodi:role="line"
+         id="tspan2082"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Varsity Regular';-inkscape-font-specification:'Varsity Regular, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+         x="28.039444"
+         y="32">ON</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.7px;font-family:'Varsity Regular';-inkscape-font-specification:'Varsity Regular, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;stroke-width:0.264583"
+       x="71.703667"
+       y="32"
+       id="text2088"
+       inkscape:label="Off"><tspan
+         sodipodi:role="line"
+         id="tspan2086"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Varsity Regular';-inkscape-font-specification:'Varsity Regular, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+         x="71.703667"
+         y="32">OFF</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="Round Texts"
+     transform="translate(78.276797)"
+     style="display:inline">
+    <text
+       xml:space="preserve"
+       style="font-size:22.5778px;font-family:'Varsity Regular';-inkscape-font-specification:'Varsity Regular, Normal';display:inline;fill:#000000;stroke-width:0.264583"
+       x="42.273384"
+       y="10"
+       id="text5575"
+       inkscape:label="Round"><tspan
+         sodipodi:role="line"
+         id="tspan5573"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:'Varsity Regular';-inkscape-font-specification:'Varsity Regular, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;stroke-width:0.264583"
+         x="42.273384"
+         y="10">ROUND</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.7px;font-family:'Varsity Regular';-inkscape-font-specification:'Varsity Regular, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;display:inline;fill:#000000;stroke-width:0.264583"
+       x="70.818604"
+       y="34.938892"
+       id="text5581"
+       inkscape:label="min"><tspan
+         sodipodi:role="line"
+         id="tspan5579"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Varsity Regular';-inkscape-font-specification:'Varsity Regular, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+         x="70.818604"
+         y="34.938892">MIN</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.7px;font-family:'Varsity Regular';-inkscape-font-specification:'Varsity Regular, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;display:inline;fill:#000000;stroke-width:0.264583"
+       x="29.7227"
+       y="28.938892"
+       id="text5587"
+       inkscape:label="2"><tspan
+         sodipodi:role="line"
+         id="tspan5585"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Varsity Regular';-inkscape-font-specification:'Varsity Regular, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+         x="29.7227"
+         y="28.938892">2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.7px;font-family:'Varsity Regular';-inkscape-font-specification:'Varsity Regular, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;display:inline;fill:#000000;stroke-width:0.264583"
+       x="74.722702"
+       y="29"
+       id="text5681"
+       inkscape:label="3"><tspan
+         sodipodi:role="line"
+         id="tspan5679"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Varsity Regular';-inkscape-font-specification:'Varsity Regular, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+         x="74.722702"
+         y="29">3</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.7px;font-family:'Varsity Regular';-inkscape-font-specification:'Varsity Regular, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;display:inline;fill:#000000;stroke-width:0.264583"
+       x="25.818602"
+       y="35"
+       id="text5685"
+       inkscape:label="min"><tspan
+         sodipodi:role="line"
+         id="tspan5683"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Varsity Regular';-inkscape-font-specification:'Varsity Regular, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+         x="25.818602"
+         y="35">MIN</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="g5603"
+     inkscape:label="Rest Texts"
+     transform="translate(155.2768)">
+    <text
+       xml:space="preserve"
+       style="font-size:22.5778px;font-family:'Varsity Regular';-inkscape-font-specification:'Varsity Regular, Normal';display:inline;fill:#000000;stroke-width:0.264583"
+       x="44.530216"
+       y="9.9266691"
+       id="text5593"
+       inkscape:label="Rest"><tspan
+         sodipodi:role="line"
+         id="tspan5591"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:'Varsity Regular';-inkscape-font-specification:'Varsity Regular, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;stroke-width:0.264583"
+         x="44.530216"
+         y="9.9266691">REST</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.7px;font-family:'Varsity Regular';-inkscape-font-specification:'Varsity Regular, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;display:inline;fill:#000000;stroke-width:0.264583"
+       x="74.364754"
+       y="29"
+       id="text5597"
+       inkscape:label="1"><tspan
+         sodipodi:role="line"
+         id="tspan5595"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Varsity Regular';-inkscape-font-specification:'Varsity Regular, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+         x="74.364754"
+         y="29">1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.7px;font-family:'Varsity Regular';-inkscape-font-specification:'Varsity Regular, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;display:inline;fill:#000000;stroke-width:0.264583"
+       x="28.524649"
+       y="29"
+       id="text5619"
+       inkscape:label="30"><tspan
+         sodipodi:role="line"
+         id="tspan5617"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Varsity Regular';-inkscape-font-specification:'Varsity Regular, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+         x="28.524649"
+         y="29">30</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.7px;font-family:'Varsity Regular';-inkscape-font-specification:'Varsity Regular, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;display:inline;fill:#000000;stroke-width:0.264583"
+       x="26.700544"
+       y="35"
+       id="text5634"
+       inkscape:label="sec"><tspan
+         sodipodi:role="line"
+         id="tspan5632"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Varsity Regular';-inkscape-font-specification:'Varsity Regular, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+         x="26.700544"
+         y="35">SEC</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.7px;font-family:'Varsity Regular';-inkscape-font-specification:'Varsity Regular, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;display:inline;fill:#000000;stroke-width:0.264583"
+       x="70.47625"
+       y="35"
+       id="text5638"
+       inkscape:label="min"><tspan
+         sodipodi:role="line"
+         id="tspan5636"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Varsity Regular';-inkscape-font-specification:'Varsity Regular, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+         x="70.47625"
+         y="35">MIN</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Buttons"
+     style="display:inline">
+    <rect
+       style="display:none;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect5540"
+       width="30.000002"
+       height="30.000002"
+       x="40"
+       y="15"
+       rx="4"
+       ry="4"
+       inkscape:label="power" />
+    <rect
+       style="display:none;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect4791"
+       width="30.000002"
+       height="30.000002"
+       x="118"
+       y="15"
+       rx="4"
+       ry="4"
+       inkscape:label="round" />
+    <rect
+       style="display:none;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect5549"
+       width="30.000002"
+       height="30.000002"
+       x="195"
+       y="15"
+       rx="4"
+       ry="4"
+       inkscape:label="rest" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.499999;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       id="path5842"
+       cx="133"
+       cy="30.000105"
+       r="0.49999997"
+       inkscape:label="path5842" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.499999;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       id="circle5871"
+       cx="210"
+       cy="30"
+       r="0.49999997"
+       inkscape:label="path5842" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.499999;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       id="circle5873"
+       cx="55"
+       cy="30"
+       r="0.49999997"
+       inkscape:label="path5842" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Drawings"
+     style="display:inline">
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect5538"
+       width="62"
+       height="36"
+       x="24"
+       y="12"
+       rx="4"
+       ry="4"
+       inkscape:label="Power" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect4321"
+       width="62"
+       height="36"
+       x="102"
+       y="12"
+       rx="4"
+       ry="4"
+       inkscape:label="Round" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect5543"
+       width="62"
+       height="36"
+       x="179"
+       y="12"
+       rx="4"
+       ry="4"
+       inkscape:label="Rest" />
+  </g>
+</svg>
