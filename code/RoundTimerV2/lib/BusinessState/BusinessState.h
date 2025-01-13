@@ -37,6 +37,7 @@ class BusinessState {
         String ap_ssid = "RoundTimerAccessPoint";
         String sta_ssid = "";
         String sta_password = "";
+        boolean sta_needs_reconnection = false;
         String sta_ip;
         boolean sta_is_connected = false;
         boolean sta_is_configured = false;

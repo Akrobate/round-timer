@@ -178,6 +178,7 @@ void RoundTimerServer::init() {
             this->business_state->sta_ssid = sta_ssid;
             this->business_state->sta_password = sta_password;
             this->business_state->saveStaCredentials();
+            this->business_state->sta_needs_reconnection = true;
             request->send(200, "application/json", "{\"status\": \"ok\"}");
         }
     );

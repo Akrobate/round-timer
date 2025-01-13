@@ -6,7 +6,7 @@
 
 #define PIN_NEOPIXEL_LED    12 // PIN_D6
 
-#define SMALL_LED_STRIP
+// #define SMALL_LED_STRIP
 
 
 

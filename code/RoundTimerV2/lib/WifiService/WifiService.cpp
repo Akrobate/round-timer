@@ -11,7 +11,9 @@ void WifiService::injectBusinessState(BusinessState * business_state) {
 void WifiService::init() {
     this->time = millis();
     WiFi.softAP("RoundTimerAccessPoint");
-    this->connect();
+    if (this->business_state->sta_ssid != "") {
+        this->connect();
+    }
 }
 
 
@@ -23,6 +25,12 @@ void WifiService::connect() {
 }
 
 void WifiService::update() {
+    if (this->business_state->sta_needs_reconnection) {
+        WiFi.disconnect();
+        this->connect();
+        this->business_state->sta_needs_reconnection = false;
+    }
+
     if(
         !this->business_state->sta_is_connected 
         && WiFi.status() == WL_CONNECTED
