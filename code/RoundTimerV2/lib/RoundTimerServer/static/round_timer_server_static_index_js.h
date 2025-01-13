@@ -313,7 +313,7 @@ function initWifiCredentialsBlock() {
     }
 }
 
-function saveWifiCredentials(btn) {
+async function saveWifiCredentials(btn) {
     const _el = $('.bloc-wifi-credentials')
     const _name_input = $('.input-wifi-ssid', _el)
     const _password_input = $('.input-wifi-password', _el)
@@ -334,7 +334,7 @@ function saveWifiCredentials(btn) {
     rmCls(_password_input, 'error')
 
     buttonSetLoadingState(btn, true)
-    saveStaCredentialsRepository({ sta_ssid, sta_password })
+    await saveStaCredentialsRepository({ sta_ssid, sta_password })
     buttonSetLoadingState(btn, false)
 }
 
