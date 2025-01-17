@@ -32,27 +32,47 @@ curl -X POST -d "index=0&lamp_0_color=#ff0000&lamp_1_color=#00ff00&lamp_2_color=
 curl -X POST -d "round_timer_state_is_running=true" http://192.168.1.29/api/controls
 ```
 
-### activate long round
+#### Stop round timer
+
+```sh
+curl -X POST -d "round_timer_state_is_running=false" http://192.168.1.29/api/controls
+```
+
+#### activate long round
 
 ```sh
 curl -X POST -d "round_timer_state_is_round_long_duration=true" http://192.168.1.29/api/controls
 ```
 
-### activate short round
+#### activate short round
 
 ```sh
 curl -X POST -d "round_timer_state_is_round_long_duration=false" http://192.168.1.29/api/controls
 ```
 
 
-### activate long rest
+#### activate long rest
 
 ```sh
 curl -X POST -d "round_timer_state_is_rest_long_duration=true" http://192.168.1.29/api/controls
 ```
 
-### activate short rest
+#### activate short rest
 
 ```sh
 curl -X POST -d "round_timer_state_is_rest_long_duration=false" http://192.168.1.29/api/controls
 ```
+
+
+### Round timer configuration
+
+```sh
+curl -X POST -d "round_timer_state_is_rest_long_duration=false" http://192.168.1.29/api/round-timer-configurations
+
+```
+
+#### available params
+
+- round_timer_mute : true / false
+- 
+
