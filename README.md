@@ -74,5 +74,18 @@ curl -X POST -d "round_timer_state_is_rest_long_duration=false" http://192.168.1
 #### available params
 
 - round_timer_mute : true / false
-- 
+- round_timer_mode : integer
+- round_timer_sequential_mode_order : integer
+- round_timer_round_color : string
+- round_timer_rest_color : string
+- round_timer_prerest_color : string
+- round_timer_round_long_duration : integer
+- round_timer_round_short_duration : integer
+- round_timer_rest_long_duration : integer
+- round_timer_rest_short_duration : integer
+- round_timer_prerest_duration : integer
+- round_timer_prestart_duration : integer
+- disconnect_access_point_delay : integer
+
+
 
