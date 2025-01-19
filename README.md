@@ -88,4 +88,30 @@ curl -X POST -d "round_timer_state_is_rest_long_duration=false" http://192.168.1
 - disconnect_access_point_delay : integer
 
 
+### Round timer get business state
+
+```sh
+curl -X GET http://192.168.1.29/api/business-state
+```
+
+#### Response should look like:
+
+```json
+{
+    "device_mode": 1,
+    "disconnect_access_point_delay": "string",
+    "ap_ssid": "string",
+    "sta_ssid": "string",
+    "sta_password": "string",
+    "sta_ip": "string",
+    "sta_is_connected": "string",
+    "sta_is_configured": "string",
+    "mdns_host": "string",
+    "mdns_is_configured": "string",
+    "sta_credentials_file_exists": true,
+    "configurations_file_exists": true,
+    "lamps_presets_file_exists": true,
+    ...
+}
+```
 
