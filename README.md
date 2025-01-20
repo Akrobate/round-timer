@@ -111,6 +111,14 @@ curl -X GET http://192.168.1.29/api/business-state
     "sta_credentials_file_exists": true,
     "configurations_file_exists": true,
     "lamps_presets_file_exists": true,
+    "round_timer_mute": false,
+    "round_timer_step": 1,
+    "round_timer_mode": 1,
+    "round_timer_sequential_mode_order": 1,
+    "round_timer_round_color": "string",
+    "round_timer_rest_color": "string",
+    "round_timer_prerest_color": "string",
+
     ...
 }
 ```
