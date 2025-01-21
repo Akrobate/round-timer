@@ -119,7 +119,31 @@ curl -X GET http://192.168.1.29/api/business-state
     "round_timer_rest_color": "string",
     "round_timer_prerest_color": "string",
 
-    ...
+    "round_timer_round_long_duration": 1,
+    "round_timer_round_short_duration": 1,
+    "round_timer_rest_long_duration": 1,
+    "round_timer_rest_short_duration": 1,
+    "round_timer_prerest_duration": 1,
+    "round_timer_prestart_duration": 1,
+
+    "round_timer_state_is_running": true,
+    "round_timer_state_is_round_long_duration": true,
+    "round_timer_state_is_rest_long_duration": true,
+
+    "lamp_0_color": "string",
+    "lamp_1_color": "string",
+    "lamp_2_color": "string",
+
+    "firmware_version": "string",
+
+    "lamp_preset_list": [
+        ["#000000", "#000000", "#000000"],
+        ["#000000", "#000000", "#000000"],
+        ["#000000", "#000000", "#000000"],
+        ["#000000", "#000000", "#000000"],
+        ["#000000", "#000000", "#000000"]
+    ]
 }
+
 ```
 
