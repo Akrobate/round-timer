@@ -147,3 +147,9 @@ curl -X GET http://192.168.1.29/api/business-state
 
 ```
 
+### Credentials set
+
+```sh
+curl -X POST -d "sta_ssid=ssid_value&sta_password=password_value" http://192.168.1.29/api/sta-credentials
+```
+
