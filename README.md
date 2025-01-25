@@ -8,10 +8,19 @@ For detailed API documentation, please refer to the [API Documentation](./docume
 
 ### main page
 
-![WebInterface Preview](./documentations/webinterface/screenshots/main.png)
+![main page](./documentations/webinterface/screenshots/main.png)
 
 
 ### Device configuration page
 
-![WebInterface Preview](./documentations/webinterface/screenshots/device-configuration.png)
+![Device configuration page](./documentations/webinterface/screenshots/device-configuration.png)
 
+
+### Round Timer control
+
+![Round Timer control](./documentations/webinterface/screenshots/round-timer-control.png)
+
+
+### Round Timer configuration
+
+![Round Timer configuration](./documentations/webinterface/screenshots/round-timer-configuration.png)
