@@ -24,3 +24,8 @@ For detailed API documentation, please refer to the [API Documentation](./docume
 ### Round Timer configuration
 
 ![Round Timer configuration](./documentations/webinterface/screenshots/round-timer-configuration.png)
+
+
+### Round Timer Lamp
+
+![Round Timer Lamp](./documentations/webinterface/screenshots/lamp.png)
