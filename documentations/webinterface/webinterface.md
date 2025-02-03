@@ -26,4 +26,4 @@
 ![Round Timer Lamp](./screenshots/lamp.png)
 
 
-🏠 [Main](../README.md)
+🏠 [Main](../../README.md)
