@@ -4,6 +4,11 @@
 declare -g PIECES=(
 angleHolderPiece
 beeperHolderBackPiece
+beeperHolderPiece
+boltJoinPiece
+buttonHolderPiece
+lampshadeHolderPiece
+lampshadePiece
 )
 
 
