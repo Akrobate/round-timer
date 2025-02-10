@@ -26,7 +26,12 @@ When `SMALL_LED_STRIP` is defined the strip of 3 leds is managed. Else a 12 leds
 
 For detailed API documentation, please refer to the [API Documentation](./documentations/API%20Documentation.md).
 
+
 ## Webinterface
 
 For detailed information about webinterface please refer to [Webinterface previews](./documentations/webinterface/webinterface.md).
 
+
+## 3D Model previews
+
+For detailed 3D Model documentation, please refer to the [API Documentation](./3D-model/README.md).
