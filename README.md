@@ -32,6 +32,6 @@ For detailed API documentation, please refer to the [API Documentation](./docume
 For detailed information about webinterface please refer to [Webinterface previews](./documentations/webinterface/webinterface.md).
 
 
-## 3D Model previews
+## 3D Models previews
 
-For detailed 3D Model documentation, please refer to the [API Documentation](./3D-model/README.md).
+For detailed 3D Model documentation, please refer to the [3D Models Previews](./3D-model/README.md).

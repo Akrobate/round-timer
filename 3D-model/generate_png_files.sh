@@ -9,6 +9,7 @@ boltJoinPiece
 buttonHolderPiece
 lampshadeHolderPiece
 lampshadePiece
+CNC_Throws_buttonHolderPiece
 )
 
 

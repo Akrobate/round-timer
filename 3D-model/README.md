@@ -6,6 +6,10 @@
 
 ![Main component](png_files/main.png)
 
+## CNC Pieces
+
+![CNC Throws buttonHolderPiece](png_files/pieces/CNC_Throws_buttonHolderPiece.png)
+
 
 ## Pieces
 
