@@ -4,8 +4,12 @@
 
 ### Controls
 
-![Facade]('./facade 1.svg')
+![Preview 1](./png_previews/preview_1.png)
 
 ### Logo
 
-![partner logo]('./partner logo.svg')
+![Logo Preview 1](./png_previews/logo_preview_1.png)
+
+![Logo Preview 2](./png_previews/logo_preview_2.png)
+
+![Logo Preview 3](./png_previews/logo_preview_3.png)
