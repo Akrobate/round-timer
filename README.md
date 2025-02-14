@@ -40,3 +40,7 @@ For detailed 3D Model documentation, please refer to the [3D Models Previews](./
 ## 2D Models previews
 
 For detailed 2D Model documentation, please refer to the [2D Models Previews](./2D-model/README.md).
+
+## Web version of the functionnal round timer project
+
+https://framagit.org/Akrobate/round-timer-js
