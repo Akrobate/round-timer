@@ -24,6 +24,11 @@ For detailed 2D Model documentation, please refer to the [2D Models Previews](./
 https://framagit.org/Akrobate/round-timer-js
 
 
+### Web version preview
+
+![round-timer-js.png](./documentations/screenshots/round-timer-js.png)
+
+
 ## Configuration for hardwares
 
 ### Pinout esp8266
