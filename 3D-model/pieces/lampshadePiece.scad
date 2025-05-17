@@ -1,5 +1,5 @@
 lampshadePiece();
-// lampshadePiece_v2();
+//lampshadePiece_v2();
 
 
 module lampshadePiece(
@@ -39,8 +39,6 @@ module lampshadePiece(
 }
 
 
-
-
 module lampshadePiece_v2(
     lampshade_diameter = 60,
     lampshade_height = 70,
@@ -52,9 +50,7 @@ module lampshadePiece_v2(
 ) {
 
     lampshade_internal_diameter = lampshade_diameter - (walled_width * 2);
-
     union () {
-
         difference() {
             scale([
                 1,

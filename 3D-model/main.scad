@@ -49,7 +49,6 @@ module topFace(
     y_size = holder_diameter + (lamp_set_margins * 2);
     echo("TopFace x size ", x_size, "mm");
     echo("TopFace y size ", y_size, "mm");
-    
     color("Chocolate")
         translate([
             0,
@@ -66,13 +65,7 @@ module topFace(
         );
 }
 
-
-
-
 module lamp() {
     color("DarkSlateGray") lampshadeHolderPiece($fn = $fn);
     color("PaleTurquoise", alpha = 0.5) lampshadePiece($fn = $fn);
 }
-
-
-

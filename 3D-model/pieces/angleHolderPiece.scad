@@ -1,10 +1,7 @@
-
-
 // insert sizes
 // * diam = 4.6
 // * length = 5.7
 
-angleHolderPiece();
 
 module angleHolderPiece(
     size_x = 25,
@@ -14,7 +11,6 @@ module angleHolderPiece(
     round_corner_radius = 0.1,
     insert_throw_diameter = 4.2,
     insert_throw_length = 6,
-
     _fn = 500
 ) {
 
@@ -82,9 +78,6 @@ module angleHolderPiece(
 }
 
 
-
-
-
 module insertThrows(
     half_size_x,
     half_size_y,
@@ -132,3 +125,7 @@ module insertThrows(
         rotate([0, 0, 90])
             cylinder(d = insert_throw_diameter, h = insert_throw_length + throw_offset, center = true, $fn = _fn);
 }
+
+
+
+angleHolderPiece();
