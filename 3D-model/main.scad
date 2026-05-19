@@ -1,5 +1,4 @@
-use <./pieces/lampshadeHolderPiece.scad>
-use <./pieces/lampshadePiece.scad>
+use <./components/lampSetComponent.scad>
 
 $fn = 150;
 
@@ -9,7 +8,7 @@ lamp_set_margins = 10;
 face_thickness = 60;
 
 translate([0, 0, face_thickness])
-    lampSet(
+    lampSetComponent(
         holder_diameter = holder_diameter,
         holder_spaces = holder_spaces
     );
@@ -20,23 +19,6 @@ topFace(
     face_thickness = face_thickness
 );
 
-
-
-module lampSet(
-    holder_diameter = 75,
-    holder_spaces = 10,
-) {
-
-    translate([-holder_diameter - holder_spaces, 0, 0])
-        lamp();
-
-    translate([0,0,0])
-        lamp();
-
-    translate([holder_diameter + holder_spaces, 0, 0])
-        lamp();
-
-}
 
 module topFace(
     holder_diameter = 75,
@@ -65,7 +47,3 @@ module topFace(
         );
 }
 
-module lamp() {
-    color("DarkSlateGray") lampshadeHolderPiece($fn = $fn);
-    color("PaleTurquoise", alpha = 0.5) lampshadePiece($fn = $fn);
-}
