@@ -1,6 +1,7 @@
 use <./components/lampSetComponent.scad>
 
-$fn = 150;
+//$fn = 150;
+$fn = 50;
 
 holder_diameter = 75;
 holder_spaces = 10;
@@ -10,7 +11,8 @@ face_thickness = 60;
 translate([0, 0, face_thickness])
     lampSetComponent(
         holder_diameter = holder_diameter,
-        holder_spaces = holder_spaces
+        holder_spaces = holder_spaces,
+        $fn = 50
     );
 topFace(
     holder_diameter = holder_diameter,

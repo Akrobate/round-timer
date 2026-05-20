@@ -1,15 +1,10 @@
-lampshadePiece();
-//lampshadePiece_v2();
-
 
 module lampshadePiece(
     lampshade_diameter = 60,
     lampshade_height = 70,
     walled_width = 1,
     border_diameter = 64,
-    border_height = 2,
-    //$fn = 150
-    $fn = 500
+    border_height = 2
 ) {
 
     lampshade_internal_diameter = lampshade_diameter - (walled_width * 2);
@@ -44,9 +39,7 @@ module lampshadePiece_v2(
     lampshade_height = 70,
     walled_width = 1,
     border_diameter = 64,
-    border_height = 2,
-    //$fn = 150
-    $fn = 500
+    border_height = 2
 ) {
 
     lampshade_internal_diameter = lampshade_diameter - (walled_width * 2);
@@ -84,5 +77,8 @@ module lampshadePiece_v2(
                 cylinder(d = lampshade_internal_diameter, h = border_height * 1.1);
         }
     }
-
 }
+
+
+lampshadePiece($fn = 500);
+//lampshadePiece_v2($fn = 500);

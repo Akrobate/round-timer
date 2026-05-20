@@ -1,7 +1,4 @@
 
-lampshadeHolderPiece();
-
-
 module lampshadeHolderPiece(
     holder_external_diameter = 75,
     lampshade_diameter = 61,
@@ -13,9 +10,6 @@ module lampshadeHolderPiece(
     bolt_throws_count = 4,
     bolt_throws_diameter = 3.5,
     bolt_throws_z = 4,
-
-    $fn = 500
-    //$fn = 150
 ) {
   
     difference() {
@@ -56,3 +50,6 @@ module boltThrow(
             cylinder(d = bolt_diameter, h = bolt_length);
     }
 }
+
+
+lampshadeHolderPiece($fn = 500);
