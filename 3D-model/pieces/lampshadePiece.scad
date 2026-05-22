@@ -1,4 +1,12 @@
 
+
+/**
+ * lampshadePiece
+ * @name lampshadePiece
+ * @description lampshadePiece
+ * @type piece
+ * @parent root
+ */
 module lampshadePiece(
     lampshade_diameter = 60,
     lampshade_height = 70,
@@ -30,7 +38,6 @@ module lampshadePiece(
                 cylinder(d = lampshade_internal_diameter, h = border_height * 1.1);
         }
     }
-
 }
 
 
@@ -80,5 +87,12 @@ module lampshadePiece_v2(
 }
 
 
+/**
+ * @stl
+ * @png
+ * @colorscheme BeforeDawn
+ * @view axes,scales
+ */
 lampshadePiece($fn = 500);
+
 //lampshadePiece_v2($fn = 500);

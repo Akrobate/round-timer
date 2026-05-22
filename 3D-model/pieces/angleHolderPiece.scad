@@ -1,5 +1,11 @@
 
-
+ /**
+ * angleHolderPiece
+ * @name angleHolderPiece
+ * @description Piece to hold panes
+ * @type piece
+ * @parent housingComponent
+ */
 module angleHolderPiece(
     size_x = 25,
     size_y = 25,
@@ -94,4 +100,10 @@ module insertThrows(
 }
 
 
+/**
+ * @stl
+ * @png
+ * @colorscheme BeforeDawn
+ * @view axes,scales
+ */
 angleHolderPiece($fn = 500);
