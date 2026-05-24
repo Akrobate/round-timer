@@ -1,15 +1,14 @@
+include <../configurations/global.scad>
 
 module lampshadeHolderPiece(
-    holder_external_diameter = 75,
-    lampshade_diameter = 61,
-    lampshade_border_diameter = 65,
-    lampshade_border_height = 2.1,
-    holder_height = 4,
-
-
-    bolt_throws_count = 4,
-    bolt_throws_diameter = 3.5,
-    bolt_throws_z = 4,
+    holder_external_diameter = lampshade_holder_piece_holder_external_diameter,
+    lampshade_diameter = lampshade_holder_piece_lampshade_diameter,
+    lampshade_border_diameter = lampshade_holder_piece_lampshade_border_diameter,
+    lampshade_border_height = lampshade_holder_piece_lampshade_border_height,
+    holder_height = lampshade_holder_piece_holder_height,
+    bolt_throws_count = lampshade_holder_piece_bolt_throws_count,
+    bolt_throws_diameter = lampshade_holder_piece_bolt_throws_diameter,
+    bolt_throws_z = lampshade_holder_piece_bolt_throws_z
 ) {
   
     difference() {
