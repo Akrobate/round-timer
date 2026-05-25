@@ -14,3 +14,7 @@ lampshade_holder_piece_holder_height = 4;
 lampshade_holder_piece_bolt_throws_count = 4;
 lampshade_holder_piece_bolt_throws_diameter = 3.5;
 lampshade_holder_piece_bolt_throws_z = 4;
+
+case_external_panes_thickness = 4.8;
+
+external_size = [265, 95, 60];
