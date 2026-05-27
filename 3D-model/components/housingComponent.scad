@@ -24,6 +24,8 @@ module housingComponent() {
     ])
         bottomPanePiece();
 
+    rotate([90, 0, 90])
+        leftPanePiece();
 
 }
 
