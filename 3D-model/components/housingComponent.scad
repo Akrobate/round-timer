@@ -24,9 +24,42 @@ module housingComponent() {
     ])
         bottomPanePiece();
 
-    rotate([90, 0, 90])
-        leftPanePiece();
+    color("red")
+    translate([
+        0,
+        case_external_panes_thickness,
+        0
+    ])
+        rotate([90, 0, 90])
+            leftPanePiece();
 
+    color("red")
+    translate([
+        external_size.x - case_external_panes_thickness,
+        case_external_panes_thickness,
+        0
+    ])
+        rotate([90, 0, 90])
+            rightPanePiece();
+
+
+    color("green")
+    translate([
+        0,
+        case_external_panes_thickness,
+        0
+    ])
+        rotate([90, 0, 0])
+            frontPanePiece();
+
+    color("green")
+    translate([
+        0,
+        external_size.y,
+        0
+    ])
+        rotate([90, 0, 0])
+            backPanePiece();
 }
 
 
