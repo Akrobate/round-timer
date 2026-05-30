@@ -13,7 +13,8 @@ module angleHolderPiece(
     round_border_radius = 0.2,
     round_corner_radius = 0.1,
     insert_throw_diameter = 4.2,
-    insert_throw_length = 6
+    insert_throw_length = 6,
+    center = false
 ) {
 
     half_size_x = size_x / 2;
@@ -28,6 +29,11 @@ module angleHolderPiece(
     half_size_x_without_radius = half_size_x - round_border_radius;
     half_size_y_without_radius = half_size_y - round_border_radius;
 
+    translate([
+        center ? 0 : half_size_x,
+        center ? 0 : half_size_y,
+        center ? 0 : half_size_z,
+    ])
     difference() {
         hull() {
             translate([-(half_size_x - round_corner_radius), -(half_size_y - round_corner_radius), 0])
