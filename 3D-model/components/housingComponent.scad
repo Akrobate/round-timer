@@ -12,65 +12,67 @@ use <../pieces/angleHolderPiece.scad>
 module housingComponent() {
 
     // Panes
-    *translate([
-        case_external_panes_thickness,
-        case_external_panes_thickness,
-        external_size.z - case_external_panes_thickness
-    ])
-        topPanePiece();
+    color("DarkGoldenrod") {
+        *translate([
+            case_external_panes_thickness,
+            case_external_panes_thickness,
+            external_size.z - case_external_panes_thickness
+        ])
+            topPanePiece();
 
-    translate([
-        case_external_panes_thickness,
-        case_external_panes_thickness,
-        0
-    ])
-        bottomPanePiece();
+        translate([
+            case_external_panes_thickness,
+            case_external_panes_thickness,
+            0
+        ])
+            bottomPanePiece();
+    }
 
-    color("red")
-    translate([
-        0,
-        case_external_panes_thickness,
-        0
-    ])
-        rotate([90, 0, 90])
-            leftPanePiece();
+    color("Peru") {
+        translate([
+            0,
+            case_external_panes_thickness,
+            0
+        ])
+            rotate([90, 0, 90])
+                leftPanePiece();
 
-    color("red")
-    translate([
-        external_size.x - case_external_panes_thickness,
-        case_external_panes_thickness,
-        0
-    ])
-        rotate([90, 0, 90])
-            rightPanePiece();
+        translate([
+            external_size.x - case_external_panes_thickness,
+            case_external_panes_thickness,
+            0
+        ])
+            rotate([90, 0, 90])
+                rightPanePiece();
+    }
 
+    color("Goldenrod") {
+        *translate([
+            0,
+            case_external_panes_thickness,
+            0
+        ])
+            rotate([90, 0, 0])
+                frontPanePiece();
 
-    *color("green")
-    translate([
-        0,
-        case_external_panes_thickness,
-        0
-    ])
-        rotate([90, 0, 0])
-            frontPanePiece();
-
-    color("green")
-    translate([
-        0,
-        external_size.y,
-        0
-    ])
-        rotate([90, 0, 0])
-            backPanePiece();
+        translate([
+            0,
+            external_size.y,
+            0
+        ])
+            rotate([90, 0, 0])
+                backPanePiece();
+    }
 
     // angle Holders
-
-    translate([0, 0, external_size.z - case_external_panes_thickness + 2])
-        positionnedAngleHolders();
-
-    translate([0, external_size.y, external_size.z - case_external_panes_thickness])
-        rotate([180,0,0])
+    color("DimGray") {
+        translate([0, 0, external_size.z - case_external_panes_thickness - angleHolderPiece_size_z])
             positionnedAngleHolders();
+        
+        translate([0, 0, angleHolderPiece_size_z + case_external_panes_thickness])
+            mirror([0,0,1])
+                positionnedAngleHolders();
+    }
 
 
     module positionnedAngleHolders() {
@@ -91,5 +93,5 @@ module housingComponent() {
     }
 }
 
-
-housingComponent();
+translate([0,0,0])
+    housingComponent();

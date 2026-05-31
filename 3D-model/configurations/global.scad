@@ -18,3 +18,9 @@ lampshade_holder_piece_bolt_throws_z = 4;
 case_external_panes_thickness = 4.8;
 
 external_size = [265, 95, 60];
+
+angleHolderPiece_size_x = 25;
+angleHolderPiece_size_y = 25;
+angleHolderPiece_size_z = 8;
+    
+    

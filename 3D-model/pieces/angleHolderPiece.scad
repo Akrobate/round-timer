@@ -1,3 +1,5 @@
+include <../configurations/global.scad>
+
 
  /**
  * angleHolderPiece
@@ -7,9 +9,9 @@
  * @parent housingComponent
  */
 module angleHolderPiece(
-    size_x = 25,
-    size_y = 25,
-    size_z = 8,
+    size_x = angleHolderPiece_size_x,
+    size_y = angleHolderPiece_size_y,
+    size_z = angleHolderPiece_size_z,
     round_border_radius = 0.2,
     round_corner_radius = 0.1,
     insert_throw_diameter = 4.2,
