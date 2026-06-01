@@ -24,3 +24,4 @@ angleHolderPiece_size_y = 25;
 angleHolderPiece_size_z = 8;
     
     
+throw_diameter = 3;
