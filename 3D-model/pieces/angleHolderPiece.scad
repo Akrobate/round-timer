@@ -12,6 +12,10 @@ module angleHolderPiece(
     size_x = angleHolderPiece_size_x,
     size_y = angleHolderPiece_size_y,
     size_z = angleHolderPiece_size_z,
+    insert_z_offset_x = angleHolderPiece_insert_z_offset_x,
+    insert_z_offset_y = angleHolderPiece_insert_z_offset_y,
+    insert_x_offset = angleHolderPiece_insert_x_offset,
+    insert_y_offset = angleHolderPiece_insert_y_offset,
     round_border_radius = 0.2,
     round_corner_radius = 0.1,
     insert_throw_diameter = 4.2,
@@ -23,10 +27,10 @@ module angleHolderPiece(
     half_size_y = size_y / 2;
     half_size_z = size_z / 2;
 
-    insert_z_offset_x = 10;
-    insert_z_offset_y = 10;
-    insert_x_offset = 10;
-    insert_y_offset = 10;
+    // insert_z_offset_x = 10;
+    // insert_z_offset_y = 10;
+    // insert_x_offset = 10;
+    // insert_y_offset = 10;
 
     half_size_x_without_radius = half_size_x - round_border_radius;
     half_size_y_without_radius = half_size_y - round_border_radius;

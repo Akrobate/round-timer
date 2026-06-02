@@ -4,7 +4,7 @@ module frontPanePiece(
     x_size = external_size.x,
     y_size = external_size.z,
     z_size = case_external_panes_thickness,
-    x_throw_margin = case_external_panes_thickness + (angleHolderPiece_size_x / 2),
+    x_throw_margin = case_external_panes_thickness + angleHolderPiece_insert_generic_offset,
     y_throw_margin = case_external_panes_thickness + angleHolderPiece_size_z / 2,
     throw_diameter = throw_diameter
 ) {

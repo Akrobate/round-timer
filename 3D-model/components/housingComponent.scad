@@ -47,7 +47,7 @@ module housingComponent() {
     }
 
     color("Goldenrod") {
-        *translate([
+        #translate([
             0,
             case_external_panes_thickness,
             0

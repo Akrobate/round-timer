@@ -22,6 +22,11 @@ external_size = [265, 95, 60];
 angleHolderPiece_size_x = 25;
 angleHolderPiece_size_y = 25;
 angleHolderPiece_size_z = 8;
-    
+
+angleHolderPiece_insert_generic_offset = 10;
+angleHolderPiece_insert_z_offset_x = angleHolderPiece_insert_generic_offset;
+angleHolderPiece_insert_z_offset_y = angleHolderPiece_insert_generic_offset;
+angleHolderPiece_insert_x_offset = angleHolderPiece_insert_generic_offset;
+angleHolderPiece_insert_y_offset = angleHolderPiece_insert_generic_offset;
     
 throw_diameter = 3;
