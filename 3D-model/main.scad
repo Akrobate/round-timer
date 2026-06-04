@@ -3,6 +3,9 @@ include <configurations/global.scad>
 use <./components/lampSetComponent.scad>
 use <./components/housingComponent.scad>
 
+use <pieces/buttonHolderPiece.scad>
+
+
 //$fn = 150;
 $fn = 50;
 
@@ -23,6 +26,19 @@ module main() {
     translate([- external_size.x / 2, - external_size.y / 2, 0])
         housingComponent();
 
+
+    translate([0, -external_size.y / 2, external_size.z / 2])
+        rotate([90,0,0])
+            buttonHolderPiece();
+
+    translate([-holder_diameter - holder_spaces, -external_size.y / 2, external_size.z / 2])
+        rotate([90,0,0])
+            buttonHolderPiece();
+
+
+    translate([holder_diameter + holder_spaces, -external_size.y / 2, external_size.z / 2])
+        rotate([90,0,0])
+            buttonHolderPiece();
 }
 
 

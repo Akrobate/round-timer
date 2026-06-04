@@ -23,47 +23,6 @@ correction_foolproof_button_thickness = 0.5;
 
 _fn = 500;
 
-buttonHolderPiece(
-    size_x = size_x,
-    size_y = size_y,
-    size_z = size_z,
-    border_radius = border_radius,
-
-    throws_diameter = throws_diameter,
-    throws_margin = throws_margin,
-
-    button_diameter = button_diameter,
-    clips_button_diameter = clips_button_diameter,
-    clips_button_thickness = clips_button_thickness,
-    foolproof_button_diameter = foolproof_button_diameter,
-    foolproof_button_thickness = foolproof_button_thickness,
-
-    correction_button_diameter = correction_button_diameter,
-    correction_clips_button_diameter = correction_clips_button_diameter,
-    correction_clips_button_thickness = correction_clips_button_thickness,
-    correction_foolproof_button_diameter = correction_foolproof_button_diameter,
-    correction_foolproof_button_thickness = correction_foolproof_button_thickness,
-    _fn = _fn
-);
-
-/*
-color(alpha = 0.2)
-    buttonFixationThrows(
-        size_x = size_x,
-        size_y = size_y,
-        size_z = size_z * 4,
-        border_radius = border_radius,
-
-        throws_diameter = throws_diameter,
-        throws_margin = throws_margin,
-
-        button_diameter = button_diameter,
-
-        correction_button_diameter = correction_button_diameter + 4,
-
-        _fn = _fn
-    );
-*/
 
 module buttonFixationThrows(
     size_x = 27,
@@ -90,23 +49,9 @@ module buttonFixationThrows(
         throws_margin = throws_margin,
         $fn = _fn
     );
-
-    cylinder(
-        d = button_diameter + correction_button_diameter,
-        h = size_z,
-        center = true,
-        $fn = _fn
-    );
 }
 
 
-
-
-// 4
-// 2
-// 19.5
-// 20.34
-// 20.64
 
 module buttonHolderPiece(
     size_x = 27,
@@ -132,6 +77,7 @@ module buttonHolderPiece(
     _fn = 500
 ) {
 
+    translate([0,0,size_z/2])
     difference() {
         roundedBorderPaneSubpiece(
             size_x = size_x,
@@ -186,3 +132,27 @@ module buttonEnveloppe(
     }
 }
 
+
+
+buttonHolderPiece(
+    size_x = size_x,
+    size_y = size_y,
+    size_z = size_z,
+    border_radius = border_radius,
+
+    throws_diameter = throws_diameter,
+    throws_margin = throws_margin,
+
+    button_diameter = button_diameter,
+    clips_button_diameter = clips_button_diameter,
+    clips_button_thickness = clips_button_thickness,
+    foolproof_button_diameter = foolproof_button_diameter,
+    foolproof_button_thickness = foolproof_button_thickness,
+
+    correction_button_diameter = correction_button_diameter,
+    correction_clips_button_diameter = correction_clips_button_diameter,
+    correction_clips_button_thickness = correction_clips_button_thickness,
+    correction_foolproof_button_diameter = correction_foolproof_button_diameter,
+    correction_foolproof_button_thickness = correction_foolproof_button_thickness,
+    _fn = _fn
+);
