@@ -1,3 +1,5 @@
+use <../enveloppes/CNC_Throws_buttonHolderPiece.scad>
+
 include <../configurations/global.scad>
 
 module frontPanePiece(
@@ -30,6 +32,10 @@ module frontPanePiece(
             translate(throw_coord)
                 cylinder(h = 50, d = throw_diameter, center = true);
         }
+
+
+        translate([x_size / 2, y_size / 2, 0])
+            buttonFixationThrows(size_z = 20);
     }
 
 }
