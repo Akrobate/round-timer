@@ -28,14 +28,13 @@ module frontPanePiece(
     difference() {
         cube([x_size, y_size, z_size]);
 
-        for(throw_coord = throw_coords) {
+        for(throw_coord = throw_coords)
             translate(throw_coord)
                 cylinder(h = 50, d = throw_diameter, center = true);
-        }
 
-
-        translate([x_size / 2, y_size / 2, 0])
-            buttonFixationThrows(size_z = 20);
+        for(throw_x_coord = [space_between_lamps, 0, -space_between_lamps])
+            translate([x_size / 2 + throw_x_coord, y_size / 2, 0])
+                buttonFixationThrows(size_z = 20);
     }
 
 }

@@ -1,3 +1,5 @@
+space_between_lamps = 85;
+
 
 lampshade_piece_lampshade_diameter = 60;
 lampshade_piece_lampshade_height = 70;

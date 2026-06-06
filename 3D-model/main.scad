@@ -31,12 +31,12 @@ module main() {
         rotate([90,0,0])
             buttonHolderPiece();
 
-    translate([-holder_diameter - holder_spaces, -external_size.y / 2, external_size.z / 2])
+    translate([- space_between_lamps, -external_size.y / 2, external_size.z / 2])
         rotate([90,0,0])
             buttonHolderPiece();
 
 
-    translate([holder_diameter + holder_spaces, -external_size.y / 2, external_size.z / 2])
+    translate([space_between_lamps, -external_size.y / 2, external_size.z / 2])
         rotate([90,0,0])
             buttonHolderPiece();
 }
