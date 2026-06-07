@@ -1,3 +1,5 @@
+// @todo should be refactored to be used in panes
+
 module paneFixationThrows(
     size_x = 25,
     size_y = 25,

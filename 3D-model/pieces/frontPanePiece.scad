@@ -11,13 +11,6 @@ module frontPanePiece(
     throw_diameter = throw_diameter
 ) {
 
-    debug = true;
-
-    if (debug) {
-        translate([x_size / 2, y_size - 10])
-            cylinder(h = 50, r = 10, center = true);
-    }
-
     throw_coords = [
         [x_throw_margin, y_throw_margin],
         [x_size - x_throw_margin, y_throw_margin],

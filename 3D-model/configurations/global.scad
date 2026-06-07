@@ -32,3 +32,27 @@ angleHolderPiece_insert_x_offset = angleHolderPiece_insert_generic_offset;
 angleHolderPiece_insert_y_offset = angleHolderPiece_insert_generic_offset;
     
 throw_diameter = 3;
+
+
+
+buttonHolderPiece_size_x = 30;
+buttonHolderPiece_size_y = 30;
+buttonHolderPiece_size_z = 2;
+buttonHolderPiece_border_radius = 4;
+
+buttonHolderPiece_throws_diameter = 3.5;
+buttonHolderPiece_throws_margin = 4;
+
+buttonHolderPiece_button_diameter = 19.5;
+buttonHolderPiece_clips_button_diameter = 20.64;
+buttonHolderPiece_clips_button_thickness = 4;
+buttonHolderPiece_foolproof_button_diameter = 20.34;
+buttonHolderPiece_foolproof_button_thickness = 2;
+
+buttonHolderPiece_correction_button_diameter = 0.5;
+buttonHolderPiece_correction_clips_button_diameter = 0.5;
+buttonHolderPiece_correction_clips_button_thickness = 0.5;
+buttonHolderPiece_correction_foolproof_button_diameter = 0.5;
+buttonHolderPiece_correction_foolproof_button_thickness = 0.5;
+
+buttonHolderPiece_fn = 500;
