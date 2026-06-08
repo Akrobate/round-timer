@@ -56,3 +56,5 @@ buttonHolderPiece_correction_foolproof_button_diameter = 0.5;
 buttonHolderPiece_correction_foolproof_button_thickness = 0.5;
 
 buttonHolderPiece_fn = 500;
+
+buttonFixationThrows_correction_button_diameter = 0.5;
