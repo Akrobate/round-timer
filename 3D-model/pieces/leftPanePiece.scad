@@ -9,14 +9,6 @@ module leftPanePiece(
     y_throw_margin = case_external_panes_thickness + angleHolderPiece_size_z / 2,
     throw_diameter = throw_diameter
 ) {
-
-    debug = false;
-
-    if (debug) {
-        translate([x_size / 2, y_size - 10])
-            cylinder(h = 50, r = 10, center = true);
-    }
-
     squareThrowedPaneSubpiece(
         x_size = x_size,
         y_size = y_size,
