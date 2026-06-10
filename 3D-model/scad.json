@@ -3,5 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "author": "",
-  "repository": ""
+  "repository": "",
+  "dependencies": {
+    "commons": "https://gitlab.com/openscad-modules/commons.git#0.0.1"
+  }
 }
