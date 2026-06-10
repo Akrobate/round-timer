@@ -5,6 +5,6 @@
   "author": "",
   "repository": "",
   "dependencies": {
-    "commons": "https://gitlab.com/openscad-modules/commons.git#0.0.1"
+    "commons": "https://gitlab.com/openscad-modules/commons.git#0.0.2"
   }
 }
