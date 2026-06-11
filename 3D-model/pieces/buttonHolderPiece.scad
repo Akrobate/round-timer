@@ -5,9 +5,9 @@ include <../configurations/global.scad>
 
 
 module buttonHolderPiece(
-    size_x = buttonHolderPiece_size_x,
-    size_y = buttonHolderPiece_size_y,
-    size_z = buttonHolderPiece_size_z,
+    size_x = buttonHolderPiece_size.x,
+    size_y = buttonHolderPiece_size.y,
+    size_z = buttonHolderPiece_size.z,
     border_radius = buttonHolderPiece_border_radius,
 
     throws_diameter = buttonHolderPiece_throws_diameter,

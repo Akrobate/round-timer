@@ -1,15 +1,14 @@
+include <../configurations/global.scad>
+
 use <./subpieces/roundedBorderPaneSubpiece.scad>
 use <./subpieces/paneFixationThrows.scad>
 
 // Beeper diameter : 11.7mm
 
-beeperHolderBackPiece();
-
 module beeperHolderBackPiece(
-    size_x = 30,
-    size_y = 20,
-    size_z = 2,
-    _fn = 500
+    size_x = beeperHolder_size.x,
+    size_y = beeperHolder_size.y,
+    size_z = beeperHolder_size.z
 ) {
 
     difference() {
@@ -18,10 +17,7 @@ module beeperHolderBackPiece(
             size_x = size_x,
             size_y = size_y,
             size_z = size_z,
-
-            border_radius = 3,
-
-            $fn = 150
+            border_radius = 3
         );
 
         paneFixationThrows(
@@ -34,3 +30,5 @@ module beeperHolderBackPiece(
         );
     }
 }
+
+beeperHolderBackPiece($fn = 150);

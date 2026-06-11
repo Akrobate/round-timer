@@ -4,9 +4,9 @@ include <../configurations/global.scad>
 
 
 module buttonFixationThrows(
-    size_x = buttonHolderPiece_size_x,
-    size_y = buttonHolderPiece_size_y,
-    size_z = buttonHolderPiece_size_z * 4,
+    size_x = buttonHolderPiece_size.x,
+    size_y = buttonHolderPiece_size.y,
+    size_z = buttonHolderPiece_size.z * 4,
     throws_diameter = buttonHolderPiece_throws_diameter,
     throws_margin = buttonHolderPiece_throws_margin,
     button_diameter = buttonHolderPiece_button_diameter,
