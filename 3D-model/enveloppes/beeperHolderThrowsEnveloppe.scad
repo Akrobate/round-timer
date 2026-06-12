@@ -6,7 +6,7 @@ module beeperHolderThrowsEnveloppe(
     size_x = beeperHolder_size.x,
     size_y = beeperHolder_size.y,
     size_z = beeperHolder_size.z,
-    buzzer_throw_diameter = 12.5 + 2 + 1,
+    buzzer_throw_diameter = beeperHolder_buzzer_diameter + 3,
     throws_depth = 10,
     throw_diameter = 3.8
 ) {

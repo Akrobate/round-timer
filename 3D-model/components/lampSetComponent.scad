@@ -1,19 +1,19 @@
 use <lampComponent.scad>
+include <../configurations/global.scad>
 
-module lampSetComponent(
-    holder_diameter = 75,
-    holder_spaces = 10,
-) {
 
-    translate([-holder_diameter - holder_spaces, 0, 0])
-        lampComponent();
+module lampSetComponent() {
 
-    translate([0,0,0])
-        lampComponent();
+    translate([external_size.x / 2, external_size.y / 2, 0]) {
+        translate([-space_between_lamps, 0, 0])
+            lampComponent();
 
-    translate([holder_diameter + holder_spaces, 0, 0])
-        lampComponent();
+        translate([0,0,0])
+            lampComponent();
 
+        translate([space_between_lamps, 0, 0])
+            lampComponent();
+    }
 }
 
 lampSetComponent();
