@@ -20,7 +20,7 @@ module housingComponent() {
         ])
             topPanePiece();
 
-        translate([
+        *translate([
             case_external_panes_thickness,
             case_external_panes_thickness,
             0
