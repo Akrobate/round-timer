@@ -23,7 +23,7 @@ module leftPanePiece(
             y_throw_margin = y_throw_margin,
             throw_diameter = throw_diameter
         );
-        #translate([x_size, y_size, z_size - throws_dephs] / 2)
+        translate([x_size, y_size, z_size - throws_dephs] / 2)
             throwsHolderExternalFix(throws_dephs = throws_dephs);
     }
 }
