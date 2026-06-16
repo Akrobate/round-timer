@@ -1,7 +1,5 @@
-use <../openscad_modules/esp-module-holder-3d-model/pieces/facade-holder-8266-D1-piece.scad>
-use <../openscad_modules/esp-module-holder-3d-model/pieces/fixation-holder-8266-D1-piece.scad>
-
-// @todo: Move pieces to real local pieces
+use <../pieces/espFacadeHolderPiece.scad>
+use <../pieces/espFixationHolderPiece.scad>
 
 /**
  * holder8266D1Component
@@ -12,22 +10,16 @@ use <../openscad_modules/esp-module-holder-3d-model/pieces/fixation-holder-8266-
  module holder8266D1Component(
    fixation_holder_position_y = 0.1,
    fixation_holder_position_z = 2,
-   fixation_holder_position_x = 0,
-
-   face_holder_piece_color = "lightgreen",
-   fixation_holder_piece_color = "yellow",
+   fixation_holder_position_x = 0
 ) {
 
-   color(face_holder_piece_color)
-      facadeHolder8266D1Piece();
-
-   color(fixation_holder_piece_color)
-      translate([
-         fixation_holder_position_x,
-         fixation_holder_position_y,
-         fixation_holder_position_z
-      ])
-         fixationHolder8266D1Piece();
+   espFacadeHolderPiece();
+   translate([
+      fixation_holder_position_x,
+      fixation_holder_position_y,
+      fixation_holder_position_z
+   ])
+      espFixationHolderPiece();
 }
 
 holder8266D1Component();
