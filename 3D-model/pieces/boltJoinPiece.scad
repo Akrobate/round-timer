@@ -1,22 +1,35 @@
+// @todo position on main.scad element
 
-boltJoinPiece(
-    internal_diameter = 3.5,
-    external_diameter = 3.5 + (0.4 * 2),
-    height = 3,
-    _fn = 500
-);
-
+ /**
+ * boltJoinPiece
+ * @name boltJoinPiece
+ * @description LED Holder
+ * @type piece
+ * @parent root
+ */
 module boltJoinPiece(
     internal_diameter = 3.5,
     external_diameter = 3.5 + (0.4 * 6),
     height = 3,
     _fn = 500
 ) {
-
     difference() {
         cylinder(d = external_diameter, h = height, center = true, $fn = _fn);
 
         cylinder(d = internal_diameter, h = height * 2, center = true, $fn = _fn);
     }
-
 }
+
+
+/**
+ * @stl
+ * @png
+ * @colorscheme BeforeDawn
+ * @view axes,scales
+ */
+boltJoinPiece(
+    internal_diameter = 3.5,
+    external_diameter = 3.5 + (0.4 * 2),
+    height = 3,
+    _fn = 500
+);

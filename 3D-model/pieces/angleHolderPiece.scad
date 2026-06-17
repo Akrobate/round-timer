@@ -27,11 +27,6 @@ module angleHolderPiece(
     half_size_y = size_y / 2;
     half_size_z = size_z / 2;
 
-    // insert_z_offset_x = 10;
-    // insert_z_offset_y = 10;
-    // insert_x_offset = 10;
-    // insert_y_offset = 10;
-
     half_size_x_without_radius = half_size_x - round_border_radius;
     half_size_y_without_radius = half_size_y - round_border_radius;
 

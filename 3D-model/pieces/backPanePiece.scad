@@ -1,5 +1,13 @@
 include <../configurations/global.scad>
 
+
+ /**
+ * backPanePiece
+ * @name backPanePiece
+ * @description backPanePiece
+ * @type piece
+ * @parent housingComponent
+ */
 module backPanePiece(
     x_size = external_size.x,
     y_size = external_size.z,
@@ -34,4 +42,11 @@ module backPanePiece(
 
 }
 
+
+/**
+ * @stl
+ * @png
+ * @colorscheme BeforeDawn
+ * @view axes,scales
+ */
 backPanePiece();
