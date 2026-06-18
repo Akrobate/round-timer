@@ -63,3 +63,8 @@ beeperHolder_size = [30, 20, 2];
 beeperHolder_buzzer_diameter = 12.5;
 beeperHolder_buzzer_border_holder = 2;
 beeperHolder_buzzer_holder_height = 4;
+
+
+boltJoinPiece_internal_diameter = 3.5;
+boltJoinPiece_external_diameter = 3.5 + (0.4 * 2);
+boltJoinPiece_height = 3;

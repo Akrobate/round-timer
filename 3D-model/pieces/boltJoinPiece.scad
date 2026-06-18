@@ -1,4 +1,4 @@
-// @todo position on main.scad element
+include <../configurations/global.scad>
 
  /**
  * boltJoinPiece
@@ -8,15 +8,15 @@
  * @parent root
  */
 module boltJoinPiece(
-    internal_diameter = 3.5,
-    external_diameter = 3.5 + (0.4 * 6),
-    height = 3,
-    _fn = 500
+    internal_diameter = boltJoinPiece_internal_diameter,
+    external_diameter = boltJoinPiece_external_diameter,
+    height = 3,boltJoinPiece_heigh,
+    z_center = false,
+    $fn = 500
 ) {
     difference() {
-        cylinder(d = external_diameter, h = height, center = true, $fn = _fn);
-
-        cylinder(d = internal_diameter, h = height * 2, center = true, $fn = _fn);
+        cylinder(d = external_diameter, h = height, center = z_center);
+        cylinder(d = internal_diameter, h = height * 2, center = z_center);
     }
 }
 
@@ -27,9 +27,4 @@ module boltJoinPiece(
  * @colorscheme BeforeDawn
  * @view axes,scales
  */
-boltJoinPiece(
-    internal_diameter = 3.5,
-    external_diameter = 3.5 + (0.4 * 2),
-    height = 3,
-    _fn = 500
-);
+boltJoinPiece($fn = 500);
