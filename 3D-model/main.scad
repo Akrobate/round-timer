@@ -10,6 +10,8 @@ module main() {
     translate([0, 0, external_size.z])
         lampSetComponent();
     
+    // @todo insert LED 4x4 asset
+
     housingComponent();
 
     translate([beeperHolder_size.z + external_size.x,external_size.y / 2,external_size.z / 2])
