@@ -10,7 +10,7 @@ include <../configurations/global.scad>
 module boltJoinPiece(
     internal_diameter = boltJoinPiece_internal_diameter,
     external_diameter = boltJoinPiece_external_diameter,
-    height = 3,boltJoinPiece_heigh,
+    height = boltJoinPiece_height,
     z_center = false,
     $fn = 500
 ) {
