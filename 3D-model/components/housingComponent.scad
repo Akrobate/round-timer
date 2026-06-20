@@ -13,14 +13,14 @@ module housingComponent() {
 
     // Panes
     color("DarkGoldenrod") {
-        *translate([
+        #translate([
             case_external_panes_thickness,
             case_external_panes_thickness,
             external_size.z - case_external_panes_thickness
         ])
             topPanePiece();
 
-        *translate([
+        #translate([
             case_external_panes_thickness,
             case_external_panes_thickness,
             0
