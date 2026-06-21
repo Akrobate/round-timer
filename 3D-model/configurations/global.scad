@@ -68,3 +68,5 @@ beeperHolder_buzzer_holder_height = 4;
 boltJoinPiece_internal_diameter = 3.5;
 boltJoinPiece_external_diameter = 3.5 + (0.4 * 2);
 boltJoinPiece_height = 3;
+
+topPanePiece_cable_throw_margin = 10;
