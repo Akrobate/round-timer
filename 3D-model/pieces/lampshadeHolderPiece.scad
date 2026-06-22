@@ -51,4 +51,10 @@ module boltThrow(
 }
 
 
+/**
+ * @stl
+ * @png
+ * @colorscheme BeforeDawn
+ * @view axes,scales
+ */
 lampshadeHolderPiece($fn = 500);

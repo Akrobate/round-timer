@@ -2,6 +2,13 @@ include <../configurations/global.scad>
 use <subpieces/squareThrowedPaneSubpiece.scad>
 
 
+/**
+ * bottomPanePiece
+ * @name bottomPanePiece
+ * @description bottomPanePiece
+ * @type piece
+ * @parent housingComponent
+ */
 module bottomPanePiece(
     x_size = external_size.x - (case_external_panes_thickness * 2),
     y_size = external_size.y - (case_external_panes_thickness * 2),
@@ -21,4 +28,10 @@ module bottomPanePiece(
 }
 
 
+/**
+ * @stl
+ * @png
+ * @colorscheme BeforeDawn
+ * @view axes,scales
+ */
 bottomPanePiece();

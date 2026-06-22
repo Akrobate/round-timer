@@ -2,6 +2,14 @@ use <../enveloppes/CNC_Throws_buttonHolderPiece.scad>
 
 include <../configurations/global.scad>
 
+
+/**
+ * frontPanePiece
+ * @name frontPanePiece
+ * @description frontPanePiece
+ * @type piece
+ * @parent housingComponent
+ */
 module frontPanePiece(
     x_size = external_size.x,
     y_size = external_size.z,
@@ -32,4 +40,11 @@ module frontPanePiece(
 
 }
 
+
+/**
+ * @stl
+ * @png
+ * @colorscheme BeforeDawn
+ * @view axes,scales
+ */
 frontPanePiece();

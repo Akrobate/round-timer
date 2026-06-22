@@ -3,6 +3,13 @@ use <../enveloppes/beeperHolderThrowsEnveloppe.scad>
 include <../configurations/global.scad>
 
 
+/**
+ * rightPanePiece
+ * @name rightPanePiece
+ * @description rightPanePiece
+ * @type piece
+ * @parent housingComponent
+ */
 module rightPanePiece(
     x_size = external_size.y - (case_external_panes_thickness * 2),
     y_size = external_size.z,
@@ -26,4 +33,11 @@ module rightPanePiece(
     }
 }
 
+
+/**
+ * @stl
+ * @png
+ * @colorscheme BeforeDawn
+ * @view axes,scales
+ */
 rightPanePiece();

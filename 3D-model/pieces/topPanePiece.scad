@@ -3,6 +3,13 @@ use <subpieces/squareThrowedPaneSubpiece.scad>
 use <../openscad_modules/commons/forEachCoord.scad>
 
 
+/**
+ * topPanePiece
+ * @name topPanePiece
+ * @description topPanePiece
+ * @type piece
+ * @parent housingComponent
+ */
 module topPanePiece(
     x_size = external_size.x - (case_external_panes_thickness * 2),
     y_size = external_size.y - (case_external_panes_thickness * 2),
@@ -36,4 +43,10 @@ module topPanePiece(
 }
 
 
+/**
+ * @stl
+ * @png
+ * @colorscheme BeforeDawn
+ * @view axes,scales
+ */
 topPanePiece();

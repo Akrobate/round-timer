@@ -1,9 +1,15 @@
 use <subpieces/squareThrowedPaneSubpiece.scad>
 use <../openscad_modules/esp-module-holder-3d-model/pieces/throws-holder-external-fix.scad>
-
-
 include <../configurations/global.scad>
 
+
+/**
+ * leftPanePiece
+ * @name leftPanePiece
+ * @description leftPanePiece
+ * @type piece
+ * @parent housingComponent
+ */
 module leftPanePiece(
     x_size = external_size.y - (case_external_panes_thickness * 2),
     y_size = external_size.z,
@@ -28,4 +34,11 @@ module leftPanePiece(
     }
 }
 
+
+/**
+ * @stl
+ * @png
+ * @colorscheme BeforeDawn
+ * @view axes,scales
+ */
 leftPanePiece();

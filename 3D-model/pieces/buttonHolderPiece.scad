@@ -79,4 +79,11 @@ module buttonEnveloppe(
     }
 }
 
+
+/**
+ * @stl
+ * @png
+ * @colorscheme BeforeDawn
+ * @view axes,scales
+ */
 buttonHolderPiece();

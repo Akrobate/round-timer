@@ -7,4 +7,11 @@ module espFacadeHolderPiece() {
         facadeHolder8266D1Piece();
 }
 
+
+/**
+ * @stl
+ * @png
+ * @colorscheme BeforeDawn
+ * @view axes,scales
+ */
 espFacadeHolderPiece();
