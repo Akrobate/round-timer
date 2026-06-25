@@ -1,7 +1,15 @@
 use <lampComponent.scad>
-include <../configurations/global.scad>
 use <../openscad_modules/commons/forEachCoord.scad>
 
+include <../configurations/global.scad>
+
+
+/**
+ * lampSetComponent
+ * @name lampSetComponent
+ * @description lampSetComponent
+ * @type component
+ */
 module lampSetComponent() {
     translate([
         external_size.x / 2,
@@ -16,4 +24,10 @@ module lampSetComponent() {
             lampComponent();
 }
 
+
+/**
+ * @png
+ * @colorscheme BeforeDawn
+ * @view axes,scales
+ */
 lampSetComponent();

@@ -6,6 +6,12 @@ use <../openscad_modules/led/ledWS2812/ledWS2812.scad>
 include <../configurations/global.scad>
 
 
+/**
+ * lampComponent
+ * @name lampComponent
+ * @description lampComponent
+ * @type component
+ */
 module lampComponent() {
 
     translate([0, 0, boltJoinPiece_height])
@@ -20,4 +26,10 @@ module lampComponent() {
         lampshadePiece();
 }
 
+
+/**
+ * @png
+ * @colorscheme BeforeDawn
+ * @view axes,scales
+ */
 lampComponent();

@@ -6,21 +6,27 @@ use <../pieces/leftPanePiece.scad>
 use <../pieces/rightPanePiece.scad>
 use <../pieces/frontPanePiece.scad>
 use <../pieces/backPanePiece.scad>
-
 use <../pieces/angleHolderPiece.scad>
 
+
+/**
+ * housingComponent
+ * @name housingComponent
+ * @description housingComponent
+ * @type component
+ */
 module housingComponent() {
 
     // Panes
     color("DarkGoldenrod") {
-        #translate([
+        translate([
             case_external_panes_thickness,
             case_external_panes_thickness,
             external_size.z - case_external_panes_thickness
         ])
             topPanePiece();
 
-        #translate([
+        translate([
             case_external_panes_thickness,
             case_external_panes_thickness,
             0
@@ -47,7 +53,7 @@ module housingComponent() {
     }
 
     color("Goldenrod") {
-        #translate([
+        translate([
             0,
             case_external_panes_thickness,
             0
@@ -93,5 +99,11 @@ module housingComponent() {
     }
 }
 
-translate([0,0,0])
-    housingComponent();
+
+/**
+ * @png
+ * @colorscheme BeforeDawn
+ * @view axes,scales
+ */
+housingComponent();
+
