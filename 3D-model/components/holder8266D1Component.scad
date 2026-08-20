@@ -26,6 +26,5 @@ use <../pieces/espFixationHolderPiece.scad>
 /**
  * @png
  * @colorscheme BeforeDawn
- * @view axes,scales
  */
 holder8266D1Component();

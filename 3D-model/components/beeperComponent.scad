@@ -23,6 +23,5 @@ module beeperComponent() {
 /**
  * @png
  * @colorscheme BeforeDawn
- * @view axes,scales
  */
 beeperComponent();

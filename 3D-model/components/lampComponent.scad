@@ -30,6 +30,5 @@ module lampComponent() {
 /**
  * @png
  * @colorscheme BeforeDawn
- * @view axes,scales
  */
 lampComponent();

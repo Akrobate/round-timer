@@ -28,6 +28,5 @@ module lampSetComponent() {
 /**
  * @png
  * @colorscheme BeforeDawn
- * @view axes,scales
  */
 lampSetComponent();

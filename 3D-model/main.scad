@@ -36,5 +36,9 @@ module main() {
 }
 
 
+/**
+ * @png
+ * @colorscheme BeforeDawn
+ */
 main();
 

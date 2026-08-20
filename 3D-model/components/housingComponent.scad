@@ -103,7 +103,6 @@ module housingComponent() {
 /**
  * @png
  * @colorscheme BeforeDawn
- * @view axes,scales
  */
 housingComponent();
 
